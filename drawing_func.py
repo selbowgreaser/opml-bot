@@ -46,3 +46,15 @@ def draw_3d(dots=None, critical_dots=None) -> go.Figure:
                                        'size': 2},
                              colorscale='ice'), 1, 2)
     return fig
+
+
+def make_df_for_drawing(func, x_constraints:[tuple], y_constraints:[tuple]) -> pd.DataFrame:
+    """
+
+    :param func: function for drawing
+    :param x_constraints: tuple, like (-10, 10). x is in (-10, 10)
+    :param y_constraints: tuple for y
+    :return: pd.DataFrame with applying func for each pair of cartesian product x and y
+    """
+
+    pass
