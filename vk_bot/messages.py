@@ -28,6 +28,14 @@ class Handler:
                 return self.handler_local_extr_with_rest()
             return self.handler_menu()
 
+        if self.status == '1':
+            if self.message == "НАЗАД":
+                return self.handler_menu()
+
+        if self.status == '2':
+            if self.message == "НАЗАД":
+                return self.handler_menu()
+
     def handler_welcome(self):
         answer = f"Привет, {self.name}!\n\nНажми на кнопочку!"
         keyboard = VkKeyboard(one_time=False)
@@ -45,10 +53,18 @@ class Handler:
         self.get_message(answer, keyboard.get_keyboard())
 
     def handler_local_extr(self):
-        pass
+        User(self.user_id).update_status('1')
+        answer = "-_- Тут пока ничего нет -_-"
+        keyboard = VkKeyboard(one_time=False)
+        keyboard.add_button("НАЗАД", color=VkKeyboardColor.POSITIVE)
+        self.get_message(answer, keyboard.get_keyboard())
 
     def handler_local_extr_with_rest(self):
-        pass
+        User(self.user_id).update_status('2')
+        answer = "-_- Тут пока ничего нет -_-"
+        keyboard = VkKeyboard(one_time=False)
+        keyboard.add_button("НАЗАД", color=VkKeyboardColor.POSITIVE)
+        self.get_message(answer, keyboard.get_keyboard())
 
 
 
