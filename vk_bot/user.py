@@ -16,3 +16,6 @@ class User:
 
     def registration(self):
         BotDatabase().insert_query((self.user_id, self.first_name, self.last_name))
+
+    def update_status(self, status):
+        BotDatabase().update_query((status, self.user_id))
