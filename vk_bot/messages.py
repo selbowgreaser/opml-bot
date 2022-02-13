@@ -65,7 +65,3 @@ class Handler:
         keyboard = VkKeyboard(one_time=False)
         keyboard.add_button("НАЗАД", color=VkKeyboardColor.POSITIVE)
         self.get_message(answer, keyboard.get_keyboard())
-
-
-
-
