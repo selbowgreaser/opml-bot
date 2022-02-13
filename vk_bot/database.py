@@ -60,3 +60,16 @@ class BotDatabase:
         finally:
             if connection:
                 connection.close()
+
+    def update_query(self, data):
+        query = "UPDATE users SET status = ? WHERE user_id = ?"
+        try:
+            connection = self.get_connection()
+            cursor = connection.cursor()
+            cursor.execute(query, data)
+            connection.commit()
+        except sqlite3.Error as error:
+            print("Ошибка при INSERT запросе", error)
+        finally:
+            if connection:
+                connection.close()
