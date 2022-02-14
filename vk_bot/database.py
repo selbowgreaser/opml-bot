@@ -2,6 +2,7 @@ import os
 import sqlite3
 
 
+# прикрутить SQLAlchemy
 class BotDatabase:
     def __init__(self):
         self.name_db = 'users.db'
@@ -41,7 +42,7 @@ class BotDatabase:
                 cursor.execute(query, input_value)
             else:
                 cursor.execute(query)
-            return cursor.fetchall()
+            return cursor.fetchone()
         except sqlite3.Error as error:
             print("Ошибка при SELECT запросе", error)
         finally:
