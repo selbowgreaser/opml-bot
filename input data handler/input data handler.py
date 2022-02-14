@@ -48,8 +48,7 @@ def check_expression(expression, var1, var2, operations = allowed_operations):
         if name not in allowed_names:
             raise NameError(f"The use of '{name}' is not allowed")
     x, y = symbols(f'{var1} {var2}')
-    d = {}
-    d[f'{var1}'] = x
-    d[f'{var2}'] = y
+    d = {var1: x, var2: y, 'e': math.e, 'pi': math.pi}
     function = sympify(expression, d, convert_xor = True)
+    function = lambdify([x, y], function)
     return function
