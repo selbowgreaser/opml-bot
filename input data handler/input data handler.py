@@ -15,8 +15,8 @@ b = {
 allowed_operations = list(set(a.keys())|set(b.keys())) + ['pi', 'e']
 
 def check_variables(variables, n_var = 2, split_by = None,
-                    forbidden_names = allowed_operations):
-    forbidden_names.extend(keyword.kwlist)
+                    forbid=allowed_operations):
+    forbidden_names = keyword.kwlist + forbid
     if len(variables.split(split_by)) != n_var:
         raise ValueError('Некорректный ввод: введено болеее 2 переменных или имена содержат пробелы')
     else:
