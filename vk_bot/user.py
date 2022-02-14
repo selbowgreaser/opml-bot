@@ -9,10 +9,10 @@ class User:
         self.last_name = VKApi().vk.users.get(user_id=user_id)[0]['last_name']
 
     def authorization(self):
-        if not BotDatabase().select_query('SELECT user_id FROM users WHERE user_id = ?', (self.user_id, )):
+        if not BotDatabase().select_query('SELECT user_id FROM users WHERE user_id = ?', (self.user_id,)):
             self.registration()
-        return {"name": self.first_name,
-                "status": BotDatabase().select_query('SELECT status FROM users WHERE user_id = ?', (self.user_id, ))[0][0]}
+        return (self.first_name,
+                BotDatabase().select_query('SELECT status FROM users WHERE user_id = ?', (self.user_id,))[0])
 
     def registration(self):
         BotDatabase().insert_query((self.user_id, self.first_name, self.last_name))
