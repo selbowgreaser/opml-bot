@@ -13,7 +13,7 @@ def start_work():
             # загрузка информации о пользователе
             print('***NEW MESSAGE***')
             print(f'{event.user_id}: {event.text}')
-            Handler(event.user_id, event.text).story()
+            Handler(vk, event.user_id, event.text).story()
             # vk.send_message(user_id=event.user_id, answer="default_answer", keyboard=None)
 
 

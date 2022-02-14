@@ -5,7 +5,8 @@ from vk_get_api import VKApi
 
 
 class Handler:
-    def __init__(self, user_id, message):
+    def __init__(self, vk, user_id, message):
+        self.vk = vk
         self.user_id = user_id
         self.message = message
         self.name, self.status = User(user_id).authorization().values()
@@ -13,7 +14,7 @@ class Handler:
     def get_message(self, answer, keyboard=None):
         answer = answer
         keyboard = keyboard
-        return VKApi().send_message(self.user_id, answer, keyboard)
+        return self.vk.send_message(self.user_id, answer, keyboard)
 
     def story(self):
         if self.status == 'welcome':
