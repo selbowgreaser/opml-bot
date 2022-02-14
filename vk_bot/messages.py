@@ -7,9 +7,10 @@ from vk_get_api import VKApi
 class Handler:
     def __init__(self, vk, user_id, message):
         self.vk = vk
+        self.user = User(user_id)
         self.user_id = user_id
         self.message = message
-        self.name, self.status = User(user_id).authorization().values()
+        self.name, self.status = self.user.authorization()
 
     def get_message(self, answer, keyboard=None):
         answer = answer
@@ -44,7 +45,7 @@ class Handler:
         self.get_message(answer, keyboard.get_keyboard())
 
     def handler_menu(self):
-        User(self.user_id).update_status('menu')
+        self.user.update_status('menu')
         answer = f"Возможности бота:\n\n" \
                  f"1. Найти локальный экстремум функции двух переменных\n" \
                  f"2. Найти локальный экстремум функции двух переменных с ограничениями (методом Лагранжа)"
@@ -54,14 +55,14 @@ class Handler:
         self.get_message(answer, keyboard.get_keyboard())
 
     def handler_local_extr(self):
-        User(self.user_id).update_status('1')
+        self.user.update_status('1')
         answer = "-_- Тут пока ничего нет -_-"
         keyboard = VkKeyboard(one_time=False)
         keyboard.add_button("НАЗАД", color=VkKeyboardColor.POSITIVE)
         self.get_message(answer, keyboard.get_keyboard())
 
     def handler_local_extr_with_rest(self):
-        User(self.user_id).update_status('2')
+        self.user.update_status('2')
         answer = "-_- Тут пока ничего нет -_-"
         keyboard = VkKeyboard(one_time=False)
         keyboard.add_button("НАЗАД", color=VkKeyboardColor.POSITIVE)
