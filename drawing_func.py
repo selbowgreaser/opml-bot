@@ -25,13 +25,16 @@ def draw_3d(dots: [pd.DataFrame], critical_dots: [list, None] = None) -> go.Figu
     -------
     CNT_DOTS = 200
 
+    f = lambda x, y: x ** 2 + y ** 2
+
     dots = pd.DataFrame(index=np.linspace(-10, 10, CNT_DOTS),
-                        columns=np.linspace(-1, 1, CNT_DOTS))
+                        columns=np.linspace(-10, 10, CNT_DOTS))
 
     for x in np.linspace(-10, 10, CNT_DOTS):
-        for y in np.linspace(-1, 1, CNT_DOTS):
+        for y in np.linspace(-10, 10, CNT_DOTS):
             dots.loc[x, y] = f(x, y)
-    draw_3d(dots, [(0, 0), (1, 0), (0, 1)])
+
+    draw_3d(dots, [(0, 0, 0), (1, 0, 1), (0, 1, 1)])
     """
     min_value = min(dots.values.flatten())
     max_value = max(dots.values.flatten())
