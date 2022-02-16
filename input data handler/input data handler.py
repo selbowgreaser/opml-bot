@@ -14,6 +14,7 @@ b = {
 }
 allowed_operations = list(set(a.keys())|set(b.keys())) + ['pi', 'e']
 
+
 def check_variables(variables, n_var = 2, split_by = None,
                     forbid=allowed_operations):
     forbidden_names = keyword.kwlist + forbid
@@ -33,6 +34,7 @@ def check_variables(variables, n_var = 2, split_by = None,
         else:
             raise ValueError('Имя содержит что-то кроме букв латиницей и цифр или начинается с цифры')
     return x, y
+
 
 def check_expression(expression, var1, var2, operations = allowed_operations):
     expression = expression.strip()

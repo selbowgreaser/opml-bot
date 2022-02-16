@@ -1,5 +1,7 @@
+import sympy
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
+from LocalExtrWithRestrictions import LocalExtrWithRestrictions
 from vk_bot.user import User
 from vk_get_api import VKApi
 
@@ -12,10 +14,10 @@ class Handler:
         self.message = message
         self.name, self.status = self.user.authorization()
 
-    def get_message(self, answer, keyboard=None):
+    def get_message(self, answer, keyboard=None, attachment=None,):
         answer = answer
         keyboard = keyboard
-        return self.vk.send_message(self.user_id, answer, keyboard)
+        return self.vk.send_message(self.user_id, answer, attachment, keyboard)
 
     def story(self):
         if self.status == 'welcome':
@@ -37,6 +39,13 @@ class Handler:
         if self.status == '2':
             if self.message == "НАЗАД":
                 return self.handler_menu()
+            return self.handler_variables()
+        if self.status == '2.1':
+            return self.handler_functions()
+        if self.status == '2.2':
+            return self.handler_g_functions()
+        if self.status == '2.3':
+            return self.handler_lewr_result()
 
     def handler_welcome(self):
         answer = f"Привет, {self.name}!\n\nНажми на кнопочку!"
@@ -62,8 +71,17 @@ class Handler:
         self.get_message(answer, keyboard.get_keyboard())
 
     def handler_local_extr_with_rest(self):
-        self.user.update_status('2')
-        answer = "-_- Тут пока ничего нет -_-"
-        keyboard = VkKeyboard(one_time=False)
-        keyboard.add_button("НАЗАД", color=VkKeyboardColor.POSITIVE)
-        self.get_message(answer, keyboard.get_keyboard())
+        self.user.update_status('2.3')
+        answer = "Введите все входные данные, начиная с новой строки"
+        self.get_message(answer)
+
+    def handler_lewr_result(self):
+        self.user.update_status('menu')
+        variables, func, g_func = self.message.split('\n')
+        variables = variables.split()
+        func = sympy.sympify(func)
+        g_func = sympy.sympify(g_func)
+        task = LocalExtrWithRestrictions(variables, func, g_func, restr=False)
+        result = task.solve()
+        graph = self.vk.upload_photo('graph.png')
+        self.get_message(result, attachment=graph)

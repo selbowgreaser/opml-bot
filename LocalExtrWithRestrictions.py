@@ -4,8 +4,8 @@ import pandas as pd
 from drawing_func import *
 import numpy as np
 
-class LocalExtrWithRestrictions(Solution):
 
+class LocalExtrWithRestrictions(Solution):
     def __init__(self, variables, func, g_func, restr=False, interval_x=None, interval_y=None):
 
         x, y = sm.symbols('x y', real=True)
@@ -86,6 +86,7 @@ class LocalExtrWithRestrictions(Solution):
 
         data_for_draw = make_df_for_drawing(sm.lambdify([x, y], self.func), self.interval_x, self.interval_y)
         plot = draw_3d(data_for_draw, critical_dots_for_draw)
+        plot.write_image('graph.png', width=2048, height=1024)
 
         def make_output_str(row):
             dot_str = '(' + str(round(float(row.dots[0]), 3)) + ', ' + str(round(float(row.dots[1]), 3)) + ')'
@@ -93,16 +94,7 @@ class LocalExtrWithRestrictions(Solution):
 
         output = output[['dots', 'type_dot']].apply(make_output_str, axis=1)
         if output.shape[0] > 0:
-            return output.to_list(), plot
+            return output.to_list()
 
         else:
             return 'Решений нет'
-
-
-if __name__ == '__main__':
-    x1, x2 = sm.symbols('x1 x2')
-    eq = LocalExtrWithRestrictions([x1, x2], x1 ** 2 + 0.5 * x2 ** 2, x1 ** 3 + x2 ** 3 - 1)
-    solve = eq.solve()
-    print(solve[0])
-    save_fig_to_pic(solve[1], 'test', ['png', 'html'])
-
