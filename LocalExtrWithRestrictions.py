@@ -88,10 +88,14 @@ class LocalExtrWithRestrictions(Solution):
         plot = draw_3d(data_for_draw, critical_dots_for_draw)
 
         def make_output_str(row):
-            dot_str = '(' + str(round(float(row.dots[0]), 3)) + ', ' + str(round(float(row.dots[1]), 3)) + ')'
+
+            dot_str = '(' + str(round(float(row.dots[0]), 3)) + ', ' + str(round(float(row.dots[1]), 3)) + \
+                      ', ' + str(round(float(row.value), 3)) + ')'
             return dot_str + ' - ' + row.type_dot
 
-        output = output[['dots', 'type_dot']].apply(make_output_str, axis=1)
+        output = output.sort_values(['type_dot', 'value'], ascending=[1, 0])
+        output = output[['dots', 'type_dot', 'value']].apply(make_output_str, axis=1)
+
         if output.shape[0] > 0:
             return output.to_list(), plot
 
