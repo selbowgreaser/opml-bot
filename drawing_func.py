@@ -75,6 +75,7 @@ def draw_3d(dots: [pd.DataFrame], critical_dots: [list, None] = None) -> go.Figu
                              colorscale='ice'), 1, 2)
 
     if critical_dots is not None:
+
         critical_dots = np.array(critical_dots)
         fig.add_scatter3d(x=critical_dots[:, 0],
                           y=critical_dots[:, 1],
