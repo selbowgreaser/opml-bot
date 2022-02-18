@@ -1,8 +1,8 @@
 from Solution import Solution
 import sympy as sm
-import pandas as pd
 from drawing_func import *
 import numpy as np
+
 
 class LocalExtrWithRestrictions(Solution):
 
@@ -105,4 +105,3 @@ if __name__ == '__main__':
     solve = eq.solve()
     print(solve[0])
     save_fig_to_pic(solve[1], 'test', ['png', 'html'])
-

@@ -3,6 +3,8 @@ import plotly
 import plotly.graph_objects as go
 import numpy as np
 
+GRID_WIDTH = 1
+
 
 def draw_3d(dots: [pd.DataFrame], critical_dots: [list, None] = None) -> go.Figure:
     """
@@ -46,14 +48,23 @@ def draw_3d(dots: [pd.DataFrame], critical_dots: [list, None] = None) -> go.Figu
     fig.add_trace(go.Surface(x=dots.index,
                              y=dots.columns,
                              z=dots.values,
-                             opacity=0.7,
+                             opacity=0.5,
                              showscale=False,
                              colorscale='ice'), 1, 1)
+
+    fig.update_scenes(xaxis_title_text='x, у.е.',
+                      yaxis_title_text='y, у.е.',
+                      zaxis_title_text='z, у.е.')
+
+    fig.update_xaxes(title='x, у.е.', col=2, row=1, gridwidth=GRID_WIDTH, gridcolor='black',
+                     zerolinecolor='black', zerolinewidth=GRID_WIDTH)
+    fig.update_yaxes(title='y, у.е.', col=2, row=1, gridwidth=GRID_WIDTH, gridcolor='black',
+                     zerolinecolor='black', zerolinewidth=GRID_WIDTH)
 
     fig.add_trace(go.Contour(x=dots.index,
                              y=dots.columns,
                              z=dots.values,
-                             opacity=1,
+                             opacity=0.75,
                              contours={
                                  'start': min_value,
                                  'end': max_value,
@@ -69,21 +80,21 @@ def draw_3d(dots: [pd.DataFrame], critical_dots: [list, None] = None) -> go.Figu
                           y=critical_dots[:, 1],
                           z=critical_dots[:, 2],
                           mode='markers',
-                          marker=dict(size=5, color='red'),
+                          marker=dict(size=6, color='red'),
                           showlegend=False,
                           name='critical dots')
 
         fig.add_scatter(x=critical_dots[:, 0],
                         y=critical_dots[:, 1],
                         mode='markers',
-                        marker=dict(size=5, color='red'),
+                        marker=dict(size=10, color='red'),
                         showlegend=False,
                         name='critical dots')
 
     return fig
 
 
-def make_df_for_drawing(func, x_constraints: [tuple], y_constraints: [tuple], cnt_dots=200) -> pd.DataFrame:
+def make_df_for_drawing(func, x_constraints: [tuple], y_constraints: [tuple], cnt_dots=50) -> pd.DataFrame:
     """
     Calculate the function for each pair of coordinates from the Cartesian product
     of x_constraints and y_constraints.
@@ -120,4 +131,4 @@ def save_fig_to_pic(fig: go.Figure, path: str, extensions: list) -> None:
         extensions.remove('html')
 
     for extension in extensions:
-        fig.write_image(path + '.' + extension, width=2048, height=1024)
+        fig.write_image(path + '.' + extension, width=2048, height=1024,)
