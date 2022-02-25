@@ -6,7 +6,17 @@ from sympy import *
 
 
 class LocalExtr(Solution):
+
     def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
+        """
+
+
+        :param vars: список с названием переменных в виде строки (тут не как у Вити)
+        :param func: sympy функция
+        :param restr: bool
+        :param interval_x: array-like
+        :param interval_y: array-like
+        """
         self.vars = vars
         self.func = func
         self.restr = restr
