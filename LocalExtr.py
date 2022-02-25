@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from Solution import Solution
+from drawing_func import *
 from sympy import *
 
 
@@ -13,7 +14,8 @@ class LocalExtr(Solution):
         self.interval_y = interval_y
 
     def solve(self):
-        x, y = symbols(f'{self.vars[0]} {self.vars[1]}', real=True)
+        # x, y = sm.symbols(f'{self.vars[0]} {self.vars[1]}', real=True)
+        x, y = self.vars[0], self.vars[1]
         z = self.func
         f = lambdify([x, y], self.func)
         critical_points_sympy = solve([z.diff(x), z.diff(y)], [x, y], dict=True)
@@ -112,8 +114,24 @@ class LocalExtr(Solution):
         ans = ''
         for i in extr:
             ans += f'{i}: {extr[i]}'
+        if ans == '':
+            ans = 'Решений нет'
+        if self.interval_x:
+            self.interval_x = [min(critical_points, key=lambda t: t[0])[0] - 5,
+                               min(critical_points, key=lambda t: t[1])[1] + 5]
+        if self.interval_y:
+            self.interval_y = [max(critical_points, key=lambda t: t[0])[0] - 5,
+                               max(critical_points, key=lambda t: t[1])[1] + 5]
 
+        data_for_draw = make_df_for_drawing(f, self.interval_x, self.interval_y)
+        plot = draw_3d(data_for_draw, critical_points)
+        plot.write_image('graph.png', width=2048, height=1024)
 
-        return  # ('ответ в виде строки', объект графика)
+        return ans
 
-    # методов в классе делай столько, сколько нужно
+if __name__ == '__main__':
+    x1, x2 = sm.symbols('x1 x2')
+    eq = LocalExtrWith([x1, x2], x1 ** 2 + 0.5 * x2 ** 2, x1 ** 3 + x2 ** 3 - 1)
+    solve = eq.solve()
+    print(solve[0])
+    save_fig_to_pic(solve[1], 'test', ['png', 'html'])
