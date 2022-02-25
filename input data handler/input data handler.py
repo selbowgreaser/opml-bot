@@ -1,5 +1,4 @@
 import re
-import math
 import sympy
 from sympy import symbols, sympify, lambdify
 from operations_name_gen import allowed_operations, forbidden_names_for_variables
@@ -9,20 +8,23 @@ from numpy import inf
 def check_variables(variables, split_by=None):
     """
 
+
     Функция для проверки переменных на корректность имени. На вход /
     принимает строку с переменными, после проверки возвращает отдельно /
     первую и вторую переменные.
 
-    Parameters:
+    Параметры:
     ------------
     variables: str
-        String with 2 variables names
+        Строка содержащая имена переменных
     split_by: str, optional
-        The character that split values. Default works like Python string .split() method
+        Разделитель переменных в строке. По умолчанию работает как /
+        обычный
 
-    Returns
+    Возвращаемое значение:
     -------
-    tuple of string variable's names
+    Кортеж из строк с именами переменных
+
     """
     if len(variables.split(split_by)) != 2:
         raise ValueError('Некорректный ввод: введено болеее 2 переменных или имена содержат пробелы')
@@ -30,7 +32,7 @@ def check_variables(variables, split_by=None):
         x, y = variables.split(split_by)
         correct_name_filter = re.compile(f'^[a-zA-Z]+[0-9]?$')
 
-        if bool(correct_name_filter.match(x)) and bool(correct_name_filter.match(y)):
+        if correct_name_filter.match(x) and correct_name_filter.match(y):
             for name in forbidden_names_for_variables:
 
                 if x.find(name) != -1:
@@ -45,27 +47,27 @@ def check_variables(variables, split_by=None):
 def check_expression(expression, variables):
     """
 
+
     Функция для проверки выражения на корректность. Принимает на вход /
     строку с функцией в аналитическом виде, возвращает sympy выражение.
 
-    Parameters:
+    Параметры:
     ------------
     expression: str
-        The string with function to check
+        Строка содержащая функцию для проверки
     variables: array-like
-        Array of variables names (name as string)
+        Массив со строками, содержащие имена переменных
 
-    Returns
+    Возвращаемое значение:
     -------
-    input function as sympy expression
+    Функция в виде выражения sympy
+
     """
     expression = expression.strip()
     if expression.find('—') != -1:
-        print('Обнаружен символ "—". Автоматически распознан как знак минуса.')
         expression = expression.replace('—', '-')
 
     if expression.find('–') != -1:
-        print('Обнаружен символ "–". Автоматически распознан как знак минуса.')
         expression = expression.replace('–', '-')
 
     checker = compile(expression, '<string>', 'eval') # Может выдать SyntaxError, если выражение некорректно
@@ -77,28 +79,29 @@ def check_expression(expression, variables):
 
     x, y = symbols(f'{variables[0]} {variables[1]}')
     d = {variables[0]: x, variables[1]: y, 'e': math.e, 'pi': math.pi}
-    function = sympify(expression, d, convert_xor = True)
+    function = sympify(expression, d, convert_xor=True)
  #   function = lambdify([x, y], function)
     return function
 
 def check_limits(limits, split_by=None):
     """
 
+
     Эта функция проверяет корректность введеных ограничений для переменных.
     Возвращает котреж ограничений.
 
-    Parameters:
+    Параметры:
     ------------
     limits: str
-        string with variable limits
+        Строка сожержащая ограничения слева и справа для переменной
     split_by: str, optional
-        character that divide left limit from right.
-        Default works like Python string .split() method
+        Символ, которым разделяются ограничения.
+        По умолчанию работает как питоновский
+        .split() для строк.
 
-    Returns
+    Возвращаемое значение:
     -------
-    tuple of limits
-
+    Кортеж с ограничениями типа float
 
     """
     if limits.find('—') != -1:
@@ -113,7 +116,7 @@ def check_limits(limits, split_by=None):
     pattern = re.compile(f'^[-]?[0-9]+[\.]?[0-9]*$')
     for i in range(len(limits)):
         k = limits[i].strip()
-        if not (k == '-oo' or k == 'oo' or bool(pattern.match(limits[i]))):
+        if not (k == '-oo' or k == 'oo' or pattern.match(limits[i])):
             raise ValueError('Неправильно задана одна из границ')
         else:
             if k == 'oo':
@@ -126,3 +129,46 @@ def check_limits(limits, split_by=None):
         raise ValueError('Левая граница превосходит правую')
     return tuple(limits)
 
+def check_restr_func(s, variables):
+    """
+
+
+    Функция проверяет корректность ввода для ограничивающей функции.
+
+    Параметры:
+    ------------
+    s: str
+        Строка, содержащая введеную функцию
+    variables: array-like
+        Массив со строками, в которых записаны имена переменных
+
+    Возвращаемое значение:
+    -------
+    Функция в виде выражения sympy
+
+    """
+    s = s.strip()
+    if s.find('—') != -1:
+        s = s.replace('—', '-')
+
+    if s.find('–') != -1:
+        s = s.replace('–', '-')
+
+    checker = compile(expression, '<string>', 'eval')  # Может выдать SyntaxError, если выражение некорректно
+    allowed_names = list(allowed_operations) + list(variables)
+
+    flag_variables = True
+    for name in checker.co_names:
+        if name not in allowed_names:
+            raise NameError(f"The use of '{name}' is not allowed")
+        if name in variables and flag_variables:
+            flag_variables = False
+    if flag_variables:
+        raise ValueError('Ограничивающая функция не содержит ни одной переменной')
+
+    x, y = symbols(f'{variables[0]} {variables[1]}', real=True)
+    d = {variables[0]: x, variables[1]: y, 'e': math.e, 'pi': math.pi}
+    function = sympify(expression, d, convert_xor=True)
+    if sympy.solve(finction, [x, y]):
+        raise ValueError('Неверный ввод ограничивающей функции')
+    return function
