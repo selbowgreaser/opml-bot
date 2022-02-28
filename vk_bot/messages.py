@@ -1,6 +1,6 @@
 from vk_api.keyboard import VkKeyboard, VkKeyboardColor
 
-from vk_bot.user import User
+from user import User
 from vk_get_api import VKApi
 
 
