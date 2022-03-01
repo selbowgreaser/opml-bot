@@ -25,15 +25,23 @@ class LocalExtr():
             if self.interval_x and self.interval_y:
                 if (self.interval_x[0] <= i[x] <= self.interval_x[1]) and (
                         self.interval_y[0] <= i[y] <= self.interval_y[1]):
-                    critical_points.append((i[x], i[y], f(i[x], i[y])))
+                    critical_points.append((float(i[x]),
+                                            float(i[y]),
+                                            float(f(i[x], i[y]))))
             elif self.interval_x:
                 if (self.interval_x[0] <= i[x] <= self.interval_x[1]):
-                    critical_points.append((i[x], i[y], f(i[x], i[y])))
+                    critical_points.append((float(i[x]),
+                                            float(i[y]),
+                                            float(f(i[x], i[y]))))
             elif self.interval_y:
                 if (self.interval_y[0] <= i[y] <= self.interval_y[1]):
-                    critical_points.append((i[x], i[y], f(i[x], i[y])))
+                    critical_points.append((float(i[x]),
+                                            float(i[y]),
+                                            float(f(i[x], i[y]))))
             else:
-                critical_points.append((i[x], i[y], f(i[x], i[y])))
+                critical_points.append((float(i[x]),
+                                        float(i[y]),
+                                        float(f(i[x], i[y]))))
 
         D = z.diff(x, 2) * z.diff(y, 2) - z.diff(x).diff(y) ** 2
         D2x = z.diff(x, 2)
@@ -74,7 +82,7 @@ class LocalExtr():
                 if abs(i) == np.inf:
                     continue
                 fun = z.subs({x: i})
-                point = solve(fun.diff(y), y, dict=True)
+                point = sm.solve(fun.diff(y), y, dict=True)
                 for j in point:
                     y_check = j[y]
                     if self.interval_y:
@@ -90,7 +98,7 @@ class LocalExtr():
                 if abs(i) == np.inf:
                     continue
                 fun = z.subs({y: i})
-                point = solve(fun.diff(x), x, dict=True)
+                point = sm.solve(fun.diff(x), x, dict=True)
                 for j in point:
                     x_check = j[x]
                     if self.interval_x:
@@ -104,24 +112,27 @@ class LocalExtr():
 
         if border_points:
             minimum_value = min(border_points, key=lambda x: x[2])[2]
+            minimum_value = min(minimum_value, min_value)
             maximum_value = max(border_points, key=lambda x: x[2])[2]
+            maximum_value = max(maximum_value, max_value)
             border_points = list(filter(lambda x: x[2] == minimum_value or x[2] == maximum_value, border_points))
             for i in border_points:
                 if i[2] == minimum_value:
                     extr['min'].append(i)
                 else:
                     extr['max'].append(i)
-            critical_points = set(critical_points + border_points)
+            critical_points = list(set(critical_points + border_points))
+
         ans = ''
         for i in extr:
             if len(extr[i]):
                 ans += f'{i}: {extr[i]}\n'
         if ans == '':
             ans = 'Решений нет'
-        if self.interval_x:
+        if not self.interval_x:
             self.interval_x = [min(critical_points, key=lambda t: t[0])[0] - 5,
                                min(critical_points, key=lambda t: t[1])[1] + 5]
-        if self.interval_y:
+        if not self.interval_y:
             self.interval_y = [max(critical_points, key=lambda t: t[0])[0] - 5,
                                max(critical_points, key=lambda t: t[1])[1] + 5]
 
@@ -134,6 +145,6 @@ class LocalExtr():
 
 if __name__ == '__main__':
     x1, x2 = sm.symbols('x1 x2')
-    eq = LocalExtr([x1, x2], x1 ** 2 + 0.5 * x2 ** 2, False)
+    eq = LocalExtr([x1, x2], x1 ** 2 - 0.5 * x2 ** 2, False, (-5, 5), (-10, 10))
     solve = eq.solve()
     print(solve)
