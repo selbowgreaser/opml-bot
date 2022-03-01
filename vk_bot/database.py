@@ -1,28 +1,15 @@
 import os
 import sqlite3
 
+from vk_bot.sql_queries import CREATE_USERS, CREATE_DATA, INSERT_USERS, INSERT_DATA, UPDATE_USERS, UPDATE_DATA
+
 
 class BotDatabase:
     def __init__(self):
-        self.name_db = 'users.db'
+        self.name_db = 'bot.db'
 
     def gen_database(self):
-        table_creation_queries = ["CREATE TABLE users ("
-                                  "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                  "user_id INTEGER NOT NULL, "
-                                  "first_name TEXT NOT NULL, "
-                                  "last_name TEXT NOT NULL, "
-                                  "status TEXT DEFAULT 'welcome')",
-                                  "CREATE TABLE data ("
-                                  "user_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                  "vars TEXT, "
-                                  "func TEXT, "
-                                  "interval_x TEXT, "
-                                  "interval_y TEXT, "
-                                  "g_func TEXT, "
-                                  "restr TEXT, "
-                                  "FOREIGN KEY(user_id) REFERENCES users(id))"
-                                  ]
+        table_creation_queries = [CREATE_USERS, CREATE_DATA]
         try:
             connection = sqlite3.connect(self.name_db)
             for query in table_creation_queries:
@@ -58,8 +45,11 @@ class BotDatabase:
             if connection:
                 connection.close()
 
-    def insert_query(self, data):
-        query = "INSERT INTO users(user_id, first_name, last_name) VALUES (?, ?, ?)"
+    def insert_query(self, table, data):
+        if table == 'users':
+            query = INSERT_USERS
+        elif table == 'data':
+            query = INSERT_DATA
         try:
             connection = self.get_connection()
             cursor = connection.cursor()
@@ -71,15 +61,18 @@ class BotDatabase:
             if connection:
                 connection.close()
 
-    def update_query(self, data):
-        query = "UPDATE users SET status = ? WHERE user_id = ?"
+    def update_query(self, data, column=None, table='users'):
+        if table == 'users':
+            query = UPDATE_USERS
+        else:
+            query = UPDATE_DATA.format(column)
         try:
             connection = self.get_connection()
             cursor = connection.cursor()
             cursor.execute(query, data)
             connection.commit()
         except sqlite3.Error as error:
-            print("Ошибка при INSERT запросе", error)
+            print("Ошибка при UPDATE запросе", error)
         finally:
             if connection:
                 connection.close()

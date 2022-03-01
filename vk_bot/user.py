@@ -15,7 +15,8 @@ class User:
                 BotDatabase().select_query('SELECT status FROM users WHERE user_id = ?', (self.user_id,))[0])
 
     def registration(self):
-        BotDatabase().insert_query((self.user_id, self.first_name, self.last_name))
+        BotDatabase().insert_query('users', (self.user_id, self.first_name, self.last_name))
+        BotDatabase().insert_query('data', (self.user_id, ))
 
     def update_status(self, status):
         BotDatabase().update_query((status, self.user_id))
