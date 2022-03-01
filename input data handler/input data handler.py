@@ -1,5 +1,5 @@
 import re
-import sympy
+import math
 from sympy import symbols, sympify, lambdify
 from operations_name_gen import allowed_operations, forbidden_names_for_variables
 from numpy import inf
@@ -23,7 +23,7 @@ def check_variables(variables, split_by=None):
 
     Возвращаемое значение:
     -------
-    Кортеж из строк с именами переменных
+    Строка с переменными, которые разделены пробелом
 
     """
     if len(variables.split(split_by)) != 2:
@@ -42,7 +42,7 @@ def check_variables(variables, split_by=None):
                     raise ValueError('Вторая переменная имеет некорректное имя')
         else:
             raise ValueError('Имя содержит что-то кроме букв латиницей и цифр или начинается с цифры')
-    return (x, y)
+    return f'{x} {y}'
 
 def check_expression(expression, variables):
     """
@@ -60,7 +60,7 @@ def check_expression(expression, variables):
 
     Возвращаемое значение:
     -------
-    Функция в виде выражения sympy
+    Функция в виде строки
 
     """
     expression = expression.strip()
@@ -81,7 +81,7 @@ def check_expression(expression, variables):
     d = {variables[0]: x, variables[1]: y, 'e': math.e, 'pi': math.pi}
     function = sympify(expression, d, convert_xor=True)
  #   function = lambdify([x, y], function)
-    return function
+    return str(function)
 
 def check_limits(limits, split_by=None):
     """
@@ -101,7 +101,7 @@ def check_limits(limits, split_by=None):
 
     Возвращаемое значение:
     -------
-    Кортеж с ограничениями типа float
+    Строка с ограничениями, разделенными пробелом
 
     """
     if limits.find('—') != -1:
@@ -127,7 +127,7 @@ def check_limits(limits, split_by=None):
                 limits[i] = float(limits[i])
     if limits[0] > limits[1]:
         raise ValueError('Левая граница превосходит правую')
-    return tuple(limits)
+    return f'{limits[0]} {limits[1]}'
 
 def check_restr_func(s, variables):
     """
@@ -144,7 +144,7 @@ def check_restr_func(s, variables):
 
     Возвращаемое значение:
     -------
-    Функция в виде выражения sympy
+    Функция в виде строки
 
     """
     s = s.strip()
@@ -154,7 +154,7 @@ def check_restr_func(s, variables):
     if s.find('–') != -1:
         s = s.replace('–', '-')
 
-    checker = compile(expression, '<string>', 'eval')  # Может выдать SyntaxError, если выражение некорректно
+    checker = compile(s, '<string>', 'eval')  # Может выдать SyntaxError, если выражение некорректно
     allowed_names = list(allowed_operations) + list(variables)
 
     flag_variables = True
@@ -168,7 +168,10 @@ def check_restr_func(s, variables):
 
     x, y = symbols(f'{variables[0]} {variables[1]}', real=True)
     d = {variables[0]: x, variables[1]: y, 'e': math.e, 'pi': math.pi}
-    function = sympify(expression, d, convert_xor=True)
-    if sympy.solve(finction, [x, y]):
+    function = sympify(s, d, convert_xor=True)
+    if not sympy.solve(function, [x, y]):
         raise ValueError('Неверный ввод ограничивающей функции')
-    return function
+    return str(function)
+
+print(type(check_limits('-10 10')))
+print(check_limits('-10 10'))
