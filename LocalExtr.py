@@ -2,21 +2,11 @@ import pandas as pd
 import numpy as np
 from Solution import Solution
 from drawing_func import *
-from sympy import *
+import sympy as sm
 
 
-class LocalExtr(Solution):
-
+class LocalExtr():
     def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
-        """
-
-
-        :param vars: список с названием переменных в виде строки (тут не как у Вити)
-        :param func: sympy функция
-        :param restr: bool
-        :param interval_x: array-like
-        :param interval_y: array-like
-        """
         self.vars = vars
         self.func = func
         self.restr = restr
@@ -27,8 +17,8 @@ class LocalExtr(Solution):
         # x, y = sm.symbols(f'{self.vars[0]} {self.vars[1]}', real=True)
         x, y = self.vars[0], self.vars[1]
         z = self.func
-        f = lambdify([x, y], self.func)
-        critical_points_sympy = solve([z.diff(x), z.diff(y)], [x, y], dict=True)
+        f = sm.lambdify([x, y], self.func)
+        critical_points_sympy = sm.solve([z.diff(x), z.diff(y)], [x, y], dict=True)
         critical_points = []
 
         for i in critical_points_sympy:
@@ -68,6 +58,7 @@ class LocalExtr(Solution):
             else:
                 critical_points.remove(i)
 
+        border_points = []
         if self.interval_x and self.interval_y:
             for i in self.interval_x:
                 for j in self.interval_y:
@@ -123,7 +114,8 @@ class LocalExtr(Solution):
             critical_points = set(critical_points + border_points)
         ans = ''
         for i in extr:
-            ans += f'{i}: {extr[i]}'
+            if len(extr[i]):
+                ans += f'{i}: {extr[i]}\n'
         if ans == '':
             ans = 'Решений нет'
         if self.interval_x:
@@ -139,9 +131,9 @@ class LocalExtr(Solution):
 
         return ans
 
+
 if __name__ == '__main__':
     x1, x2 = sm.symbols('x1 x2')
-    eq = LocalExtrWith([x1, x2], x1 ** 2 + 0.5 * x2 ** 2, x1 ** 3 + x2 ** 3 - 1)
+    eq = LocalExtr([x1, x2], x1 ** 2 + 0.5 * x2 ** 2, False)
     solve = eq.solve()
-    print(solve[0])
-    save_fig_to_pic(solve[1], 'test', ['png', 'html'])
+    print(solve)
