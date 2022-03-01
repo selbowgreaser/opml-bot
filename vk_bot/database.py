@@ -2,7 +2,6 @@ import os
 import sqlite3
 
 
-# прикрутить SQLAlchemy
 class BotDatabase:
     def __init__(self):
         self.name_db = 'users.db'
@@ -13,7 +12,17 @@ class BotDatabase:
                                   "user_id INTEGER NOT NULL, "
                                   "first_name TEXT NOT NULL, "
                                   "last_name TEXT NOT NULL, "
-                                  "status TEXT DEFAULT 'welcome')"]
+                                  "status TEXT DEFAULT 'welcome')",
+                                  "CREATE TABLE data ("
+                                  "user_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                                  "vars TEXT, "
+                                  "func TEXT, "
+                                  "interval_x TEXT, "
+                                  "interval_y TEXT, "
+                                  "g_func TEXT, "
+                                  "restr TEXT, "
+                                  "FOREIGN KEY(user_id) REFERENCES users(id))"
+                                  ]
         try:
             connection = sqlite3.connect(self.name_db)
             for query in table_creation_queries:
