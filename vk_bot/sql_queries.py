@@ -1,6 +1,5 @@
 CREATE_USERS = """CREATE TABLE users (
-                  id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                  user_id INTEGER NOT NULL, 
+                  user_id INTEGER PRIMARY KEY, 
                   first_name TEXT NOT NULL, 
                   last_name TEXT NOT NULL, 
                   status TEXT DEFAULT 'welcome')"""
@@ -13,7 +12,7 @@ CREATE_DATA = """CREATE TABLE data (
                  interval_y TEXT, 
                  g_func TEXT, 
                  restr TEXT, 
-                 FOREIGN KEY(user_id) REFERENCES users(id))"""
+                 FOREIGN KEY(user_id) REFERENCES users(user_id))"""
 
 INSERT_USERS = "INSERT INTO users(user_id, first_name, last_name) VALUES (?, ?, ?)"
 
