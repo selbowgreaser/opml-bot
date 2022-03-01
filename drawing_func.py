@@ -47,7 +47,7 @@ def draw_3d(dots: [pd.DataFrame], critical_dots: [list, None] = None) -> go.Figu
 
     fig.add_trace(go.Surface(x=dots.index,
                              y=dots.columns,
-                             z=dots.values,
+                             z=dots.values.T,
                              opacity=0.5,
                              showscale=False,
                              colorscale='ice'), 1, 1)
@@ -97,13 +97,15 @@ def draw_3d(dots: [pd.DataFrame], critical_dots: [list, None] = None) -> go.Figu
 
 def make_df_for_drawing(func, x_constraints: [tuple], y_constraints: [tuple], cnt_dots=50) -> pd.DataFrame:
     """
-    Calculate the function for each pair of coordinates from the Cartesian product
-    of x_constraints and y_constraints.
-    :param func: function for drawing
-    :param x_constraints: tuple, like (-10, 10). x is in (-10, 10)
-    :param y_constraints: tuple for y
-    :param cnt_dots: number of points on each axis
-    :return: pd.DataFrame with applying func for each pair of cartesian product x and y
+        Calculate the function for each pair of coordinates from the Cartesian product
+        of x_constraints and y_constraints.
+    Args
+    ------
+        :param func: function for drawing
+        :param x_constraints: tuple, like (-10, 10). x is in (-10, 10)
+        :param y_constraints: tuple for y
+        :param cnt_dots: number of points on each axis
+        :return: pd.DataFrame with applying func for each pair of cartesian product x and y
     """
 
     dots = pd.DataFrame(index=np.linspace(x_constraints[0], x_constraints[1], cnt_dots),
@@ -118,14 +120,16 @@ def make_df_for_drawing(func, x_constraints: [tuple], y_constraints: [tuple], cn
 
 def save_fig_to_pic(fig: go.Figure, path: str, extensions: list) -> None:
     """
-    Save fig in image requested formats
-    :param fig: the Figure to be saved
-    :param path: path without filename extension
-    :param extensions: formats - list of formats
+        Save fig in image requested formats
+    Args:
+    -----
+        :param fig: the Figure to be saved
+        :param path: path without filename extension
+        :param extensions: formats - list of formats
 
     Examples
     ------
-    save_fig_to_pic(fig, 'plot_3d', ['png', 'jpeg', 'html'])
+        save_fig_to_pic(fig, 'plot_3d', ['png', 'jpeg', 'html'])
     """
     if 'html' in extensions:
         fig.write_html(path + '.html', default_width=1336, default_height=668)
