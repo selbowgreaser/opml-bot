@@ -56,7 +56,8 @@ class Handler:
 
     def handler_local_extr(self):
         self.user.update_status('1')
-        answer = "-_- Тут пока ничего нет -_-"
+        answer = "Следующими несколькими сообщениями тебе нужно будет ввести необходимые данные.\n\n"
+        answer += "Введи имена переменных через пробел.\n\nНапример:\nx1 x2"
         keyboard = VkKeyboard(one_time=False)
         keyboard.add_button("НАЗАД", color=VkKeyboardColor.POSITIVE)
         self.get_message(answer, keyboard.get_keyboard())
