@@ -8,24 +8,28 @@ import sympy as sp
 class LocalExtr(Solution):
     def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
         self.vars = sp.symbols(vars)
-        self.func = sp.sympify(func)
+        self.func = sp.sympify(func, {'e': np.e, 'pi': np.pi})
         self.restr = restr
-        self.interval_x = interval_x.split()
-        self.interval_y = interval_y.split()
-        for i in range(2):
-            if self.interval_x[i] == 'inf':
-                self.interval_x[i] = np.inf
-            elif self.interval_x[i] == '-inf':
-                self.interval_x[i] = -np.inf
-            else:
-                self.interval_x[i] = float(self.interval_x[i])
-
-            if self.interval_y[i] == 'inf':
-                self.interval_y[i] = np.inf
-            elif self.interval_y[i] == '-inf':
-                self.interval_y[i] = -np.inf
-            else:
-                self.interval_y[i] = float(self.interval_y[i])
+        self.interval_x = interval_x
+        self.interval_y = interval_y
+        if self.interval_x:
+            self.interval_x = self.interval_x.split()
+            for i in range(2):
+                if self.interval_x[i] == 'inf':
+                    self.interval_x[i] = np.inf
+                elif self.interval_x[i] == '-inf':
+                    self.interval_x[i] = -np.inf
+                else:
+                    self.interval_x[i] = float(self.interval_x[i])
+        if self.interval_y:
+            self.interval_y = self.interval_y.split()
+            for i in range(2):
+                if self.interval_y[i] == 'inf':
+                    self.interval_y[i] = np.inf
+                elif self.interval_y[i] == '-inf':
+                    self.interval_y[i] = -np.inf
+                else:
+                    self.interval_y[i] = float(self.interval_y[i])
 
     def solve(self):
         # x, y = sm.symbols(f'{self.vars[0]} {self.vars[1]}', real=True)
@@ -159,6 +163,6 @@ class LocalExtr(Solution):
 
 
 if __name__ == '__main__':
-    eq = LocalExtr('x1 x2', 'x1 ** 2 - 0.5 * x2 ** 2', False, '-5 5', '-3 3')
+    eq = LocalExtr('x1 x2', 'x1**2 + 0.5*x2**2', False, '-5 5', '-3 3')
     solve = eq.solve()
     print(solve)

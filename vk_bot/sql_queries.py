@@ -12,7 +12,7 @@ CREATE_DATA = """CREATE TABLE data (
                  interval_x TEXT, 
                  interval_y TEXT, 
                  g_func TEXT, 
-                 restr TEXT, 
+                 restr INTEGER, 
                  FOREIGN KEY(user_id) REFERENCES users(user_id))"""
 
 INSERT_USERS = "INSERT INTO users(user_id, first_name, last_name) VALUES (?, ?, ?)"

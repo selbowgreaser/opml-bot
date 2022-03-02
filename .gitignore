@@ -130,3 +130,6 @@ dmypy.json
 
 # database
 bot.db
+
+# graph
+graph.html
