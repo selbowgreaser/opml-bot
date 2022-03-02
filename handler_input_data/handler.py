@@ -107,6 +107,9 @@ def check_limits(limits, split_by=None):
     Строка с ограничениями, разделенными пробелом
 
     """
+    if limits == 'None':
+        return 'None'
+
     if limits.find('—') != -1:
         limits = limits.replace('—', '-')
 
