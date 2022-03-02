@@ -7,11 +7,25 @@ import sympy as sm
 
 class LocalExtr():
     def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
-        self.vars = vars
-        self.func = func
+        self.vars = sm.symbols(vars)
+        self.func = sm.sympify(func)
         self.restr = restr
-        self.interval_x = interval_x
-        self.interval_y = interval_y
+        self.interval_x = interval_x.split()
+        self.interval_y = interval_y.split()
+        for i in range(2):
+            if self.interval_x[i] == 'inf':
+                self.interval_x[i] = np.inf
+            elif self.interval_x[i] == '-inf':
+                self.interval_x[i] = -np.inf
+            else:
+                self.interval_x[i] = float(self.interval_x[i])
+
+            if self.interval_y[i] == 'inf':
+                self.interval_y[i] = np.inf
+            elif self.interval_y[i] == '-inf':
+                self.interval_y[i] = -np.inf
+            else:
+                self.interval_y[i] = float(self.interval_y[i])
 
     def solve(self):
         # x, y = sm.symbols(f'{self.vars[0]} {self.vars[1]}', real=True)
@@ -129,22 +143,22 @@ class LocalExtr():
                 ans += f'{i}: {extr[i]}\n'
         if ans == '':
             ans = 'Решений нет'
-        if not self.interval_x:
+        if (not self.interval_x) or (np.inf in self.interval_x) or (-np.inf in self.interval_x):
             self.interval_x = [min(critical_points, key=lambda t: t[0])[0] - 5,
                                min(critical_points, key=lambda t: t[1])[1] + 5]
-        if not self.interval_y:
+        if (not self.interval_y) or (np.inf in self.interval_y) or (-np.inf in self.interval_y):
             self.interval_y = [max(critical_points, key=lambda t: t[0])[0] - 5,
                                max(critical_points, key=lambda t: t[1])[1] + 5]
 
         data_for_draw = make_df_for_drawing(f, self.interval_x, self.interval_y)
         plot = draw_3d(data_for_draw, critical_points)
-        plot.write_image('graph.png', width=2048, height=1024)
+        #plot.write_image('graph.png', width=2048, height=1024)
+        save_fig_to_pic(plot, 'graph.html', ['html'])
 
         return ans
 
 
 if __name__ == '__main__':
-    x1, x2 = sm.symbols('x1 x2')
-    eq = LocalExtr([x1, x2], x1 ** 2 - 0.5 * x2 ** 2, False, (-5, 5), (-10, 10))
+    eq = LocalExtr('x1 x2', 'x1 ** 2 - 0.5 * x2 ** 2', False, '-5 5', '-3 3')
     solve = eq.solve()
     print(solve)
