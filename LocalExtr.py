@@ -2,10 +2,10 @@ import pandas as pd
 import numpy as np
 from Solution import Solution
 from drawing_func import *
-import sympy as sm
+import sympy as sp
 
 
-class LocalExtr():
+class LocalExtr(Solution):
     def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
         self.vars = vars
         self.func = func
@@ -14,11 +14,11 @@ class LocalExtr():
         self.interval_y = interval_y
 
     def solve(self):
-        # x, y = sm.symbols(f'{self.vars[0]} {self.vars[1]}', real=True)
+        # x, y = sp.symbols(f'{self.vars[0]} {self.vars[1]}', real=True)
         x, y = self.vars[0], self.vars[1]
         z = self.func
-        f = sm.lambdify([x, y], self.func)
-        critical_points_sympy = sm.solve([z.diff(x), z.diff(y)], [x, y], dict=True)
+        f = sp.lambdify([x, y], self.func)
+        critical_points_sympy = sp.solve([z.diff(x), z.diff(y)], [x, y], dict=True)
         critical_points = []
 
         for i in critical_points_sympy:
@@ -27,10 +27,10 @@ class LocalExtr():
                         self.interval_y[0] <= i[y] <= self.interval_y[1]):
                     critical_points.append((i[x], i[y], f(i[x], i[y])))
             elif self.interval_x:
-                if (self.interval_x[0] <= i[x] <= self.interval_x[1]):
+                if self.interval_x[0] <= i[x] <= self.interval_x[1]:
                     critical_points.append((i[x], i[y], f(i[x], i[y])))
             elif self.interval_y:
-                if (self.interval_y[0] <= i[y] <= self.interval_y[1]):
+                if self.interval_y[0] <= i[y] <= self.interval_y[1]:
                     critical_points.append((i[x], i[y], f(i[x], i[y])))
             else:
                 critical_points.append((i[x], i[y], f(i[x], i[y])))
@@ -53,7 +53,7 @@ class LocalExtr():
                 extr['saddle'].append(i)
             elif d > 0 and d2x > 0:
                 extr['min'].append(i)
-            elif d > 0 and d2x < 0:
+            elif d > 0 > d2x:
                 extr['max'].append(i)
             else:
                 critical_points.remove(i)
@@ -74,7 +74,7 @@ class LocalExtr():
                 if abs(i) == np.inf:
                     continue
                 fun = z.subs({x: i})
-                point = solve(fun.diff(y), y, dict=True)
+                point = sp.solve(fun.diff(y), y, dict=True)
                 for j in point:
                     y_check = j[y]
                     if self.interval_y:
@@ -90,7 +90,7 @@ class LocalExtr():
                 if abs(i) == np.inf:
                     continue
                 fun = z.subs({y: i})
-                point = solve(fun.diff(x), x, dict=True)
+                point = sp.solve(fun.diff(x), x, dict=True)
                 for j in point:
                     x_check = j[x]
                     if self.interval_x:
@@ -133,7 +133,7 @@ class LocalExtr():
 
 
 if __name__ == '__main__':
-    x1, x2 = sm.symbols('x1 x2')
+    x1, x2 = sp.symbols('x1 x2')
     eq = LocalExtr([x1, x2], x1 ** 2 + 0.5 * x2 ** 2, False)
     solve = eq.solve()
     print(solve)
