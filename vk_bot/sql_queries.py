@@ -6,6 +6,7 @@ CREATE_USERS = """CREATE TABLE users (
 
 CREATE_DATA = """CREATE TABLE data (
                  user_id INTEGER PRIMARY KEY, 
+                 task INTEGER DEFAULT 0,
                  vars TEXT, 
                  func TEXT, 
                  interval_x TEXT, 

@@ -2,7 +2,7 @@ import re
 import math
 import sympy as sp
 from sympy import symbols, sympify, lambdify
-from operations_name_gen import allowed_operations, forbidden_names_for_variables
+from handler_input_data.operations_name_gen import allowed_operations, forbidden_names_for_variables
 from numpy import inf
 
 
@@ -28,7 +28,7 @@ def check_variables(variables, split_by=None):
 
     """
     if len(variables.split(split_by)) != 2:
-        raise ValueError('Некорректный ввод: введено болеее 2 переменных или имена содержат пробелы')
+        raise ValueError('Введенное количество переменных не равно двум')
     else:
         x, y = variables.split(split_by)
         correct_name_filter = re.compile(f'^[a-zA-Z]+[0-9]?$')

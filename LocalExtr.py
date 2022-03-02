@@ -7,8 +7,8 @@ import sympy as sp
 
 class LocalExtr(Solution):
     def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
-        self.vars = vars
-        self.func = func
+        self.vars = sp.symbols(vars)
+        self.func = sp.sympify(func)
         self.restr = restr
         self.interval_x = interval_x
         self.interval_y = interval_y
@@ -125,9 +125,9 @@ class LocalExtr(Solution):
             self.interval_y = [max(critical_points, key=lambda t: t[0])[0] - 5,
                                max(critical_points, key=lambda t: t[1])[1] + 5]
 
-        data_for_draw = make_df_for_drawing(f, self.interval_x, self.interval_y)
-        plot = draw_3d(data_for_draw, critical_points)
-        plot.write_image('graph.png', width=2048, height=1024)
+        # data_for_draw = make_df_for_drawing(f, self.interval_x, self.interval_y)
+        # plot = draw_3d(data_for_draw, critical_points)
+        # plot.write_image('graph.png', width=2048, height=1024)
 
         return ans
 
