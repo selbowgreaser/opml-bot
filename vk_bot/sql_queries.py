@@ -21,3 +21,5 @@ INSERT_DATA = "INSERT INTO data(user_id) VALUES (?)"
 UPDATE_USERS = "UPDATE users SET status = ? WHERE user_id = ?"
 
 UPDATE_DATA = "UPDATE data SET {} = ? WHERE user_id = ?"
+
+SELECT_DATA = "SELECT {} FROM data WHERE user_id = ?"
