@@ -10,32 +10,24 @@ def draw_3d(dots: [pd.DataFrame], critical_dots: [list, None] = None) -> go.Figu
     """
     Функция рисует два графика и возвращает plotly Figure/
     Первый график 3-d поверхность, второй график - линия уровня
-
     Parameters
     ----------
     dots : DataFrame
         index is x, columns is y and values dots.loc[xi, yj] = f(xi, yj)
-
     critical_dots : list, array, DataFrame
         array with dots like (x, y, z)
-
     Returns
     -------
         plot
-
     Examples
     -------
     CNT_DOTS = 200
-
     f = lambda x, y: x ** 2 + y ** 2
-
     dots = pd.DataFrame(index=np.linspace(-10, 10, CNT_DOTS),
                         columns=np.linspace(-10, 10, CNT_DOTS))
-
     for x in np.linspace(-10, 10, CNT_DOTS):
         for y in np.linspace(-10, 10, CNT_DOTS):
             dots.loc[x, y] = f(x, y)
-
     draw_3d(dots, [(0, 0, 0), (1, 0, 1), (0, 1, 1)])
     """
     min_value = min(dots.values.flatten())
@@ -126,7 +118,6 @@ def save_fig_to_pic(fig: go.Figure, path: str, extensions: list) -> None:
         :param fig: the Figure to be saved
         :param path: path without filename extension
         :param extensions: formats - list of formats
-
     Examples
     ------
         save_fig_to_pic(fig, 'plot_3d', ['png', 'jpeg', 'html'])
