@@ -122,10 +122,10 @@ def check_limits(limits, split_by=None):
     pattern = re.compile(f'^[-]?[0-9]+[.]?[0-9]*$')
     for i in range(len(limits)):
         k = limits[i].strip()
-        if not (k == '-oo' or k == 'oo' or pattern.match(limits[i])):
+        if not (k == '-oo' or k == '+oo' or pattern.match(limits[i])):
             raise ValueError('Неправильно задана одна из границ')
         else:
-            if k == 'oo':
+            if k == '+oo':
                 limits[i] = inf
             elif k == '-oo':
                 limits[i] = -inf
