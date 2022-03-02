@@ -1,5 +1,6 @@
 import re
 import math
+import sympy as sp
 from sympy import symbols, sympify, lambdify
 from operations_name_gen import allowed_operations, forbidden_names_for_variables
 from numpy import inf
@@ -44,6 +45,7 @@ def check_variables(variables, split_by=None):
             raise ValueError('Имя содержит что-то кроме букв латиницей и цифр или начинается с цифры')
     return f'{x} {y}'
 
+
 def check_expression(expression, variables):
     """
 
@@ -70,7 +72,7 @@ def check_expression(expression, variables):
     if expression.find('–') != -1:
         expression = expression.replace('–', '-')
 
-    checker = compile(expression, '<string>', 'eval') # Может выдать SyntaxError, если выражение некорректно
+    checker = compile(expression, '<string>', 'eval')  # Может выдать SyntaxError, если выражение некорректно
     allowed_names = list(allowed_operations) + list(variables)
 
     for name in checker.co_names:
@@ -80,8 +82,9 @@ def check_expression(expression, variables):
     x, y = symbols(f'{variables[0]} {variables[1]}')
     d = {variables[0]: x, variables[1]: y, 'e': math.e, 'pi': math.pi}
     function = sympify(expression, d, convert_xor=True)
- #   function = lambdify([x, y], function)
+    # function = lambdify([x, y], function)
     return str(function)
+
 
 def check_limits(limits, split_by=None):
     """
@@ -113,7 +116,7 @@ def check_limits(limits, split_by=None):
         raise ValueError('Неправильный формат ввода')
     else:
         limits = limits.split(split_by)
-    pattern = re.compile(f'^[-]?[0-9]+[\.]?[0-9]*$')
+    pattern = re.compile(f'^[-]?[0-9]+[.]?[0-9]*$')
     for i in range(len(limits)):
         k = limits[i].strip()
         if not (k == '-oo' or k == 'oo' or pattern.match(limits[i])):
@@ -128,6 +131,7 @@ def check_limits(limits, split_by=None):
     if limits[0] > limits[1]:
         raise ValueError('Левая граница превосходит правую')
     return f'{limits[0]} {limits[1]}'
+
 
 def check_restr_func(s, variables):
     """
@@ -169,9 +173,6 @@ def check_restr_func(s, variables):
     x, y = symbols(f'{variables[0]} {variables[1]}', real=True)
     d = {variables[0]: x, variables[1]: y, 'e': math.e, 'pi': math.pi}
     function = sympify(s, d, convert_xor=True)
-    if not sympy.solve(function, [x, y]):
+    if not sp.solve(function, [x, y]):
         raise ValueError('Неверный ввод ограничивающей функции')
     return str(function)
-
-print(type(check_limits('-10 10')))
-print(check_limits('-10 10'))
