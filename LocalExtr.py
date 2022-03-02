@@ -1,31 +1,37 @@
 import pandas as pd
 import numpy as np
+import sympy as sm
 from Solution import Solution
 from drawing_func import *
-import sympy as sm
 
 
 class LocalExtr():
     def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
         self.vars = sm.symbols(vars)
-        self.func = sm.sympify(func)
+        self.func = sm.sympify(func, {'e': np.e, 'pi': np.pi})
         self.restr = restr
-        self.interval_x = interval_x.split()
-        self.interval_y = interval_y.split()
-        for i in range(2):
-            if self.interval_x[i] == 'inf':
-                self.interval_x[i] = np.inf
-            elif self.interval_x[i] == '-inf':
-                self.interval_x[i] = -np.inf
-            else:
-                self.interval_x[i] = float(self.interval_x[i])
+        self.interval_x = interval_x
+        self.interval_y = interval_y
 
-            if self.interval_y[i] == 'inf':
-                self.interval_y[i] = np.inf
-            elif self.interval_y[i] == '-inf':
-                self.interval_y[i] = -np.inf
-            else:
-                self.interval_y[i] = float(self.interval_y[i])
+        if self.interval_x:
+            self.interval_x = self.interval_x.split()
+            for i in range(2):
+                if self.interval_x[i] == 'inf':
+                    self.interval_x[i] = np.inf
+                elif self.interval_x[i] == '-inf':
+                    self.interval_x[i] = -np.inf
+                else:
+                    self.interval_x[i] = float(self.interval_x[i])
+
+        if self.interval_y:
+            self.interval_y = self.interval_y.split()
+            for i in range(2):
+                if self.interval_y[i] == 'inf':
+                    self.interval_y[i] = np.inf
+                elif self.interval_y[i] == '-inf':
+                    self.interval_y[i] = -np.inf
+                else:
+                    self.interval_y[i] = float(self.interval_y[i])
 
     def solve(self):
         # x, y = sm.symbols(f'{self.vars[0]} {self.vars[1]}', real=True)
@@ -159,6 +165,6 @@ class LocalExtr():
 
 
 if __name__ == '__main__':
-    eq = LocalExtr('x1 x2', 'x1 ** 2 - 0.5 * x2 ** 2', False, '-5 5', '-3 3')
+    eq = LocalExtr('x y', 'e**(x**2+y**2)', True, '-10 10', '-10 10')
     solve = eq.solve()
     print(solve)
