@@ -18,7 +18,7 @@ class Message:
         Объект клавиатуры для пользователя
     """
 
-    def __init__(self, user_id, text, keyboard: Optional[VkKeyboard] = None):
+    def __init__(self, user_id: int, text: str, keyboard: Optional[VkKeyboard] = None):
         self.user_id = user_id
         self.random_id = get_random_id()
         self.text = text
