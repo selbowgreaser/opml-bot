@@ -13,8 +13,5 @@ class VKApi:
                                    group_id=GROUP_ID)
         self.vk = self.vk_session.get_api()
 
-    def send_message(self, user_id, answer, keyboard):
-        self.vk.messages.send(user_id=user_id,
-                              random_id=get_random_id(),
-                              message=answer,
-                              keyboard=keyboard)
+    def send_message(self, parameters):
+        self.vk.messages.send(**parameters)
