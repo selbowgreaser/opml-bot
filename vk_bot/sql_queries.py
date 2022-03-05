@@ -13,7 +13,8 @@ class Create(NamedTuple):
 
     EXTREMES = ("CREATE TABLE extremes (\n"
                 "                  user_id INTEGER PRIMARY KEY, \n"
-                "                  task INTEGER DEFAULT 0,\n"
+                "                  step TEXT DEFAULT 'start',\n"
+                "                  type INTEGER DEFAULT 0,\n"
                 "                  vars TEXT, \n"
                 "                  func TEXT, \n"
                 "                  interval_x TEXT, \n"
@@ -40,9 +41,10 @@ class Select(NamedTuple):
     USERS_USER_ID = "SELECT user_id FROM users WHERE user_id = ?"
     USERS_STATUS = "SELECT status FROM users WHERE user_id = ?"
 
+    EXTREMES_STEP = "SELECT step FROM extremes WHERE user_id = ?"
     EXTREMES_VARS = "SELECT vars FROM extremes WHERE user_id = ?"
-    EXTREMES_TASK = "SELECT task FROM extremes WHERE user_id = ?"
-    EXTREMES_ALL = "SELECT * FROM extremes WHERE user_id = ?"
+    EXTREMES_TYPE = "SELECT type FROM extremes WHERE user_id = ?"
+    EXTREMES_ALL = "SELECT vars, func, g_func, restr, interval_x, interval_y FROM extremes WHERE user_id = ?"
 
 
 class Update(NamedTuple):
@@ -52,11 +54,12 @@ class Update(NamedTuple):
 
     USERS_STATUS = "UPDATE users SET status = ? WHERE user_id = ?"
 
-    EXTREMES_RESTR = "UPDATE extremes SET restr = ? WHERE user_id = ?"
-    EXTREMES_TASK = "UPDATE extremes SET task = ? WHERE user_id = ?"
+    EXTREMES_STEP = "UPDATE extremes SET step = ? WHERE user_id = ?"
+    EXTREMES_TYPE = "UPDATE extremes SET type = ? WHERE user_id = ?"
     EXTREMES_VARS = "UPDATE extremes SET vars = ? WHERE user_id = ?"
     EXTREMES_FUNC = "UPDATE extremes SET func = ? WHERE user_id = ?"
     EXTREMES_G_FUNC = "UPDATE extremes SET g_func = ? WHERE user_id = ?"
+    EXTREMES_RESTR = "UPDATE extremes SET restr = ? WHERE user_id = ?"
     EXTREMES_INTERVAL_X = "UPDATE extremes SET interval_x = ? WHERE user_id = ?"
     EXTREMES_INTERVAL_Y = "UPDATE extremes SET interval_y = ? WHERE user_id = ?"
 
