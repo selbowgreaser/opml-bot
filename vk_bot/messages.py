@@ -11,7 +11,7 @@ from vk_bot.sql_queries import SELECT_DATA
 class Handler:
     def __init__(self, vk, user_id, message):
         self.vk = vk
-        self.user = User(user_id)
+        self.user = User(user_id,,
         self.user_id = user_id
         self.message = message
         self.name, self.status = self.user.authorization()

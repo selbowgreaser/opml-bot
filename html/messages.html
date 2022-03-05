@@ -46,7 +46,7 @@ class Message:
         Объект клавиатуры для пользователя
     &#34;&#34;&#34;
 
-    def __init__(self, user_id, text, keyboard: Optional[VkKeyboard] = None):
+    def __init__(self, user_id: int, text: str, keyboard: Optional[VkKeyboard] = None):
         self.user_id = user_id
         self.random_id = get_random_id()
         self.text = text
@@ -83,7 +83,7 @@ class Message:
 <dl>
 <dt id="messages.Message"><code class="flex name class">
 <span>class <span class="ident">Message</span></span>
-<span>(</span><span>user_id, text, keyboard: Optional[vk_api.keyboard.VkKeyboard] = None)</span>
+<span>(</span><span>user_id: int, text: str, keyboard: Optional[vk_api.keyboard.VkKeyboard] = None)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Сообщение для пользователя.</p>
@@ -114,7 +114,7 @@ class Message:
         Объект клавиатуры для пользователя
     &#34;&#34;&#34;
 
-    def __init__(self, user_id, text, keyboard: Optional[VkKeyboard] = None):
+    def __init__(self, user_id: int, text: str, keyboard: Optional[VkKeyboard] = None):
         self.user_id = user_id
         self.random_id = get_random_id()
         self.text = text
