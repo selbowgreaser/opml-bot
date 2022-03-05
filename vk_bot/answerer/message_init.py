@@ -14,7 +14,7 @@ class Message:
         id пользователя, которому будет отправлен ответ
     text: str
         Ответ пользователю в виде строки
-    keyboard: VkKeyboard
+    keyboard: Optional[VkKeyboard] = None
         Объект клавиатуры для пользователя
     """
 
