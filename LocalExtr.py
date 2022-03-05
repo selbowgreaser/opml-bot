@@ -285,4 +285,4 @@ class LocalExtr(Solution):
 if __name__ == '__main__':
     eq = LocalExtr('x y', 'x**2 - y**2', True, '-10 10', '-10 10')
     solve = eq.solve()
-    print(solve)
+    print(solve) #

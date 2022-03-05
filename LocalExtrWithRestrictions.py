@@ -7,7 +7,6 @@ import numpy as np
 class LocalExtrWithRestrictions(Solution):
 
     def __init__(self, variables, func, g_func, restr=False, interval_x=None, interval_y=None):
-
         x, y = sp.symbols('x y', real=True)
         variables = variables.split()
         self.func = sp.sympify(func, {'e': np.e, 'pi': np.pi}).subs({variables[0]: x, variables[1]: y})
