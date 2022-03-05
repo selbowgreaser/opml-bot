@@ -33,7 +33,7 @@ class User:
 
         Returns
         -------
-        status : str
+        str
             Статус пользователя в общении с ботом.
         """
 
@@ -74,7 +74,7 @@ class User:
 
         Returns
         -------
-        first_name : str
+        str
             Имя пользователя.
         """
 
@@ -86,7 +86,7 @@ class User:
 
         Returns
         -------
-        last_name : str
+        str
             Фамилия пользователя.
         """
 
