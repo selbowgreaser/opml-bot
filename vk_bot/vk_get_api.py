@@ -14,9 +14,9 @@ class VKApi:
                                        api_version=API_VERSION)
         self.longpoll = VkLongPoll(self.vk_session,
                                    group_id=GROUP_ID)
-        self.vk = self.vk_session.get_api()
+        self.vk_api_method = self.vk_session.get_api()
 
-    def send_message(self, parameters):
+    def send_message(self, parameters: dict):
         """
         Отправка сообщения пользователю с помощью API-метода.
 
@@ -26,4 +26,4 @@ class VKApi:
             Словарь с параметрами, необходимыми для отправки сообщения пользователю.
         """
 
-        self.vk.messages.send(**parameters)
+        self.vk_api_method.messages.send(**parameters)
