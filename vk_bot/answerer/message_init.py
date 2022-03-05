@@ -31,7 +31,7 @@ class Message:
         Returns
         -------
         dict
-            Параметры для метода send_message, которые необходимы для отправки сообщения c помощью api VK.
+            Параметры для метода send_message, которые необходимы для отправки сообщения c помощью API VK.
         """
 
         parameters = {"user_id": self.user_id,
