@@ -4,9 +4,9 @@ from vk_api.longpoll import VkLongPoll
 from config import ACCESS_TOKEN, GROUP_ID, API_VERSION
 
 
-class VKApi:
+class VK:
     """
-    Соединение с VK и получение методов API.
+    Соединение с VK, создание объекта для работы с longpoll-сервером и получение методов API.
     """
 
     def __init__(self):
