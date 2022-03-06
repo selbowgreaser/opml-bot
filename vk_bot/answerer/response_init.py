@@ -11,18 +11,36 @@ class Response:
     Parameters
     ----------
     user_id: int
-        id пользователя, которому будет отправлен ответ
-    text: str
-        Ответ пользователю в виде строки
-    keyboard: Optional[VkKeyboard] = None
-        Объект клавиатуры для пользователя
+        id пользователя, которому будет отправлен ответ.
     """
 
-    def __init__(self, user_id: int, text: str, keyboard: Optional[VkKeyboard] = None):
+    def __init__(self, user_id: int):
         self.user_id = user_id
         self.random_id = get_random_id()
+        self.text = ''
+        self.keyboard = None
+
+    def set_text(self, text: str):
+        """
+        Установка текстового ответа.
+
+        Parameters
+        ----------
+        text : str
+            Текст ответа.
+        """
         self.text = text
-        self.keyboard = keyboard
+
+    def set_keyboard(self, keyboard: VkKeyboard):
+        """
+        Установка клавиатуры.
+
+        Parameters
+        ----------
+        keyboard : VkKeyboard
+            Объект клавиатуры.
+        """
+        self.keyboard = keyboard.get_keyboard()
 
     def get_message(self) -> dict:
         """
