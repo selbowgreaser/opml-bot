@@ -9,7 +9,7 @@ class Create(NamedTuple):
              "               user_id INTEGER PRIMARY KEY, \n"
              "               first_name TEXT NOT NULL, \n"
              "               last_name TEXT NOT NULL, \n"
-             "               status TEXT DEFAULT 'welcome')")
+             "               status TEXT DEFAULT 'start')")
 
     EXTREMES = ("CREATE TABLE extremes (\n"
                 "                  user_id INTEGER PRIMARY KEY, \n"
