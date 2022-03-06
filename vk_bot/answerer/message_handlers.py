@@ -63,6 +63,22 @@ class Handlers:
         self.response.set_keyboard(Keyboards().for_about_me())
         return self.response
 
+    def menu(self) -> Response:
+        """
+        Список доступных функций бота.
+        Статус: menu
+
+        Returns
+        -------
+        Response
+            Сообщение для пользователя.
+        """
+
+        self.user.update_status('menu')
+        self.response.set_text(Phrases.menu)
+        self.response.set_keyboard(Keyboards().for_menu())
+        return self.response
+
     def click_button(self) -> Response:
         """
         Если пользователь ввёл непонятное сообщение.

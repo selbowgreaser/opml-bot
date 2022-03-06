@@ -47,12 +47,18 @@ class TaskManager:
 
         if self.status == 'greetings':
             if text == 'Меню':
-                pass
+                return self.handlers.menu()
             if text == 'Обо мне':
                 return self.handlers.about_me()
             return self.handlers.click_button()
 
         if self.status == 'about_me':
             if text == 'Меню':
-                pass
+                return self.handlers.menu()
             return self.handlers.click_button()
+
+        if self.status == 'menu':
+            if text == 'Поиск экстремума':
+                pass
+            if text == 'Обо мне':
+                return self.handlers.about_me()
