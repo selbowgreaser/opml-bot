@@ -4,7 +4,7 @@ from vk_api.keyboard import VkKeyboard
 from vk_api.utils import get_random_id
 
 
-class Message:
+class Response:
     """
     Сообщение для пользователя.
 
