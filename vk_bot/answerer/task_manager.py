@@ -1,9 +1,9 @@
 from vk_api.vk_api import VkApiMethod
 
 from vk_bot.answerer.message_handlers import Handlers
+from vk_bot.answerer.response_init import Response
 from vk_bot.database import BotDatabase
 from vk_bot.user import User
-from vk_bot.vk import VK
 
 
 class TaskManager:
@@ -18,22 +18,41 @@ class TaskManager:
         Объект для взаимодействия с базой данных.
     user : User
         Объект для взаимодействия с данными пользователя.
-    text : str
-        Текст сообщения, отправленного пользователем.
     """
 
-    def __init__(self, vk_api_method: VkApiMethod, db: BotDatabase, user: User, text: str):
+    def __init__(self, vk_api_method: VkApiMethod, db: BotDatabase, user: User):
         self.vk = vk_api_method
         self.db = db
         self.user = user
         self.status = user.authorization()
-        self.text = text
         self.handlers = Handlers(vk_api_method, db, user)
         # возможно есть смысл добавить аттрибут task
 
-    def manage(self):
-        if self.status == 'welcome':
-            return self.handlers.welcome(self.user.get_first_name())
+    def manage(self, text: str) -> Response:
+        """
+        Управление обработкой входящих сообщений. Необходим для разделения задач на различные пакеты.
 
+        Parameters
+        ----------
+        text : str
+            Текст сообщения, отправленного пользователем.
 
+        Returns
+        -------
+        Response
+            Сообщение для пользователя.
+        """
+        if self.status == 'start':
+            return self.handlers.greetings(self.user.get_first_name())
 
+        if self.status == 'greetings':
+            if text == 'Меню':
+                pass
+            if text == 'Обо мне':
+                return self.handlers.about_me()
+            return self.handlers.click_button()
+
+        if self.status == 'about_me':
+            if text == 'Меню':
+                pass
+            return self.handlers.click_button()
