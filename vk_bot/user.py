@@ -26,7 +26,7 @@ class User:
         self.db = db
         self.user_id = user_id
 
-    def authorization(self):
+    def authorization(self) -> str:
         """
         Авторизация пользователя (извлечение статуса из базы данных) и регистрация, когда информация о пользователе
         отсутствует в базе данных.
@@ -68,7 +68,7 @@ class User:
 
         self.db.update(Update.USERS_STATUS, (status, self.user_id))
 
-    def get_first_name(self):
+    def get_first_name(self) -> str:
         """
         Получение имени пользователя с помощью API VK.
 
@@ -80,7 +80,7 @@ class User:
 
         return self.vk_api_method.users.get(user_id=self.user_id)[0]['first_name']
 
-    def get_last_name(self):
+    def get_last_name(self) -> str:
         """
         Получение фамилии пользователя с помощью API VK.
 
