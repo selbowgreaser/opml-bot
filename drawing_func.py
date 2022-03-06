@@ -283,8 +283,12 @@ def rest_func_points(func,
         for x_i in x_solve:
             x_i = float(x_i)
             if x_const[0] <= x_i <= x_const[1]:
-                out_df.loc[i] = [x_i, y_i, float(func.subs({x: x_i, y: y_i}))]
-                i += 1
+                try:
+                    f = float(func.subs({x: x_i, y: y_i}))
+                    out_df.loc[i] = [x_i, y_i, f]
+                    i += 1
+                except TypeError:
+                    pass
 
     for x_i in np.linspace(x_const[0], x_const[1], cnt_points):
         try:
@@ -298,39 +302,45 @@ def rest_func_points(func,
         for y_i in y_solve:
             y_i = float(y_i)
             if y_const[0] <= y_i <= y_const[1]:
-                out_df.loc[i] = [x_i, y_i, float(func.subs({x: x_i, y: y_i}))]
-                i += 1
+                try:
+                    f = float(func.subs({x: x_i, y: y_i}))
+                    out_df.loc[i] = [x_i, y_i, f]
+                    i += 1
+                except TypeError:
+                    pass
 
-    out_df = out_df.sort_values('x').reset_index(drop=True)
+    if out_df.shape[0] > 0:
+        out_df = out_df.sort_values('x').reset_index(drop=True)
 
-    len_ways = pd.DataFrame(index=out_df.index,
-                            columns=out_df.index)
+        len_ways = pd.DataFrame(index=out_df.index,
+                                columns=out_df.index)
 
-    for i, dot1 in enumerate(out_df[['x', 'y']].apply(tuple, axis=1)):
-        for j, dot2 in enumerate(out_df[['x', 'y']].apply(tuple, axis=1)):
-            if i == j:
-                len_ways.iloc[i, j] = np.inf
-            else:
-                len_ways.iloc[i, j] = (dot1[0] - dot2[0]) ** 2 + (dot1[1] - dot2[1]) ** 2
+        for i, dot1 in enumerate(out_df[['x', 'y']].apply(tuple, axis=1)):
+            for j, dot2 in enumerate(out_df[['x', 'y']].apply(tuple, axis=1)):
+                if i == j:
+                    len_ways.iloc[i, j] = np.inf
+                else:
+                    len_ways.iloc[i, j] = (dot1[0] - dot2[0]) ** 2 + (dot1[1] - dot2[1]) ** 2
 
-    len_ways = len_ways.astype(float)
-    way = [0]
-    for i in range(len_ways.shape[0] - 1):
-        source = way[-1]
-        target, length = len_ways.loc[source].idxmin(), len_ways.loc[source].min()
-        len_ways.loc[source] = np.inf
-        len_ways.loc[:, source] = np.inf
-        if length > (epsilon_x + epsilon_y):
-            break
-        way.append(target)
+        len_ways = len_ways.astype(float)
+        way = [0]
+        for i in range(len_ways.shape[0] - 1):
+            source = way[-1]
+            target, length = len_ways.loc[source].idxmin(), len_ways.loc[source].min()
+            len_ways.loc[source] = np.inf
+            len_ways.loc[:, source] = np.inf
+            if length > (epsilon_x + epsilon_y):
+                break
+            way.append(target)
 
-    if check_dot_in_round(out_df.loc[way[0], ['x', 'y']].values,
-                          out_df.loc[way[-1], ['x', 'y']].values,
-                          epsilon_x,
-                          epsilon_y):
-        way.append(0)
+        if check_dot_in_round(out_df.loc[way[0], ['x', 'y']].values,
+                              out_df.loc[way[-1], ['x', 'y']].values,
+                              epsilon_x,
+                              epsilon_y):
+            way.append(0)
 
-    return out_df.loc[way]
+        return out_df.loc[way]
+    return out_df.iloc[:0]
 
 
 def check_dot_in_round(center, check_point, radius_x, radius_y) -> bool:
