@@ -19,8 +19,11 @@ def start_work():
             print(f'{event.user_id}: {event.text}')
             db = BotDatabase()
             user = User(vk.vk_api_method, db, event.user_id)
-            TaskManager(vk.vk_api_method, db, user, event.text).manage()
-        print('Сообщение успешно обработано!')
+            tm = TaskManager(vk.vk_api_method, db, user)
+            reply = tm.manage(event.text)
+            message = reply.get_message()
+            vk.send_message(message)
+            print('Сообщение успешно обработано!')
 
 
 if __name__ == "__main__":
