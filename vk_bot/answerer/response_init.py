@@ -1,5 +1,3 @@
-from typing import Optional
-
 from vk_api.keyboard import VkKeyboard
 from vk_api.utils import get_random_id
 
@@ -29,6 +27,7 @@ class Response:
         text : str
             Текст ответа.
         """
+
         self.text = text
 
     def set_keyboard(self, keyboard: VkKeyboard):
@@ -40,6 +39,7 @@ class Response:
         keyboard : VkKeyboard
             Объект клавиатуры.
         """
+
         self.keyboard = keyboard.get_keyboard()
 
     def get_message(self) -> dict:
