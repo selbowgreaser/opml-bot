@@ -32,41 +32,79 @@ class LocalExtr(Solution):
                     self.interval_y[i] = -np.inf
                 else:
                     self.interval_y[i] = float(self.interval_y[i])
+    def generate_colors(self):
+        """Метод создает раскраску для точек.
+
+        Returns
+        --------
+        pd.Series со значениями цветов
+        """
+
+        dots_types = ['global min', 'local min', 'saddle', 'local max',
+                      'global max', 'unknown']
+        colors = ['rgb(228,26,28)', 'rgb(77,175,74)',
+                   'rgb(152,78,163)', 'rgb(255,127,0)',
+                   'rgb(255,255,51)', 'rgb(166,86,40)']
+        colors_dict = dict(zip(dots_types, colors))
+        set_color = lambda x: colors_dict[x]
+        colors = self.points['types'].apply(set_color)
+        return colors
 
     def solve(self):
+
+        """Метод решает задачу локального экстремума.
+
+        Rerurns
+        -------
+        строка с ответом
+        """
         self.points = self.critical_points()
         if self.restr:
             self.points = self.points.append(self.border_points(),
                                              ignore_index=True)
+            self.points = self.points.drop_duplicates(['x', 'y', 'z'])
         ans = ''
         if self.points.empty:
             ans += 'Решений нет'
-            # здесь же указать лимиты
+            if not self.interval_x:
+                self.interval_x = (-1, 1) # значения для интервалов, если они не заданы и нет точек
+            if not self.interval_y:
+                self.interval_y = (-1, 1)
         else:
             f = lambda x: list(zip(x['x'].values, x['y'].values, x['z'].values))
             to_output = self.points.groupby(by='type', axis=0)[['x', 'y', 'z']].apply(f)
             for i, v in enumerate(to_output):
                 ans += f'{to_output.index[i]}: {v}\n'
-            # дописать график функции!
+            if not self.interval_y:
+                self.interval_y = (self.points['y'].min() - 5, self.points['y'].max() + 5)
+            if not self.interval_x:
+                self.interval_x = (self.points['x'].min() - 5, self.points['x'].max() + 5)
 
+        self.points = self.points.rename(columns={'type': 'types'})
+        self.points['color'] = self.generate_colors()
+
+        data_for_draw = make_df_for_drawing(self.func, self.vars,
+                                            self.interval_x, self.interval_y)
+        plot = draw_3d(data_for_draw, critical_points=self.points)
+        save_fig_to_pic(plot, 'graph', ['html'])
         return ans
 
     def check_point(point, xlim, ylim):
 
         """Метод проверяет точку на соответствие лимитам для координат.
 
-        Параметры
+        Parameters
         ---------
         point : array-like
-            массив с координатами точки вида (x, y)
+            массив с координатами точки вида (x, y), координата z не обязательна
         xlim : array-like
             массив с ограничениями слева и справа типа float
             или np.inf для первой координаты
         ylim : array-like
             массив с ограничениями слева и справа типа float
-            или np.inf для первой координаты
+            или np.inf для второй координаты
 
-        Возвращаемое значение
+        Returns
         ---------------------
         True если точка соответствует ограничениям или их нет
         иначе False
@@ -77,7 +115,7 @@ class LocalExtr(Solution):
 
             """Функция проверяет сооответствие координаты ее пределам.
 
-            Параметры
+            Parameters
             ---------
             cord : float
                 координата
@@ -85,7 +123,7 @@ class LocalExtr(Solution):
                     массив с ограничениями слева и справа типа float
                     или np.inf
 
-            Возвращаемое значение
+            Returns
             ---------------------
             True если координата соответствует ограничениям или их нет
             иначе False
@@ -113,7 +151,7 @@ class LocalExtr(Solution):
 
         С помощью производных находятся все экстремумы.
 
-        Возвращаемое значение
+        Returns
         ----------------------
         pd.DataFrame, с колонками x, y, z
 
@@ -127,8 +165,8 @@ class LocalExtr(Solution):
             является ли точка минимальной/максимальной/седловой.
             Используется для передачи в метод pandas.DataFrame.apply().
 
-            Параметры
-            ---------
+            Parameters
+            ----------
             data: pd.Series
                 столбцы со значениями x, y, z
             d: sympy выражение
@@ -138,10 +176,10 @@ class LocalExtr(Solution):
                 вторая производная по икс. В него подставляется
                 значения в точках
 
-            Возвращаемое значение
-            ---------------------
+            Returns
+            -------
             pd.Series со значениями одним из четырех типов точки:
-            'saddle', 'global min', 'global msx', 'unknown'
+            'saddle', 'global min', 'global max', 'unknown'
             """
             d = d.subs({x: data[0], y: data[1]})
             d2x = d2x.subs({x: data[0], y: data[1]})
@@ -178,7 +216,7 @@ class LocalExtr(Solution):
 
         return critical_points
 
-    def find_local_extr(self, free_var_ind):
+    def find_local_extr(self, free_var_ind, max_val, min_val):
 
         """Метод находит локальные экстремумы.
 
@@ -187,10 +225,21 @@ class LocalExtr(Solution):
         free_var_ind: 0 or 1
             Номер переменной, которая является свободной
             (по ней нет ограничений)
+        max_val: float or np.inf
+            Максимальное значение. В случае если в ходе
+            решения окажется, что у функции есть супремум,
+            больший чем это значение, то максимальное значение
+            для всех локальных экстремумов будет обновлено.
+        min_val: float or np.inf
+            Аналогично как для min_val, только минимум и инфимум.
 
-        Возвращаемое значение
+
+        Returns
         ---------------------
         pd.DataFrame с колонками как координаты точек x, y, z
+
+        max_value - новое максимальное значение
+        min_value - новое минимальное значение
 
         """
         points = pd.DataFrame(columns=['x', 'y', 'z'])
@@ -209,6 +258,13 @@ class LocalExtr(Solution):
                 continue
             else:
                 fun = self.func.subs({limit_var: i})
+                if fun == sp.zoo:
+                    check = sp.limit(self.func, limit_var, i)
+                    if check > max_val:
+                        max_val = float(check)
+                    if check < min_val:
+                        min_val = float(check)
+                    continue
                 potential_points = sp.solve(fun.diff(free_var), free_var, dict=True)
                 for j in potential_points:
                     coord = float(j[free_var])
@@ -225,18 +281,22 @@ class LocalExtr(Solution):
                         except ZeroDivisionError:
                             pass
                         else:
+                            if z > max_val:
+                                max_val = z
+                            if z < min_val:
+                                min_val = z
                             points = points.append({'x': point[0],
                                                     'y': point[1],
-                                                    'z': float(fun.subs(j))},
+                                                    'z': z},
                                                    ignore_index=True)
-        return points
+        return points, max_val, min_val
 
     def border_points(self):
 
         """Метод находит локальные экстремумы, обходя все
         возможные границы.
 
-        Возвращаемое значение
+        Returns
         ---------------------
         pd.DataFrame с колонками x, y, z, type.
         type содержит либо 'local max' либо 'local min'
@@ -262,27 +322,42 @@ class LocalExtr(Solution):
                         try:
                             z = f(x, y)
                         except ZeroDivisionError:
-                            pass
+                            values = [x, y]
+                            for i in range(2):
+                                check = self.func.subs({self.vars[i]: values[i]})
+                                lim = sp.limit(check, self.vars[1 - i], values[1 - i])
+                                try:
+                                    a = float(lim)
+                                    if a > max_z:
+                                        pass
+                                        max_z = a
+                                    elif a < min_z:
+                                        min_z = a
+                                except TypeError:
+                                    pass
                         else:
                             point = {'x': x, 'y': y, 'z': f(x, y)}
                             points = points.append(point, ignore_index=True)
-            points = points.append(self.find_local_extr(0), ignore_index=True)
-            points = points.append(self.find_local_extr(1), ignore_index=True)
-        elif self.interval_x:
-            points = points.append(self.find_local_extr(1), ignore_index=True)
-        elif self.interval_y:
-            points = points.append(self.find_local_extr(0), ignore_index=True)
-
+        if self.interval_x:
+            a = self.find_local_extr(1, max_z, min_z)
+            points = points.append(a[0], ignore_index=True)
+            max_z = a[1]
+            min_z = a[2]
+        if self.interval_y:
+            a = self.find_local_extr(0, max_z, min_z)
+            points = points.append(a[0], ignore_index=True)
+            max_z = a[1]
+            min_z = a[2]
         points = points.drop_duplicates()
-        cond = ((points['z'] == points['z'].max()) & (points['z'] > max_z)) \
-               | ((points['z'] == points['z'].min()) & (points['z'] < min_z))
+        cond = ((points['z'] == points['z'].max()) & (points['z'] >= max_z)) \
+               | ((points['z'] == points['z'].min()) & (points['z'] <= min_z))
         points = points[cond]
-        points['type'] = np.where(points['z'] == points['z'].max(),
+        points['type'] = np.where(points['z'] == max_z,
                                   'local max',
                                   'local min')
         return points
 
 if __name__ == '__main__':
-    eq = LocalExtr('x y', 'x**2 - y**2', True, '-10 10', '-10 10')
+    eq = LocalExtr('x y', 'sin(x) + 1/y', True, interval_x='-6.283185307179586 6.283185307179586', interval_y='0 10')
     solve = eq.solve()
-    print(solve) #
+    print(solve)
