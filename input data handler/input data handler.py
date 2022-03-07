@@ -42,6 +42,8 @@ def check_variables(variables, split_by=None):
                     raise ValueError('Вторая переменная имеет некорректное имя')
         else:
             raise ValueError('Имя содержит что-то кроме букв латиницей и цифр или начинается с цифры')
+    if x == y:
+        raise ValueError('Введены одинаковые имена')
     return f'{x} {y}'
 
 def check_expression(expression, variables):
