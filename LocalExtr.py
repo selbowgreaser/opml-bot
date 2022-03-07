@@ -7,9 +7,8 @@ import sympy as sp
 
 class LocalExtr(Solution):
     def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
-        x, y = sp.symbols('x y')
-        self.func = func.subs({vars[0]: x, vars[1]: y})
-        self.variables = [x, y]
+        self.vars = vars
+        self.func = sp.sympify(func).subs({vars[0]: self.vars[0], vars[1]: self.vars[1]})
         self.restr = restr
         self.interval_x = interval_x
         self.interval_y = interval_y
