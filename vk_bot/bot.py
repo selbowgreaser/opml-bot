@@ -12,12 +12,12 @@ def start_work():
     """
 
     vk = VK()
+    db = BotDatabase()
     print('Бот снова работает...')
     for event in vk.longpoll.listen():
         if event.type == VkEventType.MESSAGE_NEW and event.to_me:
             print('Получено новое сообщение!')
             print(f'{event.user_id}: {event.text}')
-            db = BotDatabase()
             user = User(vk.vk_api_method, db, event.user_id)
             tm = TaskManager(vk.vk_api_method, db, user)
             reply = tm.manage(event.text)
