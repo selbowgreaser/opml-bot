@@ -1,5 +1,5 @@
-from Solution import Solution
-from drawing_func import *
+from .Solution import Solution
+from .drawing_func import *
 
 import sympy as sp
 import numpy as np
