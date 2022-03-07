@@ -1,7 +1,8 @@
 from sympy import symbols, sympify, lambdify
 from numpy import inf
 
-def prepare_data(vars, func, interval_x=None, interval_y=None, g_func = None):
+
+def prepare_data(vars, func, interval_x=None, interval_y=None, g_func=None):
     sympy_vars = symbols(vars)
     vars = vars.split()
     func = sympify(func)
@@ -26,6 +27,7 @@ def prepare_limits(limits):
             else:
                 limits[i] = float(limits[i])
     return limits
+
 
 if __name__ == '__main__':
     c = prepare_data('x y', 'x**2 + y**2', '-10 10', '-10 10')
