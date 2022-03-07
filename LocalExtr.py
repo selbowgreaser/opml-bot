@@ -7,31 +7,13 @@ import sympy as sp
 
 class LocalExtr(Solution):
     def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
-        self.vars = sp.symbols(vars, real=True)
-        vars = vars.split()
-        self.func = sp.sympify(func).subs({vars[0]: self.vars[0], vars[1]: self.vars[1]})
-
+        x, y = sp.symbols('x y')
+        self.func = func.subs({vars[0]: x, vars[1]: y})
+        self.variables = [x, y]
         self.restr = restr
         self.interval_x = interval_x
         self.interval_y = interval_y
-        if self.interval_x:
-            self.interval_x = self.interval_x.split()
-            for i in range(2):
-                if self.interval_x[i] == 'inf':
-                    self.interval_x[i] = np.inf
-                elif self.interval_x[i] == '-inf':
-                    self.interval_x[i] = -np.inf
-                else:
-                    self.interval_x[i] = float(self.interval_x[i])
-        if self.interval_y:
-            self.interval_y = self.interval_y.split()
-            for i in range(2):
-                if self.interval_y[i] == 'inf':
-                    self.interval_y[i] = np.inf
-                elif self.interval_y[i] == '-inf':
-                    self.interval_y[i] = -np.inf
-                else:
-                    self.interval_y[i] = float(self.interval_y[i])
+
     def generate_colors(self):
         """Метод создает раскраску для точек.
 
