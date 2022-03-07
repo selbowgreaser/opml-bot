@@ -87,7 +87,7 @@ class LocalExtr(Solution):
                                             self.interval_x, self.interval_y)
         plot = draw_3d(data_for_draw, critical_points=self.points)
         save_fig_to_pic(plot, 'graph', ['html'])
-        return ans
+        return plot, ans
 
     def check_point(point, xlim, ylim):
 
