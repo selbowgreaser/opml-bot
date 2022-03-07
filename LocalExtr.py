@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from Solution import Solution
+from .Solution import Solution
 from drawing_func import *
 import sympy as sp
 
