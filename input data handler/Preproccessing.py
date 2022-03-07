@@ -63,5 +63,5 @@ def prepare_limits(limits):
 
 if __name__ == '__main__':
     c = prepare_data('x y', 'x**2 + y**2', '-10 10', '-10 10')
-    #print(c)
-    #print(c[1].subs({c[0][0]: 1, c[0][1]: 2}))
+    print(type(c[0][0]))
+    print(c[1].subs({c[0][0]: 1, c[0][1]: 2}))
