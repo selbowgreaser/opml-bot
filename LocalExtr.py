@@ -358,6 +358,6 @@ class LocalExtr(Solution):
         return points
 
 if __name__ == '__main__':
-    eq = LocalExtr('x y', 'sin(x) + 1/y', True, interval_x='-6.283185307179586 6.283185307179586', interval_y='0 10')
+    eq = LocalExtr('x y', 'x**2 - y**2', True, interval_x='-10 10', interval_y='-10 10')
     solve = eq.solve()
     print(solve)
