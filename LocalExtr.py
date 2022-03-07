@@ -3,35 +3,17 @@ import numpy as np
 from Solution import Solution
 from drawing_func import *
 import sympy as sp
+from Preproccessing import prepare_data
 
 
 class LocalExtr(Solution):
     def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
-        self.vars = sp.symbols(vars, real=True)
-        vars = vars.split()
-        self.func = sp.sympify(func).subs({vars[0]: self.vars[0], vars[1]: self.vars[1]})
-
+        self.vars = vars
+        self.func = func
         self.restr = restr
         self.interval_x = interval_x
         self.interval_y = interval_y
-        if self.interval_x:
-            self.interval_x = self.interval_x.split()
-            for i in range(2):
-                if self.interval_x[i] == 'inf':
-                    self.interval_x[i] = np.inf
-                elif self.interval_x[i] == '-inf':
-                    self.interval_x[i] = -np.inf
-                else:
-                    self.interval_x[i] = float(self.interval_x[i])
-        if self.interval_y:
-            self.interval_y = self.interval_y.split()
-            for i in range(2):
-                if self.interval_y[i] == 'inf':
-                    self.interval_y[i] = np.inf
-                elif self.interval_y[i] == '-inf':
-                    self.interval_y[i] = -np.inf
-                else:
-                    self.interval_y[i] = float(self.interval_y[i])
+
     def generate_colors(self):
         """Метод создает раскраску для точек.
 
@@ -358,6 +340,10 @@ class LocalExtr(Solution):
         return points
 
 if __name__ == '__main__':
-    eq = LocalExtr('x y', 'x**2 - y**2', True, interval_x='-10 10', interval_y='-10 10')
+    data = prepare_data('x y', 'x**2 - y**2', interval_x='-10 10', interval_y='-10 10')
+    print(data[0][0])
+    print(type(data[0][0]))
+    eq = LocalExtr(vars=data[0], func=data[1], restr=True,
+                   interval_x=data[2], interval_y=data[3])
     solve = eq.solve()
     print(solve)
