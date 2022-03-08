@@ -1,30 +1,33 @@
 import re
 import math
+from typing import Optional
+
 import sympy as sp
 from sympy import symbols, sympify
 from solver_core.search_for_extremes.handlers.operations_name_gen import allowed_operations, forbidden_names_for_variables
 from numpy import inf
 
 
-def check_variables(variables, split_by=None):
-    """ Функция для проверки переменных на корректность имени.
+def check_variables(variables: str, split_by: Optional[str] = None) -> str:
+    """
+    Функция для проверки переменных на корректность имени.
      
-     На вход принимает строку с переменными, после проверки возвращает отдельно /
+    На вход принимает строку с переменными, после проверки возвращает отдельно /
     первую и вторую переменные.
 
     Parameters:
     ------------
     variables: str
-        Строка содержащая имена переменных
-    split_by: str, optional
-        Разделитель переменных в строке. По умолчанию работает как /
-        обычный
+        Строка содержащая имена переменных.
+    split_by: Optional[str] = None
+        Разделитель переменных в строке. По умолчанию работает как обычный.
 
     Returns:
     -------
-    Строка с переменными, которые разделены пробелом
-
+    str
+        Строка с переменными, которые разделены пробелом.
     """
+
     if len(variables.split(split_by)) != 2:
         raise ValueError('Введенное количество переменных не равно двум')
     else:
@@ -46,22 +49,24 @@ def check_variables(variables, split_by=None):
     return f'{x} {y}'
 
 
-def check_expression(expression, variables):
-    """Функция для проверки выражения на корректность. Принимает на вход /
-    строку с функцией в аналитическом виде, возвращает sympy выражение.
+def check_expression(expression: str, variables: str) -> str:
+    """
+    Функция для проверки выражения на корректность. Принимает на вход строку с функцией
+    в аналитическом виде, возвращает sympy выражение.
 
     Parameters:
     ------------
     expression: str
-        Строка содержащая функцию для проверки
+        Строка содержащая функцию для проверки.
     variables: str
-        Строка, содержащие имена переменных
+        Строка, содержащие имена переменных.
 
     Returns:
     -------
-    Функция в виде строки
-
+    str
+        Функция в виде строки.
     """
+
     variables = variables.split()
 
     expression = expression.strip()
@@ -81,29 +86,26 @@ def check_expression(expression, variables):
     x, y = symbols(f'{variables[0]} {variables[1]}')
     d = {variables[0]: x, variables[1]: y, 'e': math.e, 'pi': math.pi}
     function = sympify(expression, d, convert_xor=True)
-    # function = lambdify([x, y], function)
     return str(function)
 
 
-def check_limits(limits, split_by=None):
-    """Эта функция проверяет корректность введеных ограничений для переменных.
-    
-    Возвращает котреж ограничений.
+def check_limits(limits: str, split_by: Optional[str] = None) -> str:
+    """
+    Эта функция проверяет корректность введеных ограничений для переменных.
 
     Parameters:
     ------------
     limits: str
-        Строка сожержащая ограничения слева и справа для переменной
-    split_by: str, optional
+        Строка сожержащая ограничения слева и справа для переменной.
+    split_by: Optional[str] = None
         Символ, которым разделяются ограничения.
-        По умолчанию работает как питоновский
-        .split() для строк.
 
     Returns:
     -------
-    Строка с ограничениями, разделенными пробелом
-
+    str
+        Строка с ограничениями, разделенными пробелом.
     """
+
     if limits == 'None':
         return 'None'
 
@@ -133,29 +135,33 @@ def check_limits(limits, split_by=None):
     return f'{limits[0]} {limits[1]}'
 
 
-def check_restr_func(s, variables):
-    """Функция проверяет корректность ввода для ограничивающей функции.
+def check_restr_func(expression: str, variables: str) -> str:
+    """
+    Функция проверяет корректность ввода для ограничивающей функции.
 
     Parameters:
     ------------
     s: str
-        Строка, содержащая введеную функцию
-    variables: array-like
-        Массив со строками, в которых записаны имена переменных
+        Строка, содержащая введеную функцию.
+    variables: str
+        Строка, содержащие имена переменных.
 
     Returns:
     -------
-    Функция в виде строки
-
+    str
+        Функция в виде строки.
     """
-    s = s.strip()
-    if s.find('—') != -1:
-        s = s.replace('—', '-')
 
-    if s.find('–') != -1:
-        s = s.replace('–', '-')
+    variables = variables.split()
 
-    checker = compile(s, '<string>', 'eval')  # Может выдать SyntaxError, если выражение некорректно
+    expression = expression.strip()
+    if expression.find('—') != -1:
+        expression = expression.replace('—', '-')
+
+    if expression.find('–') != -1:
+        expression = expression.replace('–', '-')
+
+    checker = compile(expression, '<string>', 'eval')  # Может выдать SyntaxError, если выражение некорректно
     allowed_names = list(allowed_operations) + list(variables)
 
     flag_variables = True
@@ -169,7 +175,7 @@ def check_restr_func(s, variables):
 
     x, y = symbols(f'{variables[0]} {variables[1]}', real=True)
     d = {variables[0]: x, variables[1]: y, 'e': math.e, 'pi': math.pi}
-    function = sympify(s, d, convert_xor=True)
+    function = sympify(expression, d, convert_xor=True)
     if not sp.solve(function, [x, y]):
         raise ValueError('Неверный ввод ограничивающей функции')
     return str(function)
