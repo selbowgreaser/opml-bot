@@ -41,20 +41,12 @@ class User:
             self.registration()
         return self.db.select(Select.USERS_STATUS, (self.user_id,))[0]
 
-    def registration(self, task: Optional[str] = None):
+    def registration(self):
         """
-        Регистрация пользователя в базе данных. По умолчанию регистрация происходит в таблице users.
-
-        Parameters
-        ----------
-        task : Optional[str] = None
-            Задача, решение которой хочет запросить пользователь.
+        Регистрация пользователя в базе данных в таблице users.
         """
 
-        if not task:
-            self.db.insert(Insert.USERS, (self.user_id, self.get_first_name(), self.get_last_name()))
-        elif task == 'extremum':
-            self.db.insert(Insert.EXTREMES, (self.user_id,))
+        self.db.insert(Insert.USERS, (self.user_id, self.get_first_name(), self.get_last_name()))
 
     def update_status(self, status: str):
         """
@@ -91,3 +83,4 @@ class User:
         """
 
         return self.vk_api_method.users.get(user_id=self.user_id)[0]['last_name']
+
