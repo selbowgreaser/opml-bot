@@ -18,5 +18,5 @@ sympy_functions = {
                                                type(v) == sympy.core.function.FunctionClass
 }
 
-allowed_operations = list(set(math_functions.keys()) & set(sympy_functions.keys())) + ['pi', 'e', 'sqrt']
+allowed_operations = list(set(math_functions.keys()) & set(sympy_functions.keys())) + ['pi', 'e', 'sqrt', 'abs']
 forbidden_names_for_variables = keyword.kwlist + allowed_operations
