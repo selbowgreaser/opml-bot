@@ -7,18 +7,17 @@ from IPython.display import display, Latex
 
 
 class LocalExtrWithRestrictions:
+    """
+    Решатель задачи.
+
+    :param vars: list из sympy.symbols
+    :param func: sympy выражение
+    :param g_func: sympy выражение
+    :param interval_x: tuple с числами
+    :param interval_y: tuple с числами
+    """
 
     def __init__(self, vars, func, g_func, interval_x=None, interval_y=None):
-        """
-        Конструктор задачи. Нужно передать обязательно список переменных, основную и ограничивающую функции
-        Интервалы при отсутствии будут определены автоматически
-        :param vars: list из sympy.symbols
-        :param func: sympy выражение
-        :param g_func: sympy выражение
-        :param interval_x: tuple с числами
-        :param interval_y: tuple с числами
-        """
-
         x, y = sp.symbols('x y')
         self.func = func.subs({vars[0]: x, vars[1]: y})
         self.g_func = g_func.subs({vars[0]: x, vars[1]: y})
