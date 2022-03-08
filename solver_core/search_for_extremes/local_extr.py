@@ -1,12 +1,10 @@
 import pandas as pd
 import numpy as np
-from Solution import Solution
 from drawing_func import *
 import sympy as sp
-from Preproccessing import prepare_data
 
 
-class LocalExtr(Solution):
+class LocalExtr:
     def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
         self.vars = vars
         self.func = func
@@ -49,7 +47,7 @@ class LocalExtr(Solution):
         if self.points.empty:
             ans += 'Решений нет'
             if not self.interval_x:
-                self.interval_x = (-1, 1) # значения для интервалов, если они не заданы и нет точек
+                self.interval_x = (-1, 1)  # значения для интервалов, если они не заданы и нет точек
             if not self.interval_y:
                 self.interval_y = (-1, 1)
         else:
@@ -339,7 +337,9 @@ class LocalExtr(Solution):
                                   'local min')
         return points
 
+
 if __name__ == '__main__':
+    from solver_core.search_for_extremes.handlers.preprocessing import prepare_data
     data = prepare_data('x y', 'x**2 - y**2', interval_x='-10 10', interval_y='-10 10')
     print(data[0][0])
     print(type(data[0][0]))

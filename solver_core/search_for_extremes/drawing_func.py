@@ -224,6 +224,7 @@ def save_fig_to_pic(fig: go.Figure, path: str, extensions: list) -> None:
     """
 
     if 'html' in extensions:
+        print('Сохранение html')
         fig.write_html(path + '.html', default_width=1336, default_height=668)
         extensions.remove('html')
 

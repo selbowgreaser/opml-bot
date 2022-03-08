@@ -1,4 +1,3 @@
-from Solution import Solution
 from drawing_func import *
 
 import sympy as sp
@@ -7,7 +6,7 @@ import pandas as pd
 from IPython.display import display, Latex
 
 
-class LocalExtrWithRestrictions(Solution):
+class LocalExtrWithRestrictions:
 
     def __init__(self, variables, func, g_func, interval_x=None, interval_y=None):
         """
