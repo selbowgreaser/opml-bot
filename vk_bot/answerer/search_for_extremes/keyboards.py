@@ -6,7 +6,7 @@ class Keyboards:
     Набор готовых клавиатур.
     """
     def __init__(self):
-        self.keyboard = VkKeyboard(one_time=True, inline=False)
+        self.keyboard = VkKeyboard(inline=True)
 
     def for_task_type_selection(self) -> VkKeyboard:
         """
