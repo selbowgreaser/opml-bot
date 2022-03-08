@@ -44,7 +44,7 @@ class Handlers:
         """
 
         self.user.update_status('greetings')
-        self.response.set_text(Phrases.greetings.format(first_name))
+        self.response.set_text(Phrases.GREETINGS.format(first_name))
         self.response.set_keyboard(Keyboards().for_welcome())
         return self.response
 
@@ -59,7 +59,7 @@ class Handlers:
             Сообщение для пользователя.
         """
         self.user.update_status('about_me')
-        self.response.set_text(Phrases.about_me)
+        self.response.set_text(Phrases.ABOUT_ME)
         self.response.set_keyboard(Keyboards().for_about_me())
         return self.response
 
@@ -75,7 +75,7 @@ class Handlers:
         """
 
         self.user.update_status('menu')
-        self.response.set_text(Phrases.menu)
+        self.response.set_text(Phrases.MENU)
         self.response.set_keyboard(Keyboards().for_menu())
         return self.response
 
@@ -90,5 +90,5 @@ class Handlers:
             Сообщение для пользователя.
         """
 
-        self.response.set_text(Phrases.click_button)
+        self.response.set_text(Phrases.CLICK_BUTTON)
         return self.response
