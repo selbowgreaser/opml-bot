@@ -65,6 +65,7 @@ class TaskManager:
                 return ExtremumManager(self.vk_api_method, self.db, self.user).manage(text)
             if text == 'Обо мне':
                 return self.handlers.about_me()
+            return self.handlers.click_button()
 
         if self.status == 'extremum':
             return ExtremumManager(self.vk_api_method, self.db, self.user).manage(text)
