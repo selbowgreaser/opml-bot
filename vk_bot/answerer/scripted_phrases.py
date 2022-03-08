@@ -3,7 +3,7 @@ from typing import NamedTuple
 
 class Phrases(NamedTuple):
     GREETINGS = 'Привет, {}!'
-    ABOUT_ME = 'Я бот с кодовым названием OPML.\n\nМоей разработкой занималась команда из шести студентов Финансового' \
+    ABOUT_ME = 'Я бот с кодовым названием OPML.\n\nМоей разработкой занималась команда из шести студентов Финансового ' \
                'университета. Давай я познакомлю тебя с ними:\n\n' \
                '*alxndr.andrvch(Александр Фролов) – Project Manager, Tech Lead\n' \
                '*id245919670(Алина Шаркова) – Analyst\n' \
