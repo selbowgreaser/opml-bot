@@ -1,10 +1,24 @@
 import pandas as pd
 import numpy as np
-from drawing_func import *
+from .drawing_func import *
 import sympy as sp
 
 
 class LocalExtr:
+    """
+    Решатель задачи.
+
+    Parameters
+    ----------
+    vars : list
+        Список переменных из sympy.symbols.
+    func : sympy выражение
+        Функция.
+    interval_x: tuple
+        Кортеж с пограничными точками для оси X.
+    interval_y: tuple
+        Кортеж с пограничными точками для оси Y.
+    """
     def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
         self.vars = vars
         self.func = func
@@ -13,11 +27,13 @@ class LocalExtr:
         self.interval_y = interval_y
 
     def generate_colors(self):
-        """Метод создает раскраску для точек.
+        """
+        Метод создает раскраску для точек.
 
         Returns
         --------
-        pd.Series со значениями цветов
+        pd.Series
+            Цвета по типам экстремумов.
         """
 
         dots_types = ['global min', 'local min', 'saddle', 'local max',
@@ -30,14 +46,16 @@ class LocalExtr:
         colors = self.points['types'].apply(set_color)
         return colors
 
-    def solve(self):
-
-        """Метод решает задачу локального экстремума.
-
-        Rerurns
-        -------
-        строка с ответом
+    def solve(self) -> str:
         """
+        Метод решает задачу локального экстремума.
+
+        Returns
+        -------
+        str
+            Строка с ответом.
+        """
+
         self.points = self.critical_points()
         if self.restr:
             self.points = self.points.append(self.border_points(),
@@ -70,44 +88,41 @@ class LocalExtr:
         return ans
 
     def check_point(point, xlim, ylim):
-
-        """Метод проверяет точку на соответствие лимитам для координат.
+        """
+        Метод проверяет точку на соответствие лимитам для координат.
 
         Parameters
         ---------
         point : array-like
-            массив с координатами точки вида (x, y), координата z не обязательна
+            Массив с координатами точки вида (x, y), координата z не обязательна
         xlim : array-like
-            массив с ограничениями слева и справа типа float
+            Массив с ограничениями слева и справа типа float
             или np.inf для первой координаты
         ylim : array-like
             массив с ограничениями слева и справа типа float
             или np.inf для второй координаты
 
         Returns
-        ---------------------
-        True если точка соответствует ограничениям или их нет
-        иначе False
-
+        -------
+        bool
+            True если точка соответствует ограничениям или их нет, иначе False
         """
 
-        def check_cord(cord, cordlim):
-
-            """Функция проверяет сооответствие координаты ее пределам.
+        def check_cord(cord: float, cordlim: list):
+            """
+            Функция проверяет сооответствие координаты ее пределам.
 
             Parameters
             ---------
             cord : float
-                координата
+                Координата.
             cordlim : array-like or None
-                    массив с ограничениями слева и справа типа float
-                    или np.inf
+                Массив с ограничениями слева и справа типа float или np.inf
 
             Returns
-            ---------------------
-            True если координата соответствует ограничениям или их нет
-            иначе False
-
+            -------
+            bool
+                True если координата соответствует ограничениям или их нет, иначе False.
             """
 
             if cordlim[0] <= cord <= cordlim[1]:
@@ -126,20 +141,20 @@ class LocalExtr:
             return True
 
     def critical_points(self):
-
-        """Метод находит критические точки для задачи.
+        """
+        Метод находит критические точки для задачи.
 
         С помощью производных находятся все экстремумы.
 
         Returns
-        ----------------------
-        pd.DataFrame, с колонками x, y, z
-
+        -------
+        pd.DataFrame
+            Данные о критических точках.
         """
 
         def set_dot_type(data, d, d2x):
-
-            """Функция определяет тип точки.
+            """
+            Функция определяет тип точки.
 
             При помощи вторых производных функция определяет
             является ли точка минимальной/максимальной/седловой.
@@ -148,18 +163,16 @@ class LocalExtr:
             Parameters
             ----------
             data: pd.Series
-                столбцы со значениями x, y, z
+                Столбцы со значениями x, y, z.
             d: sympy выражение
-                детерминант матрицы вторых производных. В него
-                подставлются значения в точках
+                Детерминант матрицы вторых производных. В него подставлются значения в точках
             d2x: sympy выражение
-                вторая производная по икс. В него подставляется
-                значения в точках
+                Вторая производная по икс. В него подставляется значения в точках
 
             Returns
             -------
-            pd.Series со значениями одним из четырех типов точки:
-            'saddle', 'global min', 'global max', 'unknown'
+            pd.Series
+                Серия со значениями одним из четырех типов точки: 'saddle', 'global min', 'global max', 'unknown'
             """
             d = d.subs({x: data[0], y: data[1]})
             d2x = d2x.subs({x: data[0], y: data[1]})
@@ -197,31 +210,28 @@ class LocalExtr:
         return critical_points
 
     def find_local_extr(self, free_var_ind, max_val, min_val):
+        """
+        Метод находит локальные экстремумы.
 
-        """Метод находит локальные экстремумы.
-
-        Пераметры
-        ---------
+        Parameters
+        ----------
         free_var_ind: 0 or 1
-            Номер переменной, которая является свободной
-            (по ней нет ограничений)
+            Номер переменной, которая является свободной (по ней нет ограничений)
         max_val: float or np.inf
-            Максимальное значение. В случае если в ходе
-            решения окажется, что у функции есть супремум,
+            Максимальное значение. В случае если в ходе решения окажется, что у функции есть супремум,
             больший чем это значение, то максимальное значение
             для всех локальных экстремумов будет обновлено.
         min_val: float or np.inf
             Аналогично как для min_val, только минимум и инфимум.
 
-
         Returns
-        ---------------------
-        pd.DataFrame с колонками как координаты точек x, y, z
-
-        max_value - новое максимальное значение
-        min_value - новое минимальное значение
-
+        -------
+        pd.DataFrame
+            с колонками как координаты точек x, y, z
+            max_value - новое максимальное значение
+            min_value - новое минимальное значение
         """
+
         points = pd.DataFrame(columns=['x', 'y', 'z'])
 
         if free_var_ind == 0:
@@ -272,16 +282,16 @@ class LocalExtr:
         return points, max_val, min_val
 
     def border_points(self):
-
-        """Метод находит локальные экстремумы, обходя все
+        """
+        Метод находит локальные экстремумы, обходя все
         возможные границы.
 
         Returns
-        ---------------------
-        pd.DataFrame с колонками x, y, z, type.
-        type содержит либо 'local max' либо 'local min'
-
+        -------
+        pd.DataFrame
+            С колонками x, y, z, type. type содержит либо 'local max' либо 'local min'
         """
+
         f = sp.lambdify(self.vars, self.func)
 
         if self.points.empty:
