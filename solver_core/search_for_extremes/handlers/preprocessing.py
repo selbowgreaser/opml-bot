@@ -1,22 +1,26 @@
+from typing import Optional
+
 from sympy import symbols, sympify, lambdify
 from numpy import inf
 
 
-def prepare_data(vars, func, interval_x=None, interval_y=None, g_func=None):
-    """Функция преобразовывает данные для передачи в конструктор класса.
+def prepare_data(vars: str, func: str, interval_x: Optional[str] = None, interval_y: Optional[str] = None,
+                 g_func: Optional[str] = None):
+    """
+    Функция преобразовывает данные для передачи в конструктор класса.
 
     Parameters
     ----------
     vars: str
-        Строка с переменными, разделенными пробелом
+        Строка с переменными, разделенными пробелом.
     func: str
-        Строка с функцией
+        Строка с функцией.
     interval_x: str
-        Ограничения для первой переменной
+        Ограничения для первой переменной.
     interval_y: str
-        Ограничения для второй переменной
+        Ограничения для второй переменной.
     g_func: str
-        Ограничивающая функция в виде строки
+        Ограничивающая функция в виде строки.
 
     Returns
     --------
@@ -30,7 +34,7 @@ def prepare_data(vars, func, interval_x=None, interval_y=None, g_func=None):
     func = func.subs({vars[0]: sympy_vars[0], vars[1]: sympy_vars[1]})
     interval_x = prepare_limits(interval_x)
     interval_y = prepare_limits(interval_y)
-    param = {'vars': vars,
+    param = {'vars': sympy_vars,
              'func': func,
              'interval_x': interval_x,
              'interval_y': interval_y}
@@ -47,7 +51,7 @@ def prepare_limits(limits):
     Parameters
     ----------
     limits: str
-        Строка с числами, разделенными пробелом
+        Строка с числами, разделенными пробелом.
 
     Returns
     -------
@@ -55,7 +59,7 @@ def prepare_limits(limits):
         Ограничения для функции.
     """
 
-    if limits != 'None':
+    if limits and limits != 'None':
         limits = limits.split()
         for i in range(2):
             if limits[i] == 'inf':
