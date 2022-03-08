@@ -2,6 +2,7 @@ from vk_api.vk_api import VkApiMethod
 
 from vk_bot.answerer.message_handlers import Handlers
 from vk_bot.answerer.response_init import Response
+from vk_bot.answerer.search_for_extremes.extremum_manager import ExtremumManager
 from vk_bot.database import BotDatabase
 from vk_bot.user import User
 
@@ -21,7 +22,7 @@ class TaskManager:
     """
 
     def __init__(self, vk_api_method: VkApiMethod, db: BotDatabase, user: User):
-        self.vk = vk_api_method
+        self.vk_api_method = vk_api_method
         self.db = db
         self.user = user
         self.status = user.authorization()
@@ -60,6 +61,10 @@ class TaskManager:
 
         if self.status == 'menu':
             if text == 'Поиск экстремума':
-                pass
+                self.user.update_status('extremum')
+                return ExtremumManager(self.vk_api_method, self.db, self.user).manage(text)
             if text == 'Обо мне':
                 return self.handlers.about_me()
+
+        if self.status == 'extremum':
+            return ExtremumManager(self.vk_api_method, self.db, self.user).manage(text)
