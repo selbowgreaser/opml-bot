@@ -20,8 +20,8 @@ def prepare_data(vars, func, interval_x=None, interval_y=None, g_func=None):
 
     Returns
     --------
-    tuple
-        Набор параметров, подготовленный для решения задачи.
+    dict
+        Набор параметров в виде словаря с данными, подготовленными для поиска экстремума.
     """
 
     sympy_vars = symbols(vars)
@@ -30,12 +30,14 @@ def prepare_data(vars, func, interval_x=None, interval_y=None, g_func=None):
     func = func.subs({vars[0]: sympy_vars[0], vars[1]: sympy_vars[1]})
     interval_x = prepare_limits(interval_x)
     interval_y = prepare_limits(interval_y)
-    # TODO: возвращать словарь с параметрами, а не кортеж
+    param = {'vars': vars,
+             'func': func,
+             'interval_x': interval_x,
+             'interval_y': interval_y}
     if g_func:
         g_func = sympify(g_func).subs({vars[0]: sympy_vars[0], vars[1]: sympy_vars[1]})
-        return sympy_vars, func, interval_x, interval_y, g_func
-    else:
-        return sympy_vars, func, interval_x, interval_y
+        param.update(g_func=g_func)
+    return param
 
 
 def prepare_limits(limits):
