@@ -166,7 +166,7 @@ def draw_3d(points_of_function: pd.DataFrame,
     return fig
 
 
-def make_df_for_drawing(func: sympy.functions,
+def make_df_for_drawing(func,
                         variables,
                         x_constraints: tuple,
                         y_constraints: tuple,
