@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 <meta name="generator" content="pdoc 0.10.0" />
-<title>messages API documentation</title>
+<title>opml_1.vk_bot.answerer.scripted_phrases API documentation</title>
 <meta name="description" content="" />
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
 <link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
@@ -19,57 +19,29 @@
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>messages</code></h1>
+<h1 class="title">Module <code>opml_1.vk_bot.answerer.scripted_phrases</code></h1>
 </header>
 <section id="section-intro">
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">from typing import Optional
-
-from vk_api.keyboard import VkKeyboard
-from vk_api.utils import get_random_id
+<pre><code class="python">from typing import NamedTuple
 
 
-class Response:
-    &#34;&#34;&#34;
-    Сообщение для пользователя.
-
-    Parameters
-    ----------
-    user_id: int
-        id пользователя, которому будет отправлен ответ
-    text: str
-        Ответ пользователю в виде строки
-    keyboard: VkKeyboard
-        Объект клавиатуры для пользователя
-    &#34;&#34;&#34;
-
-    def __init__(self, user_id: int, text: str, keyboard: Optional[VkKeyboard] = None):
-        self.user_id = user_id
-        self.random_id = get_random_id()
-        self.text = text
-        self.keyboard = keyboard
-
-    def get_message(self) -&gt; dict:
-        &#34;&#34;&#34;
-        Формирование словаря с параметрами сообщения для отправки сообщения пользователю.
-
-        Returns
-        -------
-        dict
-            Параметры для метода send_message, которые необходимы для отправки сообщения c помощью api VK.
-        &#34;&#34;&#34;
-
-        parameters = {&#34;user_id&#34;: self.user_id,
-                      &#34;random_id&#34;: self.random_id,
-                      &#34;message&#34;: self.text}
-
-        if self.keyboard:
-            parameters.update(keyboard=self.keyboard)
-
-        return parameters</code></pre>
+class Phrases(NamedTuple):
+    GREETINGS = &#39;Привет, {}!&#39;
+    ABOUT_ME = &#39;Я бот с кодовым названием OPML.\n\nМоей разработкой занималась команда из шести студентов Финансового&#39; \
+               &#39;университета. Давай я познакомлю тебя с ними:\n\n&#39; \
+               &#39;*alxndr.andrvch(Александр Фролов) – Project Manager, Tech Lead\n&#39; \
+               &#39;*id245919670(Алина Шаркова) – Analyst\n&#39; \
+               &#39;*mashaplastinina(Мария Пластинина) – Analyst\n&#39; \
+               &#39;*vktrbr(Виктор Барбарич) – Programmer\n&#39; \
+               &#39;*gospod_bogg(Виталий Тимофеев) – Programmer\n&#39; \
+               &#39;*0nadya(Надежда Гераськина) – Tester\n\n&#39; \
+               &#39;Если хочешь лучше узнать мой внутренний мир, тебе сюда -&gt; https://github.com/selbowgreaser/opml_1\n&#39;
+    MENU = &#39;Выбери то, что тебе нужно:&#39;
+    CLICK_BUTTON = &#39;Не понял... Нажми на клавиатуру ☝🏻&#39;</code></pre>
 </details>
 </section>
 <section>
@@ -81,99 +53,50 @@ class Response:
 <section>
 <h2 class="section-title" id="header-classes">Classes</h2>
 <dl>
-<dt id="messages.Response"><code class="flex name class">
-<span>class <span class="ident">Response</span></span>
-<span>(</span><span>user_id: int, text: str, keyboard: Optional[vk_api.keyboard.VkKeyboard] = None)</span>
+<dt id="opml_1.vk_bot.answerer.scripted_phrases.Phrases"><code class="flex name class">
+<span>class <span class="ident">Phrases</span></span>
 </code></dt>
 <dd>
-<div class="desc"><p>Сообщение для пользователя.</p>
-<h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>user_id</code></strong> :&ensp;<code>int</code></dt>
-<dd>id пользователя, которому будет отправлен ответ</dd>
-<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
-<dd>Ответ пользователю в виде строки</dd>
-<dt><strong><code>keyboard</code></strong> :&ensp;<code>VkKeyboard</code></dt>
-<dd>Объект клавиатуры для пользователя</dd>
-</dl></div>
+<div class="desc"><p>Phrases()</p></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">class Response:
-    &#34;&#34;&#34;
-    Сообщение для пользователя.
-
-    Parameters
-    ----------
-    user_id: int
-        id пользователя, которому будет отправлен ответ
-    text: str
-        Ответ пользователю в виде строки
-    keyboard: VkKeyboard
-        Объект клавиатуры для пользователя
-    &#34;&#34;&#34;
-
-    def __init__(self, user_id: int, text: str, keyboard: Optional[VkKeyboard] = None):
-        self.user_id = user_id
-        self.random_id = get_random_id()
-        self.text = text
-        self.keyboard = keyboard
-
-    def get_message(self) -&gt; dict:
-        &#34;&#34;&#34;
-        Формирование словаря с параметрами сообщения для отправки сообщения пользователю.
-
-        Returns
-        -------
-        dict
-            Параметры для метода send_message, которые необходимы для отправки сообщения c помощью api VK.
-        &#34;&#34;&#34;
-
-        parameters = {&#34;user_id&#34;: self.user_id,
-                      &#34;random_id&#34;: self.random_id,
-                      &#34;message&#34;: self.text}
-
-        if self.keyboard:
-            parameters.update(keyboard=self.keyboard)
-
-        return parameters</code></pre>
+<pre><code class="python">class Phrases(NamedTuple):
+    GREETINGS = &#39;Привет, {}!&#39;
+    ABOUT_ME = &#39;Я бот с кодовым названием OPML.\n\nМоей разработкой занималась команда из шести студентов Финансового&#39; \
+               &#39;университета. Давай я познакомлю тебя с ними:\n\n&#39; \
+               &#39;*alxndr.andrvch(Александр Фролов) – Project Manager, Tech Lead\n&#39; \
+               &#39;*id245919670(Алина Шаркова) – Analyst\n&#39; \
+               &#39;*mashaplastinina(Мария Пластинина) – Analyst\n&#39; \
+               &#39;*vktrbr(Виктор Барбарич) – Programmer\n&#39; \
+               &#39;*gospod_bogg(Виталий Тимофеев) – Programmer\n&#39; \
+               &#39;*0nadya(Надежда Гераськина) – Tester\n\n&#39; \
+               &#39;Если хочешь лучше узнать мой внутренний мир, тебе сюда -&gt; https://github.com/selbowgreaser/opml_1\n&#39;
+    MENU = &#39;Выбери то, что тебе нужно:&#39;
+    CLICK_BUTTON = &#39;Не понял... Нажми на клавиатуру ☝🏻&#39;</code></pre>
 </details>
-<h3>Methods</h3>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.tuple</li>
+</ul>
+<h3>Class variables</h3>
 <dl>
-<dt id="messages.Response.get_message"><code class="name flex">
-<span>def <span class="ident">get_message</span></span>(<span>self) ‑> dict</span>
-</code></dt>
+<dt id="opml_1.vk_bot.answerer.scripted_phrases.Phrases.ABOUT_ME"><code class="name">var <span class="ident">ABOUT_ME</span></code></dt>
 <dd>
-<div class="desc"><p>Формирование словаря с параметрами сообщения для отправки сообщения пользователю.</p>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>dict</code></dt>
-<dd>Параметры для метода send_message, которые необходимы для отправки сообщения c помощью api VK.</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def get_message(self) -&gt; dict:
-    &#34;&#34;&#34;
-    Формирование словаря с параметрами сообщения для отправки сообщения пользователю.
-
-    Returns
-    -------
-    dict
-        Параметры для метода send_message, которые необходимы для отправки сообщения c помощью api VK.
-    &#34;&#34;&#34;
-
-    parameters = {&#34;user_id&#34;: self.user_id,
-                  &#34;random_id&#34;: self.random_id,
-                  &#34;message&#34;: self.text}
-
-    if self.keyboard:
-        parameters.update(keyboard=self.keyboard)
-
-    return parameters</code></pre>
-</details>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.answerer.scripted_phrases.Phrases.CLICK_BUTTON"><code class="name">var <span class="ident">CLICK_BUTTON</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.answerer.scripted_phrases.Phrases.GREETINGS"><code class="name">var <span class="ident">GREETINGS</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.answerer.scripted_phrases.Phrases.MENU"><code class="name">var <span class="ident">MENU</span></code></dt>
+<dd>
+<div class="desc"></div>
 </dd>
 </dl>
 </dd>
@@ -186,12 +109,20 @@ class Response:
 <ul></ul>
 </div>
 <ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="opml_1.vk_bot.answerer" href="index.html">opml_1.vk_bot.answerer</a></code></li>
+</ul>
+</li>
 <li><h3><a href="#header-classes">Classes</a></h3>
 <ul>
 <li>
-<h4><code><a title="messages.Response" href="#messages.Response">Response</a></code></h4>
+<h4><code><a title="opml_1.vk_bot.answerer.scripted_phrases.Phrases" href="#opml_1.vk_bot.answerer.scripted_phrases.Phrases">Phrases</a></code></h4>
 <ul class="">
-<li><code><a title="messages.Response.get_message" href="#messages.Response.get_message">get_message</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.scripted_phrases.Phrases.ABOUT_ME" href="#opml_1.vk_bot.answerer.scripted_phrases.Phrases.ABOUT_ME">ABOUT_ME</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.scripted_phrases.Phrases.CLICK_BUTTON" href="#opml_1.vk_bot.answerer.scripted_phrases.Phrases.CLICK_BUTTON">CLICK_BUTTON</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.scripted_phrases.Phrases.GREETINGS" href="#opml_1.vk_bot.answerer.scripted_phrases.Phrases.GREETINGS">GREETINGS</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.scripted_phrases.Phrases.MENU" href="#opml_1.vk_bot.answerer.scripted_phrases.Phrases.MENU">MENU</a></code></li>
 </ul>
 </li>
 </ul>

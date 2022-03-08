@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>opml_1.vk_bot.sql_queries API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>opml_1.vk_bot.sql_queries</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from typing import NamedTuple
+
+
+class Create(NamedTuple):
+    &#34;&#34;&#34;
+    Запросы на создание таблиц в базе данных.
+    &#34;&#34;&#34;
+    USERS = (&#34;CREATE TABLE users (\n&#34;
+             &#34;               user_id INTEGER PRIMARY KEY, \n&#34;
+             &#34;               first_name TEXT NOT NULL, \n&#34;
+             &#34;               last_name TEXT NOT NULL, \n&#34;
+             &#34;               status TEXT DEFAULT &#39;start&#39;)&#34;)
+
+    EXTREMES = (&#34;CREATE TABLE extremes (\n&#34;
+                &#34;                  user_id INTEGER PRIMARY KEY, \n&#34;
+                &#34;                  step TEXT DEFAULT &#39;start&#39;,\n&#34;
+                &#34;                  type TEXT,\n&#34;
+                &#34;                  vars TEXT, \n&#34;
+                &#34;                  func TEXT, \n&#34;
+                &#34;                  interval_x TEXT, \n&#34;
+                &#34;                  interval_y TEXT, \n&#34;
+                &#34;                  g_func TEXT, \n&#34;
+                &#34;                  restr INTEGER, \n&#34;
+                &#34;                  FOREIGN KEY(user_id) REFERENCES users(user_id))&#34;)
+
+
+class Insert(NamedTuple):
+    &#34;&#34;&#34;
+    Запросы на добавление новых строк в таблицу базы данных.
+    &#34;&#34;&#34;
+
+    USERS = &#34;INSERT INTO users(user_id, first_name, last_name) VALUES (?, ?, ?)&#34;
+    EXTREMES = &#34;INSERT INTO extremes(user_id) VALUES (?)&#34;
+
+
+class Select(NamedTuple):
+    &#34;&#34;&#34;
+    Запросы на извлечение полей из таблицы базы данных.
+    &#34;&#34;&#34;
+
+    USERS_USER_ID = &#34;SELECT user_id FROM users WHERE user_id = ?&#34;
+    USERS_STATUS = &#34;SELECT status FROM users WHERE user_id = ?&#34;
+
+    EXTREMES_STEP = &#34;SELECT step FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_RESTR = &#34;SELECT restr FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_VARS = &#34;SELECT vars FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_TYPE = &#34;SELECT type FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_ALL = &#34;SELECT vars, func, g_func, restr, interval_x, interval_y FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_WITH_INT = &#34;SELECT vars, func, interval_x, interval_y FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_WITHOUT_INT = &#34;SELECT vars, func FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_RESTR_WITH_INT = &#34;SELECT vars, func, g_func, interval_x, interval_y FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_RESTR_WITHOUT_INT = &#34;SELECT vars, func, g_func FROM extremes WHERE user_id = ? &#34;
+
+
+class Update(NamedTuple):
+    &#34;&#34;&#34;
+    Запросы на обновление полей в таблицах базы данных.
+    &#34;&#34;&#34;
+
+    USERS_STATUS = &#34;UPDATE users SET status = ? WHERE user_id = ?&#34;
+
+    EXTREMES_STEP = &#34;UPDATE extremes SET step = ? WHERE user_id = ?&#34;
+    EXTREMES_TYPE = &#34;UPDATE extremes SET type = ? WHERE user_id = ?&#34;
+    EXTREMES_VARS = &#34;UPDATE extremes SET vars = ? WHERE user_id = ?&#34;
+    EXTREMES_FUNC = &#34;UPDATE extremes SET func = ? WHERE user_id = ?&#34;
+    EXTREMES_G_FUNC = &#34;UPDATE extremes SET g_func = ? WHERE user_id = ?&#34;
+    EXTREMES_RESTR = &#34;UPDATE extremes SET restr = ? WHERE user_id = ?&#34;
+    EXTREMES_INTERVAL_X = &#34;UPDATE extremes SET interval_x = ? WHERE user_id = ?&#34;
+    EXTREMES_INTERVAL_Y = &#34;UPDATE extremes SET interval_y = ? WHERE user_id = ?&#34;</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="opml_1.vk_bot.sql_queries.Create"><code class="flex name class">
+<span>class <span class="ident">Create</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Запросы на создание таблиц в базе данных.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Create(NamedTuple):
+    &#34;&#34;&#34;
+    Запросы на создание таблиц в базе данных.
+    &#34;&#34;&#34;
+    USERS = (&#34;CREATE TABLE users (\n&#34;
+             &#34;               user_id INTEGER PRIMARY KEY, \n&#34;
+             &#34;               first_name TEXT NOT NULL, \n&#34;
+             &#34;               last_name TEXT NOT NULL, \n&#34;
+             &#34;               status TEXT DEFAULT &#39;start&#39;)&#34;)
+
+    EXTREMES = (&#34;CREATE TABLE extremes (\n&#34;
+                &#34;                  user_id INTEGER PRIMARY KEY, \n&#34;
+                &#34;                  step TEXT DEFAULT &#39;start&#39;,\n&#34;
+                &#34;                  type TEXT,\n&#34;
+                &#34;                  vars TEXT, \n&#34;
+                &#34;                  func TEXT, \n&#34;
+                &#34;                  interval_x TEXT, \n&#34;
+                &#34;                  interval_y TEXT, \n&#34;
+                &#34;                  g_func TEXT, \n&#34;
+                &#34;                  restr INTEGER, \n&#34;
+                &#34;                  FOREIGN KEY(user_id) REFERENCES users(user_id))&#34;)</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.tuple</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="opml_1.vk_bot.sql_queries.Create.EXTREMES"><code class="name">var <span class="ident">EXTREMES</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Create.USERS"><code class="name">var <span class="ident">USERS</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Insert"><code class="flex name class">
+<span>class <span class="ident">Insert</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Запросы на добавление новых строк в таблицу базы данных.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Insert(NamedTuple):
+    &#34;&#34;&#34;
+    Запросы на добавление новых строк в таблицу базы данных.
+    &#34;&#34;&#34;
+
+    USERS = &#34;INSERT INTO users(user_id, first_name, last_name) VALUES (?, ?, ?)&#34;
+    EXTREMES = &#34;INSERT INTO extremes(user_id) VALUES (?)&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.tuple</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="opml_1.vk_bot.sql_queries.Insert.EXTREMES"><code class="name">var <span class="ident">EXTREMES</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Insert.USERS"><code class="name">var <span class="ident">USERS</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Select"><code class="flex name class">
+<span>class <span class="ident">Select</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Запросы на извлечение полей из таблицы базы данных.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Select(NamedTuple):
+    &#34;&#34;&#34;
+    Запросы на извлечение полей из таблицы базы данных.
+    &#34;&#34;&#34;
+
+    USERS_USER_ID = &#34;SELECT user_id FROM users WHERE user_id = ?&#34;
+    USERS_STATUS = &#34;SELECT status FROM users WHERE user_id = ?&#34;
+
+    EXTREMES_STEP = &#34;SELECT step FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_RESTR = &#34;SELECT restr FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_VARS = &#34;SELECT vars FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_TYPE = &#34;SELECT type FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_ALL = &#34;SELECT vars, func, g_func, restr, interval_x, interval_y FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_WITH_INT = &#34;SELECT vars, func, interval_x, interval_y FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_WITHOUT_INT = &#34;SELECT vars, func FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_RESTR_WITH_INT = &#34;SELECT vars, func, g_func, interval_x, interval_y FROM extremes WHERE user_id = ?&#34;
+    EXTREMES_RESTR_WITHOUT_INT = &#34;SELECT vars, func, g_func FROM extremes WHERE user_id = ? &#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.tuple</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="opml_1.vk_bot.sql_queries.Select.EXTREMES_ALL"><code class="name">var <span class="ident">EXTREMES_ALL</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Select.EXTREMES_RESTR"><code class="name">var <span class="ident">EXTREMES_RESTR</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Select.EXTREMES_RESTR_WITHOUT_INT"><code class="name">var <span class="ident">EXTREMES_RESTR_WITHOUT_INT</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Select.EXTREMES_RESTR_WITH_INT"><code class="name">var <span class="ident">EXTREMES_RESTR_WITH_INT</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Select.EXTREMES_STEP"><code class="name">var <span class="ident">EXTREMES_STEP</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Select.EXTREMES_TYPE"><code class="name">var <span class="ident">EXTREMES_TYPE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Select.EXTREMES_VARS"><code class="name">var <span class="ident">EXTREMES_VARS</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Select.EXTREMES_WITHOUT_INT"><code class="name">var <span class="ident">EXTREMES_WITHOUT_INT</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Select.EXTREMES_WITH_INT"><code class="name">var <span class="ident">EXTREMES_WITH_INT</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Select.USERS_STATUS"><code class="name">var <span class="ident">USERS_STATUS</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Select.USERS_USER_ID"><code class="name">var <span class="ident">USERS_USER_ID</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Update"><code class="flex name class">
+<span>class <span class="ident">Update</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Запросы на обновление полей в таблицах базы данных.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Update(NamedTuple):
+    &#34;&#34;&#34;
+    Запросы на обновление полей в таблицах базы данных.
+    &#34;&#34;&#34;
+
+    USERS_STATUS = &#34;UPDATE users SET status = ? WHERE user_id = ?&#34;
+
+    EXTREMES_STEP = &#34;UPDATE extremes SET step = ? WHERE user_id = ?&#34;
+    EXTREMES_TYPE = &#34;UPDATE extremes SET type = ? WHERE user_id = ?&#34;
+    EXTREMES_VARS = &#34;UPDATE extremes SET vars = ? WHERE user_id = ?&#34;
+    EXTREMES_FUNC = &#34;UPDATE extremes SET func = ? WHERE user_id = ?&#34;
+    EXTREMES_G_FUNC = &#34;UPDATE extremes SET g_func = ? WHERE user_id = ?&#34;
+    EXTREMES_RESTR = &#34;UPDATE extremes SET restr = ? WHERE user_id = ?&#34;
+    EXTREMES_INTERVAL_X = &#34;UPDATE extremes SET interval_x = ? WHERE user_id = ?&#34;
+    EXTREMES_INTERVAL_Y = &#34;UPDATE extremes SET interval_y = ? WHERE user_id = ?&#34;</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>builtins.tuple</li>
+</ul>
+<h3>Class variables</h3>
+<dl>
+<dt id="opml_1.vk_bot.sql_queries.Update.EXTREMES_FUNC"><code class="name">var <span class="ident">EXTREMES_FUNC</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Update.EXTREMES_G_FUNC"><code class="name">var <span class="ident">EXTREMES_G_FUNC</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Update.EXTREMES_INTERVAL_X"><code class="name">var <span class="ident">EXTREMES_INTERVAL_X</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Update.EXTREMES_INTERVAL_Y"><code class="name">var <span class="ident">EXTREMES_INTERVAL_Y</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Update.EXTREMES_RESTR"><code class="name">var <span class="ident">EXTREMES_RESTR</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Update.EXTREMES_STEP"><code class="name">var <span class="ident">EXTREMES_STEP</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Update.EXTREMES_TYPE"><code class="name">var <span class="ident">EXTREMES_TYPE</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Update.EXTREMES_VARS"><code class="name">var <span class="ident">EXTREMES_VARS</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt id="opml_1.vk_bot.sql_queries.Update.USERS_STATUS"><code class="name">var <span class="ident">USERS_STATUS</span></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="opml_1.vk_bot" href="index.html">opml_1.vk_bot</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="opml_1.vk_bot.sql_queries.Create" href="#opml_1.vk_bot.sql_queries.Create">Create</a></code></h4>
+<ul class="">
+<li><code><a title="opml_1.vk_bot.sql_queries.Create.EXTREMES" href="#opml_1.vk_bot.sql_queries.Create.EXTREMES">EXTREMES</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Create.USERS" href="#opml_1.vk_bot.sql_queries.Create.USERS">USERS</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="opml_1.vk_bot.sql_queries.Insert" href="#opml_1.vk_bot.sql_queries.Insert">Insert</a></code></h4>
+<ul class="">
+<li><code><a title="opml_1.vk_bot.sql_queries.Insert.EXTREMES" href="#opml_1.vk_bot.sql_queries.Insert.EXTREMES">EXTREMES</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Insert.USERS" href="#opml_1.vk_bot.sql_queries.Insert.USERS">USERS</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="opml_1.vk_bot.sql_queries.Select" href="#opml_1.vk_bot.sql_queries.Select">Select</a></code></h4>
+<ul class="">
+<li><code><a title="opml_1.vk_bot.sql_queries.Select.EXTREMES_ALL" href="#opml_1.vk_bot.sql_queries.Select.EXTREMES_ALL">EXTREMES_ALL</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Select.EXTREMES_RESTR" href="#opml_1.vk_bot.sql_queries.Select.EXTREMES_RESTR">EXTREMES_RESTR</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Select.EXTREMES_RESTR_WITHOUT_INT" href="#opml_1.vk_bot.sql_queries.Select.EXTREMES_RESTR_WITHOUT_INT">EXTREMES_RESTR_WITHOUT_INT</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Select.EXTREMES_RESTR_WITH_INT" href="#opml_1.vk_bot.sql_queries.Select.EXTREMES_RESTR_WITH_INT">EXTREMES_RESTR_WITH_INT</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Select.EXTREMES_STEP" href="#opml_1.vk_bot.sql_queries.Select.EXTREMES_STEP">EXTREMES_STEP</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Select.EXTREMES_TYPE" href="#opml_1.vk_bot.sql_queries.Select.EXTREMES_TYPE">EXTREMES_TYPE</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Select.EXTREMES_VARS" href="#opml_1.vk_bot.sql_queries.Select.EXTREMES_VARS">EXTREMES_VARS</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Select.EXTREMES_WITHOUT_INT" href="#opml_1.vk_bot.sql_queries.Select.EXTREMES_WITHOUT_INT">EXTREMES_WITHOUT_INT</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Select.EXTREMES_WITH_INT" href="#opml_1.vk_bot.sql_queries.Select.EXTREMES_WITH_INT">EXTREMES_WITH_INT</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Select.USERS_STATUS" href="#opml_1.vk_bot.sql_queries.Select.USERS_STATUS">USERS_STATUS</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Select.USERS_USER_ID" href="#opml_1.vk_bot.sql_queries.Select.USERS_USER_ID">USERS_USER_ID</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="opml_1.vk_bot.sql_queries.Update" href="#opml_1.vk_bot.sql_queries.Update">Update</a></code></h4>
+<ul class="two-column">
+<li><code><a title="opml_1.vk_bot.sql_queries.Update.EXTREMES_FUNC" href="#opml_1.vk_bot.sql_queries.Update.EXTREMES_FUNC">EXTREMES_FUNC</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Update.EXTREMES_G_FUNC" href="#opml_1.vk_bot.sql_queries.Update.EXTREMES_G_FUNC">EXTREMES_G_FUNC</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Update.EXTREMES_INTERVAL_X" href="#opml_1.vk_bot.sql_queries.Update.EXTREMES_INTERVAL_X">EXTREMES_INTERVAL_X</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Update.EXTREMES_INTERVAL_Y" href="#opml_1.vk_bot.sql_queries.Update.EXTREMES_INTERVAL_Y">EXTREMES_INTERVAL_Y</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Update.EXTREMES_RESTR" href="#opml_1.vk_bot.sql_queries.Update.EXTREMES_RESTR">EXTREMES_RESTR</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Update.EXTREMES_STEP" href="#opml_1.vk_bot.sql_queries.Update.EXTREMES_STEP">EXTREMES_STEP</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Update.EXTREMES_TYPE" href="#opml_1.vk_bot.sql_queries.Update.EXTREMES_TYPE">EXTREMES_TYPE</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Update.EXTREMES_VARS" href="#opml_1.vk_bot.sql_queries.Update.EXTREMES_VARS">EXTREMES_VARS</a></code></li>
+<li><code><a title="opml_1.vk_bot.sql_queries.Update.USERS_STATUS" href="#opml_1.vk_bot.sql_queries.Update.USERS_STATUS">USERS_STATUS</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

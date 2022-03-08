@@ -1,0 +1,809 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>opml_1.vk_bot.answerer.search_for_extremes.message_handlers API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>opml_1.vk_bot.answerer.search_for_extremes.message_handlers</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from vk_api.vk_api import VkApiMethod
+
+from solver_core.search_for_extremes.handlers.input_validation import check_variables, check_restr_func, \
+    check_expression, check_limits
+from solver_core.search_for_extremes.handlers.preprocessing import prepare_data
+from solver_core.search_for_extremes.local_extr import LocalExtr
+from vk_bot.answerer.response_init import Response
+from vk_bot.answerer.search_for_extremes.extremum import Extremum
+from vk_bot.answerer.search_for_extremes.keyboards import Keyboards
+from vk_bot.answerer.search_for_extremes.scripted_phrases import Phrases
+from vk_bot.database import BotDatabase
+from vk_bot.user import User
+
+
+class Handlers:
+    &#34;&#34;&#34;
+    Генератор ответов пользователю.
+
+    Parameters
+    ----------
+    vk_api_method : VkApiMethod
+        Объект соединения с VK и набор методов API.
+    db : BotDatabase
+        Объект для взаимодействия с базой данных.
+    user : User
+        Объект для взаимодействия с данными пользователя.
+    &#34;&#34;&#34;
+
+    def __init__(self, vk_api_method: VkApiMethod, db: BotDatabase, user: User, extremum: Extremum):
+        self.vk = vk_api_method
+        self.db = db
+        self.user = user
+        self.extremum = extremum
+        self.response = Response(self.user.user_id)
+
+    def task_type_selection(self) -&gt; Response:
+        &#34;&#34;&#34;
+        Выбор типа задачи.
+        Шаг: task_type_selection
+
+        Returns
+        -------
+        Response
+            Сообщение для пользователя.
+        &#34;&#34;&#34;
+        self.extremum.update_step(&#39;task_type_selection&#39;)
+        self.response.set_text(Phrases.TASK_TYPE_SELECTION)
+        self.response.set_keyboard(Keyboards().for_task_type_selection())
+        return self.response
+
+    def input_vars(self) -&gt; Response:
+        &#34;&#34;&#34;
+        Предложение ввести имена переменных.
+        Шаг: input_vars
+
+        Returns
+        -------
+        Response
+            Сообщение для пользователя.
+        &#34;&#34;&#34;
+        self.extremum.update_step(&#39;input_vars&#39;)
+        self.response.set_text(Phrases.INPUT_VARS)
+        return self.response
+
+    def vars(self, text) -&gt; Response:
+        &#34;&#34;&#34;
+        Обработка введенных именных переменных. Предложение ввести функцию.
+        Шаг: input_func
+
+        Parameters
+        ----------
+        text : str
+            Текст сообщения, отправленного пользователем.
+
+        Returns
+        -------
+        Response
+            Сообщение для пользователя.
+        &#34;&#34;&#34;
+        try:
+            vars = check_variables(text)
+            self.extremum.update_vars(vars)
+            self.response.set_text(Phrases.INPUT_FUNC)
+            self.extremum.update_step(&#39;input_func&#39;)
+            return self.response
+        except ValueError as e:
+            return self.error(e)
+
+    def func(self, text, task_type) -&gt; Response:
+        try:
+            vars = self.extremum.get_vars()
+            func = check_expression(text, vars)
+            self.extremum.update_func(func)
+            if task_type == &#39;common&#39;:
+                self.response.set_text(Phrases.INPUT_RESTR)
+                self.response.set_keyboard(Keyboards().for_input_restr())
+                self.extremum.update_step(&#39;input_restr&#39;)
+            else:
+                self.response.set_text(Phrases.INPUT_G_FUNC)
+                self.extremum.update_step(&#39;input_g_func&#39;)
+            return self.response
+        except ValueError as e:
+            return self.error(e)
+
+    def g_func(self, text) -&gt; Response:
+        try:
+            vars = self.extremum.get_vars()
+            g_func = check_restr_func(text, vars)
+            self.extremum.update_g_func(g_func)
+            self.extremum.update_step(&#39;input_restr&#39;)
+            self.response.set_text(Phrases.INPUT_RESTR)
+            self.response.set_keyboard(Keyboards().for_input_restr())
+            return self.response
+        except ValueError as e:
+            return self.error(e)
+
+    def input_restr(self) -&gt; Response:
+        self.extremum.update_step(&#39;input_interval_x&#39;)
+        self.response.set_text(Phrases.INPUT_INTERVAL_X)
+        return self.response
+
+    def interval_x(self, text) -&gt; Response:
+        try:
+            interval_x = check_limits(text)
+            self.extremum.update_interval_x(interval_x)
+            self.extremum.update_step(&#39;input_interval_y&#39;)
+            self.response.set_text(Phrases.INPUT_INTERVAL_Y)
+            return self.response
+        except ValueError as e:
+            return self.error(e)
+
+    def interval_y(self, text) -&gt; Response:
+        try:
+            interval_y = check_limits(text)
+            self.extremum.update_interval_y(interval_y)
+            self.extremum.update_step(&#39;compute&#39;)
+            self.response.set_text(Phrases.COMPUTE)
+            self.response.set_keyboard(Keyboards().for_compute())
+            return self.response
+        except ValueError as e:
+            return self.error(e)
+
+    def precompute(self) -&gt; Response:
+        self.extremum.update_step(&#39;compute&#39;)
+        self.response.set_text(Phrases.COMPUTE)
+        self.response.set_keyboard(Keyboards().for_compute())
+        return self.response
+
+    def local_extr(self, restr) -&gt; Response:
+        if restr:
+            vars, func, interval_x, interval_y = self.extremum.get_params(self.extremum.get_type(), &#39;with_int&#39;)
+            param = prepare_data(vars=vars, func=func, interval_x=interval_x, interval_y=interval_y)
+        else:
+            vars, func = self.extremum.get_params(self.extremum.get_type(), &#39;without_int&#39;)
+            param = prepare_data(vars=vars, func=func)
+        solver = LocalExtr(**param)
+        result = solver.solve()
+        link = Phrases.LINK
+        self.response.set_text(result+link)
+        self.response.set_keyboard(Keyboards().for_menu())
+        self.extremum.update_step(&#39;start&#39;)
+        self.user.update_status(&#39;menu&#39;)
+        return self.response
+
+    def local_extr_with_restr(self, restr) -&gt; Response:
+        if restr:
+            vars, func, g_func, interval_x, interval_y = self.extremum.get_params(self.extremum.get_type(), &#39;with_int&#39;)
+            param = prepare_data(vars=vars, func=func, interval_x=interval_x, interval_y=interval_y)
+        else:
+            vars, func, g_func = self.extremum.get_params(self.extremum.get_type(), &#39;without_int&#39;)
+            param = prepare_data(vars=vars, func=func)
+        solver = LocalExtr(**param)
+        result = solver.solve()
+        link = Phrases.LINK
+        self.response.set_text(result + link)
+        self.response.set_keyboard(Keyboards().for_menu())
+        self.extremum.update_step(&#39;start&#39;)
+        self.user.update_status(&#39;menu&#39;)
+        return self.response
+
+    def click_button(self) -&gt; Response:
+        &#34;&#34;&#34;
+        Если пользователь ввёл непонятное сообщение.
+        Статус: не переопределяется
+
+        Returns
+        -------
+        Response
+            Сообщение для пользователя.
+        &#34;&#34;&#34;
+
+        self.response.set_text(Phrases.CLICK_BUTTON)
+        return self.response
+
+    def error(self, error) -&gt; Response:
+        self.response.set_text(Phrases.ERROR.format(error))
+        return self.response</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers"><code class="flex name class">
+<span>class <span class="ident">Handlers</span></span>
+<span>(</span><span>vk_api_method: vk_api.vk_api.VkApiMethod, db: vk_bot.database.BotDatabase, user: vk_bot.user.User, extremum: vk_bot.answerer.search_for_extremes.extremum.Extremum)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Генератор ответов пользователю.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>vk_api_method</code></strong> :&ensp;<code>VkApiMethod</code></dt>
+<dd>Объект соединения с VK и набор методов API.</dd>
+<dt><strong><code>db</code></strong> :&ensp;<code>BotDatabase</code></dt>
+<dd>Объект для взаимодействия с базой данных.</dd>
+<dt><strong><code>user</code></strong> :&ensp;<code>User</code></dt>
+<dd>Объект для взаимодействия с данными пользователя.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Handlers:
+    &#34;&#34;&#34;
+    Генератор ответов пользователю.
+
+    Parameters
+    ----------
+    vk_api_method : VkApiMethod
+        Объект соединения с VK и набор методов API.
+    db : BotDatabase
+        Объект для взаимодействия с базой данных.
+    user : User
+        Объект для взаимодействия с данными пользователя.
+    &#34;&#34;&#34;
+
+    def __init__(self, vk_api_method: VkApiMethod, db: BotDatabase, user: User, extremum: Extremum):
+        self.vk = vk_api_method
+        self.db = db
+        self.user = user
+        self.extremum = extremum
+        self.response = Response(self.user.user_id)
+
+    def task_type_selection(self) -&gt; Response:
+        &#34;&#34;&#34;
+        Выбор типа задачи.
+        Шаг: task_type_selection
+
+        Returns
+        -------
+        Response
+            Сообщение для пользователя.
+        &#34;&#34;&#34;
+        self.extremum.update_step(&#39;task_type_selection&#39;)
+        self.response.set_text(Phrases.TASK_TYPE_SELECTION)
+        self.response.set_keyboard(Keyboards().for_task_type_selection())
+        return self.response
+
+    def input_vars(self) -&gt; Response:
+        &#34;&#34;&#34;
+        Предложение ввести имена переменных.
+        Шаг: input_vars
+
+        Returns
+        -------
+        Response
+            Сообщение для пользователя.
+        &#34;&#34;&#34;
+        self.extremum.update_step(&#39;input_vars&#39;)
+        self.response.set_text(Phrases.INPUT_VARS)
+        return self.response
+
+    def vars(self, text) -&gt; Response:
+        &#34;&#34;&#34;
+        Обработка введенных именных переменных. Предложение ввести функцию.
+        Шаг: input_func
+
+        Parameters
+        ----------
+        text : str
+            Текст сообщения, отправленного пользователем.
+
+        Returns
+        -------
+        Response
+            Сообщение для пользователя.
+        &#34;&#34;&#34;
+        try:
+            vars = check_variables(text)
+            self.extremum.update_vars(vars)
+            self.response.set_text(Phrases.INPUT_FUNC)
+            self.extremum.update_step(&#39;input_func&#39;)
+            return self.response
+        except ValueError as e:
+            return self.error(e)
+
+    def func(self, text, task_type) -&gt; Response:
+        try:
+            vars = self.extremum.get_vars()
+            func = check_expression(text, vars)
+            self.extremum.update_func(func)
+            if task_type == &#39;common&#39;:
+                self.response.set_text(Phrases.INPUT_RESTR)
+                self.response.set_keyboard(Keyboards().for_input_restr())
+                self.extremum.update_step(&#39;input_restr&#39;)
+            else:
+                self.response.set_text(Phrases.INPUT_G_FUNC)
+                self.extremum.update_step(&#39;input_g_func&#39;)
+            return self.response
+        except ValueError as e:
+            return self.error(e)
+
+    def g_func(self, text) -&gt; Response:
+        try:
+            vars = self.extremum.get_vars()
+            g_func = check_restr_func(text, vars)
+            self.extremum.update_g_func(g_func)
+            self.extremum.update_step(&#39;input_restr&#39;)
+            self.response.set_text(Phrases.INPUT_RESTR)
+            self.response.set_keyboard(Keyboards().for_input_restr())
+            return self.response
+        except ValueError as e:
+            return self.error(e)
+
+    def input_restr(self) -&gt; Response:
+        self.extremum.update_step(&#39;input_interval_x&#39;)
+        self.response.set_text(Phrases.INPUT_INTERVAL_X)
+        return self.response
+
+    def interval_x(self, text) -&gt; Response:
+        try:
+            interval_x = check_limits(text)
+            self.extremum.update_interval_x(interval_x)
+            self.extremum.update_step(&#39;input_interval_y&#39;)
+            self.response.set_text(Phrases.INPUT_INTERVAL_Y)
+            return self.response
+        except ValueError as e:
+            return self.error(e)
+
+    def interval_y(self, text) -&gt; Response:
+        try:
+            interval_y = check_limits(text)
+            self.extremum.update_interval_y(interval_y)
+            self.extremum.update_step(&#39;compute&#39;)
+            self.response.set_text(Phrases.COMPUTE)
+            self.response.set_keyboard(Keyboards().for_compute())
+            return self.response
+        except ValueError as e:
+            return self.error(e)
+
+    def precompute(self) -&gt; Response:
+        self.extremum.update_step(&#39;compute&#39;)
+        self.response.set_text(Phrases.COMPUTE)
+        self.response.set_keyboard(Keyboards().for_compute())
+        return self.response
+
+    def local_extr(self, restr) -&gt; Response:
+        if restr:
+            vars, func, interval_x, interval_y = self.extremum.get_params(self.extremum.get_type(), &#39;with_int&#39;)
+            param = prepare_data(vars=vars, func=func, interval_x=interval_x, interval_y=interval_y)
+        else:
+            vars, func = self.extremum.get_params(self.extremum.get_type(), &#39;without_int&#39;)
+            param = prepare_data(vars=vars, func=func)
+        solver = LocalExtr(**param)
+        result = solver.solve()
+        link = Phrases.LINK
+        self.response.set_text(result+link)
+        self.response.set_keyboard(Keyboards().for_menu())
+        self.extremum.update_step(&#39;start&#39;)
+        self.user.update_status(&#39;menu&#39;)
+        return self.response
+
+    def local_extr_with_restr(self, restr) -&gt; Response:
+        if restr:
+            vars, func, g_func, interval_x, interval_y = self.extremum.get_params(self.extremum.get_type(), &#39;with_int&#39;)
+            param = prepare_data(vars=vars, func=func, interval_x=interval_x, interval_y=interval_y)
+        else:
+            vars, func, g_func = self.extremum.get_params(self.extremum.get_type(), &#39;without_int&#39;)
+            param = prepare_data(vars=vars, func=func)
+        solver = LocalExtr(**param)
+        result = solver.solve()
+        link = Phrases.LINK
+        self.response.set_text(result + link)
+        self.response.set_keyboard(Keyboards().for_menu())
+        self.extremum.update_step(&#39;start&#39;)
+        self.user.update_status(&#39;menu&#39;)
+        return self.response
+
+    def click_button(self) -&gt; Response:
+        &#34;&#34;&#34;
+        Если пользователь ввёл непонятное сообщение.
+        Статус: не переопределяется
+
+        Returns
+        -------
+        Response
+            Сообщение для пользователя.
+        &#34;&#34;&#34;
+
+        self.response.set_text(Phrases.CLICK_BUTTON)
+        return self.response
+
+    def error(self, error) -&gt; Response:
+        self.response.set_text(Phrases.ERROR.format(error))
+        return self.response</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.click_button"><code class="name flex">
+<span>def <span class="ident">click_button</span></span>(<span>self) ‑> vk_bot.answerer.response_init.Response</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Если пользователь ввёл непонятное сообщение.
+Статус: не переопределяется</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Response</code></dt>
+<dd>Сообщение для пользователя.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def click_button(self) -&gt; Response:
+    &#34;&#34;&#34;
+    Если пользователь ввёл непонятное сообщение.
+    Статус: не переопределяется
+
+    Returns
+    -------
+    Response
+        Сообщение для пользователя.
+    &#34;&#34;&#34;
+
+    self.response.set_text(Phrases.CLICK_BUTTON)
+    return self.response</code></pre>
+</details>
+</dd>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.error"><code class="name flex">
+<span>def <span class="ident">error</span></span>(<span>self, error) ‑> vk_bot.answerer.response_init.Response</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def error(self, error) -&gt; Response:
+    self.response.set_text(Phrases.ERROR.format(error))
+    return self.response</code></pre>
+</details>
+</dd>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.func"><code class="name flex">
+<span>def <span class="ident">func</span></span>(<span>self, text, task_type) ‑> vk_bot.answerer.response_init.Response</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def func(self, text, task_type) -&gt; Response:
+    try:
+        vars = self.extremum.get_vars()
+        func = check_expression(text, vars)
+        self.extremum.update_func(func)
+        if task_type == &#39;common&#39;:
+            self.response.set_text(Phrases.INPUT_RESTR)
+            self.response.set_keyboard(Keyboards().for_input_restr())
+            self.extremum.update_step(&#39;input_restr&#39;)
+        else:
+            self.response.set_text(Phrases.INPUT_G_FUNC)
+            self.extremum.update_step(&#39;input_g_func&#39;)
+        return self.response
+    except ValueError as e:
+        return self.error(e)</code></pre>
+</details>
+</dd>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.g_func"><code class="name flex">
+<span>def <span class="ident">g_func</span></span>(<span>self, text) ‑> vk_bot.answerer.response_init.Response</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def g_func(self, text) -&gt; Response:
+    try:
+        vars = self.extremum.get_vars()
+        g_func = check_restr_func(text, vars)
+        self.extremum.update_g_func(g_func)
+        self.extremum.update_step(&#39;input_restr&#39;)
+        self.response.set_text(Phrases.INPUT_RESTR)
+        self.response.set_keyboard(Keyboards().for_input_restr())
+        return self.response
+    except ValueError as e:
+        return self.error(e)</code></pre>
+</details>
+</dd>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.input_restr"><code class="name flex">
+<span>def <span class="ident">input_restr</span></span>(<span>self) ‑> vk_bot.answerer.response_init.Response</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def input_restr(self) -&gt; Response:
+    self.extremum.update_step(&#39;input_interval_x&#39;)
+    self.response.set_text(Phrases.INPUT_INTERVAL_X)
+    return self.response</code></pre>
+</details>
+</dd>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.input_vars"><code class="name flex">
+<span>def <span class="ident">input_vars</span></span>(<span>self) ‑> vk_bot.answerer.response_init.Response</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Предложение ввести имена переменных.
+Шаг: input_vars</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Response</code></dt>
+<dd>Сообщение для пользователя.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def input_vars(self) -&gt; Response:
+    &#34;&#34;&#34;
+    Предложение ввести имена переменных.
+    Шаг: input_vars
+
+    Returns
+    -------
+    Response
+        Сообщение для пользователя.
+    &#34;&#34;&#34;
+    self.extremum.update_step(&#39;input_vars&#39;)
+    self.response.set_text(Phrases.INPUT_VARS)
+    return self.response</code></pre>
+</details>
+</dd>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.interval_x"><code class="name flex">
+<span>def <span class="ident">interval_x</span></span>(<span>self, text) ‑> vk_bot.answerer.response_init.Response</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def interval_x(self, text) -&gt; Response:
+    try:
+        interval_x = check_limits(text)
+        self.extremum.update_interval_x(interval_x)
+        self.extremum.update_step(&#39;input_interval_y&#39;)
+        self.response.set_text(Phrases.INPUT_INTERVAL_Y)
+        return self.response
+    except ValueError as e:
+        return self.error(e)</code></pre>
+</details>
+</dd>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.interval_y"><code class="name flex">
+<span>def <span class="ident">interval_y</span></span>(<span>self, text) ‑> vk_bot.answerer.response_init.Response</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def interval_y(self, text) -&gt; Response:
+    try:
+        interval_y = check_limits(text)
+        self.extremum.update_interval_y(interval_y)
+        self.extremum.update_step(&#39;compute&#39;)
+        self.response.set_text(Phrases.COMPUTE)
+        self.response.set_keyboard(Keyboards().for_compute())
+        return self.response
+    except ValueError as e:
+        return self.error(e)</code></pre>
+</details>
+</dd>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.local_extr"><code class="name flex">
+<span>def <span class="ident">local_extr</span></span>(<span>self, restr) ‑> vk_bot.answerer.response_init.Response</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def local_extr(self, restr) -&gt; Response:
+    if restr:
+        vars, func, interval_x, interval_y = self.extremum.get_params(self.extremum.get_type(), &#39;with_int&#39;)
+        param = prepare_data(vars=vars, func=func, interval_x=interval_x, interval_y=interval_y)
+    else:
+        vars, func = self.extremum.get_params(self.extremum.get_type(), &#39;without_int&#39;)
+        param = prepare_data(vars=vars, func=func)
+    solver = LocalExtr(**param)
+    result = solver.solve()
+    link = Phrases.LINK
+    self.response.set_text(result+link)
+    self.response.set_keyboard(Keyboards().for_menu())
+    self.extremum.update_step(&#39;start&#39;)
+    self.user.update_status(&#39;menu&#39;)
+    return self.response</code></pre>
+</details>
+</dd>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.local_extr_with_restr"><code class="name flex">
+<span>def <span class="ident">local_extr_with_restr</span></span>(<span>self, restr) ‑> vk_bot.answerer.response_init.Response</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def local_extr_with_restr(self, restr) -&gt; Response:
+    if restr:
+        vars, func, g_func, interval_x, interval_y = self.extremum.get_params(self.extremum.get_type(), &#39;with_int&#39;)
+        param = prepare_data(vars=vars, func=func, interval_x=interval_x, interval_y=interval_y)
+    else:
+        vars, func, g_func = self.extremum.get_params(self.extremum.get_type(), &#39;without_int&#39;)
+        param = prepare_data(vars=vars, func=func)
+    solver = LocalExtr(**param)
+    result = solver.solve()
+    link = Phrases.LINK
+    self.response.set_text(result + link)
+    self.response.set_keyboard(Keyboards().for_menu())
+    self.extremum.update_step(&#39;start&#39;)
+    self.user.update_status(&#39;menu&#39;)
+    return self.response</code></pre>
+</details>
+</dd>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.precompute"><code class="name flex">
+<span>def <span class="ident">precompute</span></span>(<span>self) ‑> vk_bot.answerer.response_init.Response</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def precompute(self) -&gt; Response:
+    self.extremum.update_step(&#39;compute&#39;)
+    self.response.set_text(Phrases.COMPUTE)
+    self.response.set_keyboard(Keyboards().for_compute())
+    return self.response</code></pre>
+</details>
+</dd>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.task_type_selection"><code class="name flex">
+<span>def <span class="ident">task_type_selection</span></span>(<span>self) ‑> vk_bot.answerer.response_init.Response</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Выбор типа задачи.
+Шаг: task_type_selection</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Response</code></dt>
+<dd>Сообщение для пользователя.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def task_type_selection(self) -&gt; Response:
+    &#34;&#34;&#34;
+    Выбор типа задачи.
+    Шаг: task_type_selection
+
+    Returns
+    -------
+    Response
+        Сообщение для пользователя.
+    &#34;&#34;&#34;
+    self.extremum.update_step(&#39;task_type_selection&#39;)
+    self.response.set_text(Phrases.TASK_TYPE_SELECTION)
+    self.response.set_keyboard(Keyboards().for_task_type_selection())
+    return self.response</code></pre>
+</details>
+</dd>
+<dt id="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.vars"><code class="name flex">
+<span>def <span class="ident">vars</span></span>(<span>self, text) ‑> vk_bot.answerer.response_init.Response</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Обработка введенных именных переменных. Предложение ввести функцию.
+Шаг: input_func</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>text</code></strong> :&ensp;<code>str</code></dt>
+<dd>Текст сообщения, отправленного пользователем.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>Response</code></dt>
+<dd>Сообщение для пользователя.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def vars(self, text) -&gt; Response:
+    &#34;&#34;&#34;
+    Обработка введенных именных переменных. Предложение ввести функцию.
+    Шаг: input_func
+
+    Parameters
+    ----------
+    text : str
+        Текст сообщения, отправленного пользователем.
+
+    Returns
+    -------
+    Response
+        Сообщение для пользователя.
+    &#34;&#34;&#34;
+    try:
+        vars = check_variables(text)
+        self.extremum.update_vars(vars)
+        self.response.set_text(Phrases.INPUT_FUNC)
+        self.extremum.update_step(&#39;input_func&#39;)
+        return self.response
+    except ValueError as e:
+        return self.error(e)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes" href="index.html">opml_1.vk_bot.answerer.search_for_extremes</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers">Handlers</a></code></h4>
+<ul class="">
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.click_button" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.click_button">click_button</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.error" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.error">error</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.func" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.func">func</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.g_func" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.g_func">g_func</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.input_restr" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.input_restr">input_restr</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.input_vars" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.input_vars">input_vars</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.interval_x" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.interval_x">interval_x</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.interval_y" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.interval_y">interval_y</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.local_extr" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.local_extr">local_extr</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.local_extr_with_restr" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.local_extr_with_restr">local_extr_with_restr</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.precompute" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.precompute">precompute</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.task_type_selection" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.task_type_selection">task_type_selection</a></code></li>
+<li><code><a title="opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.vars" href="#opml_1.vk_bot.answerer.search_for_extremes.message_handlers.Handlers.vars">vars</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

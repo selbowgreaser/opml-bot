@@ -1,0 +1,1241 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>opml_1.solver_core.search_for_extremes.local_extr API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>opml_1.solver_core.search_for_extremes.local_extr</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import pandas as pd
+import numpy as np
+import sympy as sp
+
+from .drawing_func import *
+
+
+class LocalExtr:
+    &#34;&#34;&#34;
+    Решатель задачи.
+
+    Parameters
+    ----------
+    vars : list
+        Список переменных из sympy.symbols.
+    func : sympy выражение
+        Функция.
+    interval_x: tuple
+        Кортеж с пограничными точками для оси X.
+    interval_y: tuple
+        Кортеж с пограничными точками для оси Y.
+    &#34;&#34;&#34;
+    def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
+        self.vars = vars
+        self.func = func
+        self.restr = restr
+        self.interval_x = interval_x
+        self.interval_y = interval_y
+
+    def generate_colors(self):
+        &#34;&#34;&#34;
+        Метод создает раскраску для точек.
+
+        Returns
+        --------
+        pd.Series
+            Цвета по типам экстремумов.
+        &#34;&#34;&#34;
+
+        dots_types = [&#39;global min&#39;, &#39;local min&#39;, &#39;saddle&#39;, &#39;local max&#39;,
+                      &#39;global max&#39;, &#39;unknown&#39;]
+        colors = [&#39;rgb(228,26,28)&#39;, &#39;rgb(77,175,74)&#39;,
+                   &#39;rgb(152,78,163)&#39;, &#39;rgb(255,127,0)&#39;,
+                   &#39;rgb(255,255,51)&#39;, &#39;rgb(166,86,40)&#39;]
+        colors_dict = dict(zip(dots_types, colors))
+        set_color = lambda x: colors_dict[x]
+        colors = self.points[&#39;types&#39;].apply(set_color)
+        return colors
+
+    def solve(self) -&gt; str:
+        &#34;&#34;&#34;
+        Метод решает задачу локального экстремума.
+
+        Returns
+        -------
+        str
+            Строка с ответом.
+        &#34;&#34;&#34;
+
+        self.points = self.critical_points()
+        if self.restr:
+            self.points = self.points.append(self.border_points(),
+                                             ignore_index=True)
+            self.points = self.points.drop_duplicates([&#39;x&#39;, &#39;y&#39;, &#39;z&#39;])
+        ans = &#39;&#39;
+        if self.points.empty:
+            ans += &#39;Решений нет&#39;
+            if not self.interval_x:
+                self.interval_x = (-1, 1)  # значения для интервалов, если они не заданы и нет точек
+            if not self.interval_y:
+                self.interval_y = (-1, 1)
+        else:
+            f = lambda x: list(zip(x[&#39;x&#39;].values, x[&#39;y&#39;].values, x[&#39;z&#39;].values))
+            to_output = self.points.groupby(by=&#39;type&#39;, axis=0)[[&#39;x&#39;, &#39;y&#39;, &#39;z&#39;]].apply(f)
+            for i, v in enumerate(to_output):
+                ans += f&#39;{to_output.index[i]}: {v}\n&#39;
+            if not self.interval_y:
+                self.interval_y = (self.points[&#39;y&#39;].min() - 5, self.points[&#39;y&#39;].max() + 5)
+            if not self.interval_x:
+                self.interval_x = (self.points[&#39;x&#39;].min() - 5, self.points[&#39;x&#39;].max() + 5)
+
+        self.points = self.points.rename(columns={&#39;type&#39;: &#39;types&#39;})
+        self.points[&#39;color&#39;] = self.generate_colors()
+
+        data_for_draw = make_df_for_drawing(self.func, self.vars,
+                                            self.interval_x, self.interval_y)
+        plot = draw_3d(data_for_draw, critical_points=self.points)
+        save_fig_to_pic(plot, &#39;graph&#39;, [&#39;html&#39;])
+        return ans
+
+    def check_point(point, xlim, ylim):
+        &#34;&#34;&#34;
+        Метод проверяет точку на соответствие лимитам для координат.
+
+        Parameters
+        ---------
+        point : array-like
+            Массив с координатами точки вида (x, y), координата z не обязательна
+        xlim : array-like
+            Массив с ограничениями слева и справа типа float
+            или np.inf для первой координаты
+        ylim : array-like
+            массив с ограничениями слева и справа типа float
+            или np.inf для второй координаты
+
+        Returns
+        -------
+        bool
+            True если точка соответствует ограничениям или их нет, иначе False
+        &#34;&#34;&#34;
+
+        def check_cord(cord: float, cordlim: list):
+            &#34;&#34;&#34;
+            Функция проверяет сооответствие координаты ее пределам.
+
+            Parameters
+            ---------
+            cord : float
+                Координата.
+            cordlim : array-like or None
+                Массив с ограничениями слева и справа типа float или np.inf
+
+            Returns
+            -------
+            bool
+                True если координата соответствует ограничениям или их нет, иначе False.
+            &#34;&#34;&#34;
+
+            if cordlim[0] &lt;= cord &lt;= cordlim[1]:
+                return True
+            else:
+                return False
+
+        if xlim and ylim:
+            return check_cord(point[0], xlim) \
+                   and check_cord(point[1], ylim)
+        elif xlim:
+            return check_cord(point[0], xlim)
+        elif ylim:
+            return check_cord(point[1], ylim)
+        else:
+            return True
+
+    def critical_points(self):
+        &#34;&#34;&#34;
+        Метод находит критические точки для задачи.
+
+        С помощью производных находятся все экстремумы.
+
+        Returns
+        -------
+        pd.DataFrame
+            Данные о критических точках.
+        &#34;&#34;&#34;
+
+        def set_dot_type(data, d, d2x):
+            &#34;&#34;&#34;
+            Функция определяет тип точки.
+
+            При помощи вторых производных функция определяет
+            является ли точка минимальной/максимальной/седловой.
+            Используется для передачи в метод pandas.DataFrame.apply().
+
+            Parameters
+            ----------
+            data: pd.Series
+                Столбцы со значениями x, y, z.
+            d: sympy выражение
+                Детерминант матрицы вторых производных. В него подставлются значения в точках
+            d2x: sympy выражение
+                Вторая производная по икс. В него подставляется значения в точках
+
+            Returns
+            -------
+            pd.Series
+                Серия со значениями одним из четырех типов точки: &#39;saddle&#39;, &#39;global min&#39;, &#39;global max&#39;, &#39;unknown&#39;
+            &#34;&#34;&#34;
+            d = d.subs({x: data[0], y: data[1]})
+            d2x = d2x.subs({x: data[0], y: data[1]})
+
+            if d &lt; 0:
+                return &#39;saddle&#39;
+            elif d &gt; 0 and d2x &gt; 0:
+                return &#39;global min&#39;
+            elif d &gt; 0 and d2x &lt; 0:
+                return &#39;global max&#39;
+            else:
+                return &#39;unknown&#39;
+
+        x, y = self.vars[0], self.vars[1]
+        z = self.func
+        critical_points_sympy = sp.solve([z.diff(x), z.diff(y)], [x, y], dict=True)
+        f = sp.lambdify([x, y], z)
+        critical_points = pd.DataFrame(columns=[&#39;x&#39;, &#39;y&#39;, &#39;z&#39;])
+
+        for i in critical_points_sympy:
+            i = [float(i[x]), float(i[y])]
+            if LocalExtr.check_point(i, self.interval_x, self.interval_y):
+                point = {&#39;x&#39;: i[0], &#39;y&#39;: i[1], &#39;z&#39;: f(i[0], i[1])}
+                critical_points = critical_points.append(point, ignore_index=True)
+
+        if not critical_points.empty:
+            D = z.diff(x, 2) * z.diff(y, 2) - z.diff(x).diff(y) ** 2
+            D2x = z.diff(x, 2)
+            critical_points[&#39;type&#39;] = critical_points.apply(set_dot_type,
+                                                            axis=1,
+                                                            args=(D, D2x))
+        else:
+            critical_points[&#39;type&#39;] = []
+
+        return critical_points
+
+    def find_local_extr(self, free_var_ind, max_val, min_val):
+        &#34;&#34;&#34;
+        Метод находит локальные экстремумы.
+
+        Parameters
+        ----------
+        free_var_ind: 0 or 1
+            Номер переменной, которая является свободной (по ней нет ограничений)
+        max_val: float or np.inf
+            Максимальное значение. В случае если в ходе решения окажется, что у функции есть супремум,
+            больший чем это значение, то максимальное значение
+            для всех локальных экстремумов будет обновлено.
+        min_val: float or np.inf
+            Аналогично как для min_val, только минимум и инфимум.
+
+        Returns
+        -------
+        pd.DataFrame
+            с колонками как координаты точек x, y, z
+            max_value - новое максимальное значение
+            min_value - новое минимальное значение
+        &#34;&#34;&#34;
+
+        points = pd.DataFrame(columns=[&#39;x&#39;, &#39;y&#39;, &#39;z&#39;])
+
+        if free_var_ind == 0:
+            lim = self.interval_y
+            free_var = self.vars[0]
+            limit_var = self.vars[1]
+        elif free_var_ind == 1:
+            lim = self.interval_x
+            free_var = self.vars[1]
+            limit_var = self.vars[0]
+
+        for i in lim:
+            if abs(i) == np.inf:
+                continue
+            else:
+                fun = self.func.subs({limit_var: i})
+                if fun == sp.zoo:
+                    check = sp.limit(self.func, limit_var, i)
+                    if check &gt; max_val:
+                        max_val = float(check)
+                    if check &lt; min_val:
+                        min_val = float(check)
+                    continue
+                potential_points = sp.solve(fun.diff(free_var), free_var, dict=True)
+                for j in potential_points:
+                    coord = float(j[free_var])
+                    if free_var_ind == 0:
+                        point = (coord, i)
+                    else:
+                        point = (i, coord)
+
+                    if LocalExtr.check_point(point,
+                                             self.interval_x,
+                                             self.interval_y):
+                        try:
+                            z = float(fun.subs(j))
+                        except ZeroDivisionError:
+                            pass
+                        else:
+                            if z &gt; max_val:
+                                max_val = z
+                            if z &lt; min_val:
+                                min_val = z
+                            points = points.append({&#39;x&#39;: point[0],
+                                                    &#39;y&#39;: point[1],
+                                                    &#39;z&#39;: z},
+                                                   ignore_index=True)
+        return points, max_val, min_val
+
+    def border_points(self):
+        &#34;&#34;&#34;
+        Метод находит локальные экстремумы, обходя все
+        возможные границы.
+
+        Returns
+        -------
+        pd.DataFrame
+            С колонками x, y, z, type. type содержит либо &#39;local max&#39; либо &#39;local min&#39;
+        &#34;&#34;&#34;
+
+        f = sp.lambdify(self.vars, self.func)
+
+        if self.points.empty:
+            min_z = np.inf
+            max_z = -np.inf
+        else:
+            min_z = self.points[&#39;z&#39;].min()
+            max_z = self.points[&#39;z&#39;].max()
+
+        points = pd.DataFrame(columns=[&#39;x&#39;, &#39;y&#39;, &#39;z&#39;])
+
+        if self.interval_x and self.interval_y:
+            for x in self.interval_x:
+                for y in self.interval_y:
+                    if abs(x) == np.inf or abs(y) == np.inf:
+                        continue
+                    else:
+                        try:
+                            z = f(x, y)
+                        except ZeroDivisionError:
+                            values = [x, y]
+                            for i in range(2):
+                                check = self.func.subs({self.vars[i]: values[i]})
+                                lim = sp.limit(check, self.vars[1 - i], values[1 - i])
+                                try:
+                                    a = float(lim)
+                                    if a &gt; max_z:
+                                        pass
+                                        max_z = a
+                                    elif a &lt; min_z:
+                                        min_z = a
+                                except TypeError:
+                                    pass
+                        else:
+                            point = {&#39;x&#39;: x, &#39;y&#39;: y, &#39;z&#39;: f(x, y)}
+                            points = points.append(point, ignore_index=True)
+        if self.interval_x:
+            a = self.find_local_extr(1, max_z, min_z)
+            points = points.append(a[0], ignore_index=True)
+            max_z = a[1]
+            min_z = a[2]
+        if self.interval_y:
+            a = self.find_local_extr(0, max_z, min_z)
+            points = points.append(a[0], ignore_index=True)
+            max_z = a[1]
+            min_z = a[2]
+        points = points.drop_duplicates()
+        cond = ((points[&#39;z&#39;] == points[&#39;z&#39;].max()) &amp; (points[&#39;z&#39;] &gt;= max_z)) \
+               | ((points[&#39;z&#39;] == points[&#39;z&#39;].min()) &amp; (points[&#39;z&#39;] &lt;= min_z))
+        points = points[cond]
+        points[&#39;type&#39;] = np.where(points[&#39;z&#39;] == max_z,
+                                  &#39;local max&#39;,
+                                  &#39;local min&#39;)
+        return points
+
+
+if __name__ == &#39;__main__&#39;:
+    from solver_core.search_for_extremes.handlers.preprocessing import prepare_data
+    data = prepare_data(&#39;x y&#39;, &#39;x**2 - y**2&#39;, interval_x=&#39;-10 10&#39;, interval_y=&#39;-10 10&#39;)
+    print(data[0][0])
+    print(type(data[0][0]))
+    eq = LocalExtr(vars=data[0], func=data[1], restr=True,
+                   interval_x=data[2], interval_y=data[3])
+    solve = eq.solve()
+    print(solve)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr"><code class="flex name class">
+<span>class <span class="ident">LocalExtr</span></span>
+<span>(</span><span>vars, func, restr=False, interval_x=None, interval_y=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Решатель задачи.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>vars</code></strong> :&ensp;<code>list</code></dt>
+<dd>Список переменных из sympy.symbols.</dd>
+<dt><strong><code>func</code></strong> :&ensp;<code>sympy выражение</code></dt>
+<dd>Функция.</dd>
+<dt><strong><code>interval_x</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>Кортеж с пограничными точками для оси X.</dd>
+<dt><strong><code>interval_y</code></strong> :&ensp;<code>tuple</code></dt>
+<dd>Кортеж с пограничными точками для оси Y.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class LocalExtr:
+    &#34;&#34;&#34;
+    Решатель задачи.
+
+    Parameters
+    ----------
+    vars : list
+        Список переменных из sympy.symbols.
+    func : sympy выражение
+        Функция.
+    interval_x: tuple
+        Кортеж с пограничными точками для оси X.
+    interval_y: tuple
+        Кортеж с пограничными точками для оси Y.
+    &#34;&#34;&#34;
+    def __init__(self, vars, func, restr=False, interval_x=None, interval_y=None):
+        self.vars = vars
+        self.func = func
+        self.restr = restr
+        self.interval_x = interval_x
+        self.interval_y = interval_y
+
+    def generate_colors(self):
+        &#34;&#34;&#34;
+        Метод создает раскраску для точек.
+
+        Returns
+        --------
+        pd.Series
+            Цвета по типам экстремумов.
+        &#34;&#34;&#34;
+
+        dots_types = [&#39;global min&#39;, &#39;local min&#39;, &#39;saddle&#39;, &#39;local max&#39;,
+                      &#39;global max&#39;, &#39;unknown&#39;]
+        colors = [&#39;rgb(228,26,28)&#39;, &#39;rgb(77,175,74)&#39;,
+                   &#39;rgb(152,78,163)&#39;, &#39;rgb(255,127,0)&#39;,
+                   &#39;rgb(255,255,51)&#39;, &#39;rgb(166,86,40)&#39;]
+        colors_dict = dict(zip(dots_types, colors))
+        set_color = lambda x: colors_dict[x]
+        colors = self.points[&#39;types&#39;].apply(set_color)
+        return colors
+
+    def solve(self) -&gt; str:
+        &#34;&#34;&#34;
+        Метод решает задачу локального экстремума.
+
+        Returns
+        -------
+        str
+            Строка с ответом.
+        &#34;&#34;&#34;
+
+        self.points = self.critical_points()
+        if self.restr:
+            self.points = self.points.append(self.border_points(),
+                                             ignore_index=True)
+            self.points = self.points.drop_duplicates([&#39;x&#39;, &#39;y&#39;, &#39;z&#39;])
+        ans = &#39;&#39;
+        if self.points.empty:
+            ans += &#39;Решений нет&#39;
+            if not self.interval_x:
+                self.interval_x = (-1, 1)  # значения для интервалов, если они не заданы и нет точек
+            if not self.interval_y:
+                self.interval_y = (-1, 1)
+        else:
+            f = lambda x: list(zip(x[&#39;x&#39;].values, x[&#39;y&#39;].values, x[&#39;z&#39;].values))
+            to_output = self.points.groupby(by=&#39;type&#39;, axis=0)[[&#39;x&#39;, &#39;y&#39;, &#39;z&#39;]].apply(f)
+            for i, v in enumerate(to_output):
+                ans += f&#39;{to_output.index[i]}: {v}\n&#39;
+            if not self.interval_y:
+                self.interval_y = (self.points[&#39;y&#39;].min() - 5, self.points[&#39;y&#39;].max() + 5)
+            if not self.interval_x:
+                self.interval_x = (self.points[&#39;x&#39;].min() - 5, self.points[&#39;x&#39;].max() + 5)
+
+        self.points = self.points.rename(columns={&#39;type&#39;: &#39;types&#39;})
+        self.points[&#39;color&#39;] = self.generate_colors()
+
+        data_for_draw = make_df_for_drawing(self.func, self.vars,
+                                            self.interval_x, self.interval_y)
+        plot = draw_3d(data_for_draw, critical_points=self.points)
+        save_fig_to_pic(plot, &#39;graph&#39;, [&#39;html&#39;])
+        return ans
+
+    def check_point(point, xlim, ylim):
+        &#34;&#34;&#34;
+        Метод проверяет точку на соответствие лимитам для координат.
+
+        Parameters
+        ---------
+        point : array-like
+            Массив с координатами точки вида (x, y), координата z не обязательна
+        xlim : array-like
+            Массив с ограничениями слева и справа типа float
+            или np.inf для первой координаты
+        ylim : array-like
+            массив с ограничениями слева и справа типа float
+            или np.inf для второй координаты
+
+        Returns
+        -------
+        bool
+            True если точка соответствует ограничениям или их нет, иначе False
+        &#34;&#34;&#34;
+
+        def check_cord(cord: float, cordlim: list):
+            &#34;&#34;&#34;
+            Функция проверяет сооответствие координаты ее пределам.
+
+            Parameters
+            ---------
+            cord : float
+                Координата.
+            cordlim : array-like or None
+                Массив с ограничениями слева и справа типа float или np.inf
+
+            Returns
+            -------
+            bool
+                True если координата соответствует ограничениям или их нет, иначе False.
+            &#34;&#34;&#34;
+
+            if cordlim[0] &lt;= cord &lt;= cordlim[1]:
+                return True
+            else:
+                return False
+
+        if xlim and ylim:
+            return check_cord(point[0], xlim) \
+                   and check_cord(point[1], ylim)
+        elif xlim:
+            return check_cord(point[0], xlim)
+        elif ylim:
+            return check_cord(point[1], ylim)
+        else:
+            return True
+
+    def critical_points(self):
+        &#34;&#34;&#34;
+        Метод находит критические точки для задачи.
+
+        С помощью производных находятся все экстремумы.
+
+        Returns
+        -------
+        pd.DataFrame
+            Данные о критических точках.
+        &#34;&#34;&#34;
+
+        def set_dot_type(data, d, d2x):
+            &#34;&#34;&#34;
+            Функция определяет тип точки.
+
+            При помощи вторых производных функция определяет
+            является ли точка минимальной/максимальной/седловой.
+            Используется для передачи в метод pandas.DataFrame.apply().
+
+            Parameters
+            ----------
+            data: pd.Series
+                Столбцы со значениями x, y, z.
+            d: sympy выражение
+                Детерминант матрицы вторых производных. В него подставлются значения в точках
+            d2x: sympy выражение
+                Вторая производная по икс. В него подставляется значения в точках
+
+            Returns
+            -------
+            pd.Series
+                Серия со значениями одним из четырех типов точки: &#39;saddle&#39;, &#39;global min&#39;, &#39;global max&#39;, &#39;unknown&#39;
+            &#34;&#34;&#34;
+            d = d.subs({x: data[0], y: data[1]})
+            d2x = d2x.subs({x: data[0], y: data[1]})
+
+            if d &lt; 0:
+                return &#39;saddle&#39;
+            elif d &gt; 0 and d2x &gt; 0:
+                return &#39;global min&#39;
+            elif d &gt; 0 and d2x &lt; 0:
+                return &#39;global max&#39;
+            else:
+                return &#39;unknown&#39;
+
+        x, y = self.vars[0], self.vars[1]
+        z = self.func
+        critical_points_sympy = sp.solve([z.diff(x), z.diff(y)], [x, y], dict=True)
+        f = sp.lambdify([x, y], z)
+        critical_points = pd.DataFrame(columns=[&#39;x&#39;, &#39;y&#39;, &#39;z&#39;])
+
+        for i in critical_points_sympy:
+            i = [float(i[x]), float(i[y])]
+            if LocalExtr.check_point(i, self.interval_x, self.interval_y):
+                point = {&#39;x&#39;: i[0], &#39;y&#39;: i[1], &#39;z&#39;: f(i[0], i[1])}
+                critical_points = critical_points.append(point, ignore_index=True)
+
+        if not critical_points.empty:
+            D = z.diff(x, 2) * z.diff(y, 2) - z.diff(x).diff(y) ** 2
+            D2x = z.diff(x, 2)
+            critical_points[&#39;type&#39;] = critical_points.apply(set_dot_type,
+                                                            axis=1,
+                                                            args=(D, D2x))
+        else:
+            critical_points[&#39;type&#39;] = []
+
+        return critical_points
+
+    def find_local_extr(self, free_var_ind, max_val, min_val):
+        &#34;&#34;&#34;
+        Метод находит локальные экстремумы.
+
+        Parameters
+        ----------
+        free_var_ind: 0 or 1
+            Номер переменной, которая является свободной (по ней нет ограничений)
+        max_val: float or np.inf
+            Максимальное значение. В случае если в ходе решения окажется, что у функции есть супремум,
+            больший чем это значение, то максимальное значение
+            для всех локальных экстремумов будет обновлено.
+        min_val: float or np.inf
+            Аналогично как для min_val, только минимум и инфимум.
+
+        Returns
+        -------
+        pd.DataFrame
+            с колонками как координаты точек x, y, z
+            max_value - новое максимальное значение
+            min_value - новое минимальное значение
+        &#34;&#34;&#34;
+
+        points = pd.DataFrame(columns=[&#39;x&#39;, &#39;y&#39;, &#39;z&#39;])
+
+        if free_var_ind == 0:
+            lim = self.interval_y
+            free_var = self.vars[0]
+            limit_var = self.vars[1]
+        elif free_var_ind == 1:
+            lim = self.interval_x
+            free_var = self.vars[1]
+            limit_var = self.vars[0]
+
+        for i in lim:
+            if abs(i) == np.inf:
+                continue
+            else:
+                fun = self.func.subs({limit_var: i})
+                if fun == sp.zoo:
+                    check = sp.limit(self.func, limit_var, i)
+                    if check &gt; max_val:
+                        max_val = float(check)
+                    if check &lt; min_val:
+                        min_val = float(check)
+                    continue
+                potential_points = sp.solve(fun.diff(free_var), free_var, dict=True)
+                for j in potential_points:
+                    coord = float(j[free_var])
+                    if free_var_ind == 0:
+                        point = (coord, i)
+                    else:
+                        point = (i, coord)
+
+                    if LocalExtr.check_point(point,
+                                             self.interval_x,
+                                             self.interval_y):
+                        try:
+                            z = float(fun.subs(j))
+                        except ZeroDivisionError:
+                            pass
+                        else:
+                            if z &gt; max_val:
+                                max_val = z
+                            if z &lt; min_val:
+                                min_val = z
+                            points = points.append({&#39;x&#39;: point[0],
+                                                    &#39;y&#39;: point[1],
+                                                    &#39;z&#39;: z},
+                                                   ignore_index=True)
+        return points, max_val, min_val
+
+    def border_points(self):
+        &#34;&#34;&#34;
+        Метод находит локальные экстремумы, обходя все
+        возможные границы.
+
+        Returns
+        -------
+        pd.DataFrame
+            С колонками x, y, z, type. type содержит либо &#39;local max&#39; либо &#39;local min&#39;
+        &#34;&#34;&#34;
+
+        f = sp.lambdify(self.vars, self.func)
+
+        if self.points.empty:
+            min_z = np.inf
+            max_z = -np.inf
+        else:
+            min_z = self.points[&#39;z&#39;].min()
+            max_z = self.points[&#39;z&#39;].max()
+
+        points = pd.DataFrame(columns=[&#39;x&#39;, &#39;y&#39;, &#39;z&#39;])
+
+        if self.interval_x and self.interval_y:
+            for x in self.interval_x:
+                for y in self.interval_y:
+                    if abs(x) == np.inf or abs(y) == np.inf:
+                        continue
+                    else:
+                        try:
+                            z = f(x, y)
+                        except ZeroDivisionError:
+                            values = [x, y]
+                            for i in range(2):
+                                check = self.func.subs({self.vars[i]: values[i]})
+                                lim = sp.limit(check, self.vars[1 - i], values[1 - i])
+                                try:
+                                    a = float(lim)
+                                    if a &gt; max_z:
+                                        pass
+                                        max_z = a
+                                    elif a &lt; min_z:
+                                        min_z = a
+                                except TypeError:
+                                    pass
+                        else:
+                            point = {&#39;x&#39;: x, &#39;y&#39;: y, &#39;z&#39;: f(x, y)}
+                            points = points.append(point, ignore_index=True)
+        if self.interval_x:
+            a = self.find_local_extr(1, max_z, min_z)
+            points = points.append(a[0], ignore_index=True)
+            max_z = a[1]
+            min_z = a[2]
+        if self.interval_y:
+            a = self.find_local_extr(0, max_z, min_z)
+            points = points.append(a[0], ignore_index=True)
+            max_z = a[1]
+            min_z = a[2]
+        points = points.drop_duplicates()
+        cond = ((points[&#39;z&#39;] == points[&#39;z&#39;].max()) &amp; (points[&#39;z&#39;] &gt;= max_z)) \
+               | ((points[&#39;z&#39;] == points[&#39;z&#39;].min()) &amp; (points[&#39;z&#39;] &lt;= min_z))
+        points = points[cond]
+        points[&#39;type&#39;] = np.where(points[&#39;z&#39;] == max_z,
+                                  &#39;local max&#39;,
+                                  &#39;local min&#39;)
+        return points</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.border_points"><code class="name flex">
+<span>def <span class="ident">border_points</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Метод находит локальные экстремумы, обходя все
+возможные границы.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pd.DataFrame</code></dt>
+<dd>С колонками x, y, z, type. type содержит либо 'local max' либо 'local min'</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def border_points(self):
+    &#34;&#34;&#34;
+    Метод находит локальные экстремумы, обходя все
+    возможные границы.
+
+    Returns
+    -------
+    pd.DataFrame
+        С колонками x, y, z, type. type содержит либо &#39;local max&#39; либо &#39;local min&#39;
+    &#34;&#34;&#34;
+
+    f = sp.lambdify(self.vars, self.func)
+
+    if self.points.empty:
+        min_z = np.inf
+        max_z = -np.inf
+    else:
+        min_z = self.points[&#39;z&#39;].min()
+        max_z = self.points[&#39;z&#39;].max()
+
+    points = pd.DataFrame(columns=[&#39;x&#39;, &#39;y&#39;, &#39;z&#39;])
+
+    if self.interval_x and self.interval_y:
+        for x in self.interval_x:
+            for y in self.interval_y:
+                if abs(x) == np.inf or abs(y) == np.inf:
+                    continue
+                else:
+                    try:
+                        z = f(x, y)
+                    except ZeroDivisionError:
+                        values = [x, y]
+                        for i in range(2):
+                            check = self.func.subs({self.vars[i]: values[i]})
+                            lim = sp.limit(check, self.vars[1 - i], values[1 - i])
+                            try:
+                                a = float(lim)
+                                if a &gt; max_z:
+                                    pass
+                                    max_z = a
+                                elif a &lt; min_z:
+                                    min_z = a
+                            except TypeError:
+                                pass
+                    else:
+                        point = {&#39;x&#39;: x, &#39;y&#39;: y, &#39;z&#39;: f(x, y)}
+                        points = points.append(point, ignore_index=True)
+    if self.interval_x:
+        a = self.find_local_extr(1, max_z, min_z)
+        points = points.append(a[0], ignore_index=True)
+        max_z = a[1]
+        min_z = a[2]
+    if self.interval_y:
+        a = self.find_local_extr(0, max_z, min_z)
+        points = points.append(a[0], ignore_index=True)
+        max_z = a[1]
+        min_z = a[2]
+    points = points.drop_duplicates()
+    cond = ((points[&#39;z&#39;] == points[&#39;z&#39;].max()) &amp; (points[&#39;z&#39;] &gt;= max_z)) \
+           | ((points[&#39;z&#39;] == points[&#39;z&#39;].min()) &amp; (points[&#39;z&#39;] &lt;= min_z))
+    points = points[cond]
+    points[&#39;type&#39;] = np.where(points[&#39;z&#39;] == max_z,
+                              &#39;local max&#39;,
+                              &#39;local min&#39;)
+    return points</code></pre>
+</details>
+</dd>
+<dt id="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.check_point"><code class="name flex">
+<span>def <span class="ident">check_point</span></span>(<span>point, xlim, ylim)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Метод проверяет точку на соответствие лимитам для координат.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>point</code></strong> :&ensp;<code>array-like</code></dt>
+<dd>Массив с координатами точки вида (x, y), координата z не обязательна</dd>
+<dt><strong><code>xlim</code></strong> :&ensp;<code>array-like</code></dt>
+<dd>Массив с ограничениями слева и справа типа float
+или np.inf для первой координаты</dd>
+<dt><strong><code>ylim</code></strong> :&ensp;<code>array-like</code></dt>
+<dd>массив с ограничениями слева и справа типа float
+или np.inf для второй координаты</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>bool</code></dt>
+<dd>True если точка соответствует ограничениям или их нет, иначе False</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_point(point, xlim, ylim):
+    &#34;&#34;&#34;
+    Метод проверяет точку на соответствие лимитам для координат.
+
+    Parameters
+    ---------
+    point : array-like
+        Массив с координатами точки вида (x, y), координата z не обязательна
+    xlim : array-like
+        Массив с ограничениями слева и справа типа float
+        или np.inf для первой координаты
+    ylim : array-like
+        массив с ограничениями слева и справа типа float
+        или np.inf для второй координаты
+
+    Returns
+    -------
+    bool
+        True если точка соответствует ограничениям или их нет, иначе False
+    &#34;&#34;&#34;
+
+    def check_cord(cord: float, cordlim: list):
+        &#34;&#34;&#34;
+        Функция проверяет сооответствие координаты ее пределам.
+
+        Parameters
+        ---------
+        cord : float
+            Координата.
+        cordlim : array-like or None
+            Массив с ограничениями слева и справа типа float или np.inf
+
+        Returns
+        -------
+        bool
+            True если координата соответствует ограничениям или их нет, иначе False.
+        &#34;&#34;&#34;
+
+        if cordlim[0] &lt;= cord &lt;= cordlim[1]:
+            return True
+        else:
+            return False
+
+    if xlim and ylim:
+        return check_cord(point[0], xlim) \
+               and check_cord(point[1], ylim)
+    elif xlim:
+        return check_cord(point[0], xlim)
+    elif ylim:
+        return check_cord(point[1], ylim)
+    else:
+        return True</code></pre>
+</details>
+</dd>
+<dt id="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.critical_points"><code class="name flex">
+<span>def <span class="ident">critical_points</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Метод находит критические точки для задачи.</p>
+<p>С помощью производных находятся все экстремумы.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pd.DataFrame</code></dt>
+<dd>Данные о критических точках.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def critical_points(self):
+    &#34;&#34;&#34;
+    Метод находит критические точки для задачи.
+
+    С помощью производных находятся все экстремумы.
+
+    Returns
+    -------
+    pd.DataFrame
+        Данные о критических точках.
+    &#34;&#34;&#34;
+
+    def set_dot_type(data, d, d2x):
+        &#34;&#34;&#34;
+        Функция определяет тип точки.
+
+        При помощи вторых производных функция определяет
+        является ли точка минимальной/максимальной/седловой.
+        Используется для передачи в метод pandas.DataFrame.apply().
+
+        Parameters
+        ----------
+        data: pd.Series
+            Столбцы со значениями x, y, z.
+        d: sympy выражение
+            Детерминант матрицы вторых производных. В него подставлются значения в точках
+        d2x: sympy выражение
+            Вторая производная по икс. В него подставляется значения в точках
+
+        Returns
+        -------
+        pd.Series
+            Серия со значениями одним из четырех типов точки: &#39;saddle&#39;, &#39;global min&#39;, &#39;global max&#39;, &#39;unknown&#39;
+        &#34;&#34;&#34;
+        d = d.subs({x: data[0], y: data[1]})
+        d2x = d2x.subs({x: data[0], y: data[1]})
+
+        if d &lt; 0:
+            return &#39;saddle&#39;
+        elif d &gt; 0 and d2x &gt; 0:
+            return &#39;global min&#39;
+        elif d &gt; 0 and d2x &lt; 0:
+            return &#39;global max&#39;
+        else:
+            return &#39;unknown&#39;
+
+    x, y = self.vars[0], self.vars[1]
+    z = self.func
+    critical_points_sympy = sp.solve([z.diff(x), z.diff(y)], [x, y], dict=True)
+    f = sp.lambdify([x, y], z)
+    critical_points = pd.DataFrame(columns=[&#39;x&#39;, &#39;y&#39;, &#39;z&#39;])
+
+    for i in critical_points_sympy:
+        i = [float(i[x]), float(i[y])]
+        if LocalExtr.check_point(i, self.interval_x, self.interval_y):
+            point = {&#39;x&#39;: i[0], &#39;y&#39;: i[1], &#39;z&#39;: f(i[0], i[1])}
+            critical_points = critical_points.append(point, ignore_index=True)
+
+    if not critical_points.empty:
+        D = z.diff(x, 2) * z.diff(y, 2) - z.diff(x).diff(y) ** 2
+        D2x = z.diff(x, 2)
+        critical_points[&#39;type&#39;] = critical_points.apply(set_dot_type,
+                                                        axis=1,
+                                                        args=(D, D2x))
+    else:
+        critical_points[&#39;type&#39;] = []
+
+    return critical_points</code></pre>
+</details>
+</dd>
+<dt id="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.find_local_extr"><code class="name flex">
+<span>def <span class="ident">find_local_extr</span></span>(<span>self, free_var_ind, max_val, min_val)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Метод находит локальные экстремумы.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>free_var_ind</code></strong> :&ensp;<code>0</code> or <code>1</code></dt>
+<dd>Номер переменной, которая является свободной (по ней нет ограничений)</dd>
+<dt><strong><code>max_val</code></strong> :&ensp;<code>float</code> or <code>np.inf</code></dt>
+<dd>Максимальное значение. В случае если в ходе решения окажется, что у функции есть супремум,
+больший чем это значение, то максимальное значение
+для всех локальных экстремумов будет обновлено.</dd>
+<dt><strong><code>min_val</code></strong> :&ensp;<code>float</code> or <code>np.inf</code></dt>
+<dd>Аналогично как для min_val, только минимум и инфимум.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pd.DataFrame</code></dt>
+<dd>с колонками как координаты точек x, y, z
+max_value - новое максимальное значение
+min_value - новое минимальное значение</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def find_local_extr(self, free_var_ind, max_val, min_val):
+    &#34;&#34;&#34;
+    Метод находит локальные экстремумы.
+
+    Parameters
+    ----------
+    free_var_ind: 0 or 1
+        Номер переменной, которая является свободной (по ней нет ограничений)
+    max_val: float or np.inf
+        Максимальное значение. В случае если в ходе решения окажется, что у функции есть супремум,
+        больший чем это значение, то максимальное значение
+        для всех локальных экстремумов будет обновлено.
+    min_val: float or np.inf
+        Аналогично как для min_val, только минимум и инфимум.
+
+    Returns
+    -------
+    pd.DataFrame
+        с колонками как координаты точек x, y, z
+        max_value - новое максимальное значение
+        min_value - новое минимальное значение
+    &#34;&#34;&#34;
+
+    points = pd.DataFrame(columns=[&#39;x&#39;, &#39;y&#39;, &#39;z&#39;])
+
+    if free_var_ind == 0:
+        lim = self.interval_y
+        free_var = self.vars[0]
+        limit_var = self.vars[1]
+    elif free_var_ind == 1:
+        lim = self.interval_x
+        free_var = self.vars[1]
+        limit_var = self.vars[0]
+
+    for i in lim:
+        if abs(i) == np.inf:
+            continue
+        else:
+            fun = self.func.subs({limit_var: i})
+            if fun == sp.zoo:
+                check = sp.limit(self.func, limit_var, i)
+                if check &gt; max_val:
+                    max_val = float(check)
+                if check &lt; min_val:
+                    min_val = float(check)
+                continue
+            potential_points = sp.solve(fun.diff(free_var), free_var, dict=True)
+            for j in potential_points:
+                coord = float(j[free_var])
+                if free_var_ind == 0:
+                    point = (coord, i)
+                else:
+                    point = (i, coord)
+
+                if LocalExtr.check_point(point,
+                                         self.interval_x,
+                                         self.interval_y):
+                    try:
+                        z = float(fun.subs(j))
+                    except ZeroDivisionError:
+                        pass
+                    else:
+                        if z &gt; max_val:
+                            max_val = z
+                        if z &lt; min_val:
+                            min_val = z
+                        points = points.append({&#39;x&#39;: point[0],
+                                                &#39;y&#39;: point[1],
+                                                &#39;z&#39;: z},
+                                               ignore_index=True)
+    return points, max_val, min_val</code></pre>
+</details>
+</dd>
+<dt id="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.generate_colors"><code class="name flex">
+<span>def <span class="ident">generate_colors</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Метод создает раскраску для точек.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pd.Series</code></dt>
+<dd>Цвета по типам экстремумов.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generate_colors(self):
+    &#34;&#34;&#34;
+    Метод создает раскраску для точек.
+
+    Returns
+    --------
+    pd.Series
+        Цвета по типам экстремумов.
+    &#34;&#34;&#34;
+
+    dots_types = [&#39;global min&#39;, &#39;local min&#39;, &#39;saddle&#39;, &#39;local max&#39;,
+                  &#39;global max&#39;, &#39;unknown&#39;]
+    colors = [&#39;rgb(228,26,28)&#39;, &#39;rgb(77,175,74)&#39;,
+               &#39;rgb(152,78,163)&#39;, &#39;rgb(255,127,0)&#39;,
+               &#39;rgb(255,255,51)&#39;, &#39;rgb(166,86,40)&#39;]
+    colors_dict = dict(zip(dots_types, colors))
+    set_color = lambda x: colors_dict[x]
+    colors = self.points[&#39;types&#39;].apply(set_color)
+    return colors</code></pre>
+</details>
+</dd>
+<dt id="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.solve"><code class="name flex">
+<span>def <span class="ident">solve</span></span>(<span>self) ‑> str</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Метод решает задачу локального экстремума.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>Строка с ответом.</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def solve(self) -&gt; str:
+    &#34;&#34;&#34;
+    Метод решает задачу локального экстремума.
+
+    Returns
+    -------
+    str
+        Строка с ответом.
+    &#34;&#34;&#34;
+
+    self.points = self.critical_points()
+    if self.restr:
+        self.points = self.points.append(self.border_points(),
+                                         ignore_index=True)
+        self.points = self.points.drop_duplicates([&#39;x&#39;, &#39;y&#39;, &#39;z&#39;])
+    ans = &#39;&#39;
+    if self.points.empty:
+        ans += &#39;Решений нет&#39;
+        if not self.interval_x:
+            self.interval_x = (-1, 1)  # значения для интервалов, если они не заданы и нет точек
+        if not self.interval_y:
+            self.interval_y = (-1, 1)
+    else:
+        f = lambda x: list(zip(x[&#39;x&#39;].values, x[&#39;y&#39;].values, x[&#39;z&#39;].values))
+        to_output = self.points.groupby(by=&#39;type&#39;, axis=0)[[&#39;x&#39;, &#39;y&#39;, &#39;z&#39;]].apply(f)
+        for i, v in enumerate(to_output):
+            ans += f&#39;{to_output.index[i]}: {v}\n&#39;
+        if not self.interval_y:
+            self.interval_y = (self.points[&#39;y&#39;].min() - 5, self.points[&#39;y&#39;].max() + 5)
+        if not self.interval_x:
+            self.interval_x = (self.points[&#39;x&#39;].min() - 5, self.points[&#39;x&#39;].max() + 5)
+
+    self.points = self.points.rename(columns={&#39;type&#39;: &#39;types&#39;})
+    self.points[&#39;color&#39;] = self.generate_colors()
+
+    data_for_draw = make_df_for_drawing(self.func, self.vars,
+                                        self.interval_x, self.interval_y)
+    plot = draw_3d(data_for_draw, critical_points=self.points)
+    save_fig_to_pic(plot, &#39;graph&#39;, [&#39;html&#39;])
+    return ans</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="opml_1.solver_core.search_for_extremes" href="index.html">opml_1.solver_core.search_for_extremes</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr" href="#opml_1.solver_core.search_for_extremes.local_extr.LocalExtr">LocalExtr</a></code></h4>
+<ul class="two-column">
+<li><code><a title="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.border_points" href="#opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.border_points">border_points</a></code></li>
+<li><code><a title="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.check_point" href="#opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.check_point">check_point</a></code></li>
+<li><code><a title="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.critical_points" href="#opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.critical_points">critical_points</a></code></li>
+<li><code><a title="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.find_local_extr" href="#opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.find_local_extr">find_local_extr</a></code></li>
+<li><code><a title="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.generate_colors" href="#opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.generate_colors">generate_colors</a></code></li>
+<li><code><a title="opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.solve" href="#opml_1.solver_core.search_for_extremes.local_extr.LocalExtr.solve">solve</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
