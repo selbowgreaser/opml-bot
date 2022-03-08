@@ -99,7 +99,7 @@ class Handlers:
                 self.response.set_text(Phrases.INPUT_G_FUNC)
                 self.extremum.update_step('input_g_func')
             return self.response
-        except ValueError as e:
+        except (ValueError, SyntaxError, NameError) as e:
             return self.error(e)
 
     def g_func(self, text) -> Response:
@@ -111,7 +111,7 @@ class Handlers:
             self.response.set_text(Phrases.INPUT_RESTR)
             self.response.set_keyboard(Keyboards().for_input_restr())
             return self.response
-        except ValueError as e:
+        except (ValueError, SyntaxError, NameError) as e:
             return self.error(e)
 
     def input_restr(self) -> Response:
