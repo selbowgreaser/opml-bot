@@ -54,14 +54,16 @@ def check_expression(expression, variables):
     ------------
     expression: str
         Строка содержащая функцию для проверки
-    variables: array-like
-        Массив со строками, содержащие имена переменных
+    variables: str
+        Строка, содержащие имена переменных
 
     Returns:
     -------
     Функция в виде строки
 
     """
+    variables = variables.split()
+
     expression = expression.strip()
     if expression.find('—') != -1:
         expression = expression.replace('—', '-')
