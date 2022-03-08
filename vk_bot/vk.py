@@ -1,7 +1,7 @@
 import vk_api
 from vk_api.longpoll import VkLongPoll
 
-from config import ACCESS_TOKEN, GROUP_ID, API_VERSION
+from .config import ACCESS_TOKEN, GROUP_ID, API_VERSION
 
 
 class VK:

@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
-from .drawing_func import *
 import sympy as sp
+
+from .drawing_func import *
 
 
 class LocalExtr:

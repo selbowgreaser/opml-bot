@@ -1,9 +1,7 @@
-from typing import Optional
-
 from vk_api.vk_api import VkApiMethod
 
 from vk_bot.sql_queries import Select, Insert, Update
-from database import BotDatabase
+from .database import BotDatabase
 
 
 class User:

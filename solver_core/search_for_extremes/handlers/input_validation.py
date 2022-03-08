@@ -1,11 +1,11 @@
 import re
 import math
 from typing import Optional
-
 import sympy as sp
 from sympy import symbols, sympify
-from solver_core.search_for_extremes.handlers.operations_name_gen import allowed_operations, forbidden_names_for_variables
 from numpy import inf
+
+from .operations_name_gen import allowed_operations, forbidden_names_for_variables
 
 
 def check_variables(variables: str, split_by: Optional[str] = None) -> str:

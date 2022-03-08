@@ -1,9 +1,9 @@
-from drawing_func import *
-
 import sympy as sp
 import numpy as np
 import pandas as pd
 from IPython.display import display, Latex
+
+from .drawing_func import *
 
 
 class LocalExtrWithRestrictions:
@@ -237,7 +237,7 @@ class LocalExtrWithRestrictions:
         rest_points = rest_func_points(self.func, self.g_func, self.variables, self.interval_x, self.interval_y)
 
         plot = draw_3d(surface_points, rest_points, critical_points)
-        save_fig_to_pic(plot, path, ['html', 'png'])
+        save_fig_to_pic(plot, path, ['html'])
         return plot
 
 
