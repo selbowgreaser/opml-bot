@@ -14,7 +14,7 @@ class Create(NamedTuple):
     EXTREMES = ("CREATE TABLE extremes (\n"
                 "                  user_id INTEGER PRIMARY KEY, \n"
                 "                  step TEXT DEFAULT 'start',\n"
-                "                  type INTEGER DEFAULT 0,\n"
+                "                  type TEXT,\n"
                 "                  vars TEXT, \n"
                 "                  func TEXT, \n"
                 "                  interval_x TEXT, \n"
@@ -42,9 +42,14 @@ class Select(NamedTuple):
     USERS_STATUS = "SELECT status FROM users WHERE user_id = ?"
 
     EXTREMES_STEP = "SELECT step FROM extremes WHERE user_id = ?"
+    EXTREMES_RESTR = "SELECT restr FROM extremes WHERE user_id = ?"
     EXTREMES_VARS = "SELECT vars FROM extremes WHERE user_id = ?"
     EXTREMES_TYPE = "SELECT type FROM extremes WHERE user_id = ?"
     EXTREMES_ALL = "SELECT vars, func, g_func, restr, interval_x, interval_y FROM extremes WHERE user_id = ?"
+    EXTREMES_WITH_INT = "SELECT vars, func, interval_x, interval_y FROM extremes WHERE user_id = ?"
+    EXTREMES_WITHOUT_INT = "SELECT vars, func FROM extremes WHERE user_id = ?"
+    EXTREMES_RESTR_WITH_INT = "SELECT vars, func, g_func, interval_x, interval_y FROM extremes WHERE user_id = ?"
+    EXTREMES_RESTR_WITHOUT_INT = "SELECT vars, func, g_func FROM extremes WHERE user_id = ? "
 
 
 class Update(NamedTuple):
