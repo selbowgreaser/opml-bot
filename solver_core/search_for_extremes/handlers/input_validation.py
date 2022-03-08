@@ -1,8 +1,8 @@
 import re
 import math
 import sympy as sp
-from sympy import symbols, sympify, lambdify
-from handler_input_data.operations_name_gen import allowed_operations, forbidden_names_for_variables
+from sympy import symbols, sympify
+from solver_core.search_for_extremes.handlers.operations_name_gen import allowed_operations, forbidden_names_for_variables
 from numpy import inf
 
 
