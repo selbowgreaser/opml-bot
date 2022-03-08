@@ -8,11 +8,11 @@ from IPython.display import display, Latex
 
 class LocalExtrWithRestrictions:
 
-    def __init__(self, variables, func, g_func, interval_x=None, interval_y=None):
+    def __init__(self, vars, func, g_func, interval_x=None, interval_y=None):
         """
         Конструктор задачи. Нужно передать обязательно список переменных, основную и ограничивающую функции
         Интервалы при отсутствии будут определены автоматически
-        :param variables: list из sympy.symbols
+        :param vars: list из sympy.symbols
         :param func: sympy выражение
         :param g_func: sympy выражение
         :param interval_x: tuple с числами
@@ -20,8 +20,8 @@ class LocalExtrWithRestrictions:
         """
 
         x, y = sp.symbols('x y')
-        self.func = func.subs({variables[0]: x, variables[1]: y})
-        self.g_func = g_func.subs({variables[0]: x, variables[1]: y})
+        self.func = func.subs({vars[0]: x, vars[1]: y})
+        self.g_func = g_func.subs({vars[0]: x, vars[1]: y})
         self.variables = [x, y]
         self.interval_x = interval_x
         self.interval_y = interval_y
