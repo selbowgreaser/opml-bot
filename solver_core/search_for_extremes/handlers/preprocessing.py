@@ -5,7 +5,7 @@ from numpy import inf
 
 
 def prepare_data(vars: str, func: str, interval_x: Optional[str] = None, interval_y: Optional[str] = None,
-                 g_func: Optional[str] = None):
+                 g_func: Optional[str] = None) -> dict:
     """
     Функция преобразовывает данные для передачи в конструктор класса.
 
@@ -44,7 +44,7 @@ def prepare_data(vars: str, func: str, interval_x: Optional[str] = None, interva
     return param
 
 
-def prepare_limits(limits):
+def prepare_limits(limits: str) -> list:
     """
     Функция преобразует ограничения в нужный вид.
 
