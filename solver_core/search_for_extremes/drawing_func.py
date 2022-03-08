@@ -1,3 +1,5 @@
+from typing import Optional
+
 import pandas as pd
 import plotly
 import plotly.graph_objects as go
@@ -10,56 +12,61 @@ GRID_WIDTH = 1
 
 
 def draw_3d(points_of_function: pd.DataFrame,
-            points_of_restriction: pd.DataFrame = None,
-            critical_points: pd.DataFrame = None) -> go.Figure:
+            points_of_restriction: Optional[pd.DataFrame] = None,
+            critical_points: Optional[pd.DataFrame] = None) -> go.Figure:
     """
     Функция рисует два графика и возвращает plotly Figure. Первый график 3-d поверхность, второй график - линии уровня.
     На первом и втором графиках рисуются точки critical_points и ограничивающая функция.
 
-    Code examples::
+    Parameters
+    ----------
+    points_of_function : pd.DataFrame
+        Датафрейм, у которого индексы - это значения по оси x, столбцы - значения по оси y, сами значения функции это матрица df.values.
+    points_of_restriction : Optional[pd.DataFrame] = None
+        Датафрейм с тремя столбцами x, y, z для ограничивающей функции
+    critical_points : Optional[pd.DataFrame] = None критической точки.
 
-        import sympy as sp
+    Returns
+    -------
+    go.Figure
+        Фигуру в plotly, с двумя подграфиками.
 
-        x, y = sp.symbols('x y')
-        func = x ** 2 - y ** 2 / 2
-        restr_func = x + y
-        x_constr = (-2, 2)
-        y_constr = (-2, 2)
+    Examples
+    --------
 
-        data = make_df_for_drawing(func, [x, y], x_conts, y_conts, 39)
+    >>> import sympy as sp
 
-        points = pd.DataFrame({'x':[0, 1],
-                               'y':[0, 1],
-                               'z':[0, 2],
-                               'types':['saddle', 'Пример точки'],
-                               'color':['yellow', 'red']})
+    >>> x, y = sp.symbols('x y')
+    >>> func = x ** 2 - y ** 2 / 2
+    >>> restr_func = x + y
+    >>> x_constr = (-2, 2)
+    >>> y_constr = (-2, 2)
 
+    >>> data = make_df_for_drawing(func, [x, y], x_conts, y_conts, 39)
 
-        rest_points = rest_func_points(func, restr_func, [x, y], x_constr, y_constr)
-        fig = draw_3d(data, rest_points, points)
-        fig.show()
-
-        # Интересная поверхность и ограничения - окружность
-        x, y = sp.symbols('x y')
-        func = (x + y) ** 2 + y * sp.cos(2 * x * sp.pi) + x * sp.sin(2 * y * sp.pi)
-        restr_func = x ** 2  + y ** 2 - 9
-        x_constr = (-5, 3.5)
-        y_constr = (-4, 3)
-
-        data = make_df_for_drawing(func, [x, y], x_constr, y_constr, 39)
-        rest_points = rest_func_points(func, restr_func, [x, y], x_constr, y_constr)
-        fig = draw_3d(data, rest_points)
-
-        fig.show()
-
-    :param points_of_function: Датафрейм, у которого индексы - это значения по оси x,
-                               столбцы - значения по оси y, сами значения функции это матрица df.values.
-    :param points_of_restriction: Датафрейм с тремя столбцами x, y, z для ограничивающей функции
-    :param critical_points: Датафрейм, который содержить столбцы x, y, z, type, color для каждой
-                            критической точки.
-    :return: go.Figure. Фигуру в plotly, с двумя подграфиками.
+    >>> points = pd.DataFrame({'x':[0, 1],
+    >>>                        'y':[0, 1],
+    >>>                        'z':[0, 2],
+    >>>                        'types':['saddle', 'Пример точки'],
+    >>>                        'color':['yellow', 'red']})
 
 
+    >>> rest_points = rest_func_points(func, restr_func, [x, y], x_constr, y_constr)
+    >>> fig = draw_3d(data, rest_points, points)
+    >>> fig.show()
+
+    # Интересная поверхность и ограничения - окружность
+    >>> x, y = sp.symbols('x y')
+    >>> func = (x + y) ** 2 + y * sp.cos(2 * x * sp.pi) + x * sp.sin(2 * y * sp.pi)
+    >>> restr_func = x ** 2  + y ** 2 - 9
+    >>> x_constr = (-5, 3.5)
+    >>> y_constr = (-4, 3)
+
+    >>> data = make_df_for_drawing(func, [x, y], x_constr, y_constr, 39)
+    >>> rest_points = rest_func_points(func, restr_func, [x, y], x_constr, y_constr)
+    >>> fig = draw_3d(data, rest_points)
+
+    >>> fig.show()
     """
 
     if not isinstance(points_of_function, pd.DataFrame):
@@ -159,7 +166,7 @@ def draw_3d(points_of_function: pd.DataFrame,
     return fig
 
 
-def make_df_for_drawing(func,
+def make_df_for_drawing(func: sympy.functions,
                         variables,
                         x_constraints: tuple,
                         y_constraints: tuple,
