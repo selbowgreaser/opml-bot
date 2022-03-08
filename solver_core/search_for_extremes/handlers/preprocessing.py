@@ -53,7 +53,7 @@ def prepare_limits(limits):
         Ограничения для функции.
     """
 
-    if limits:
+    if limits != 'None':
         limits = limits.split()
         for i in range(2):
             if limits[i] == 'inf':
@@ -62,7 +62,7 @@ def prepare_limits(limits):
                 limits[i] = -inf
             else:
                 limits[i] = float(limits[i])
-    return limits
+        return limits
 
 
 if __name__ == '__main__':
