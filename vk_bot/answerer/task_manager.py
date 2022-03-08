@@ -42,6 +42,7 @@ class TaskManager:
         Response
             Сообщение для пользователя.
         """
+
         if self.status == 'start':
             return self.handlers.greetings(self.user.get_first_name())
 
