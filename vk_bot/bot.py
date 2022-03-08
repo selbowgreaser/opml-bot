@@ -1,7 +1,7 @@
 from vk_api.longpoll import VkEventType
 
 from vk_bot.database import BotDatabase
-from .vk import VK
+from vk_bot.vk import VK
 from vk_bot.user import User
 from vk_bot.answerer.task_manager import TaskManager
 
