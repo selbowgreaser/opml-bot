@@ -155,7 +155,7 @@ class Handlers:
             param = prepare_data(vars=vars, func=func)
         solver = LocalExtr(**param)
         result = solver.solve()
-        link = '\n\nСЮДА НАДО ДОБАВИТЬ ССЫЛКУ'
+        link = Phrases.LINK
         self.response.set_text(result+link)
         self.response.set_keyboard(Keyboards().for_menu())
         self.extremum.update_step('start')
@@ -171,7 +171,7 @@ class Handlers:
             param = prepare_data(vars=vars, func=func)
         solver = LocalExtr(**param)
         result = solver.solve()
-        link = '\n\nСЮДА НАДО ДОБАВИТЬ ССЫЛКУ'
+        link = Phrases.LINK
         self.response.set_text(result + link)
         self.response.set_keyboard(Keyboards().for_menu())
         self.extremum.update_step('start')

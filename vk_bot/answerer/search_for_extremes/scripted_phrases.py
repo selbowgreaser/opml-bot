@@ -27,4 +27,5 @@ class Phrases(NamedTuple):
     INPUT_INTERVAL_Y = 'Теперь то же самое, но для оси Y.' \
                        'Пример: -5 5'
     COMPUTE = 'Нажми кнопку и жди результата! :)'
+    LINK = '\n\nПосмотреть на график -> https://opml-bot.herokuapp.com/'
     ERROR = 'При обработке данных произошла ошибка: {}'
