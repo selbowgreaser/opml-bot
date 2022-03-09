@@ -153,7 +153,7 @@ class Handlers:
         else:
             vars, func = self.extremum.get_params(self.extremum.get_type(), 'without_int')
             param = prepare_data(vars=vars, func=func)
-        solver = LocalExtr(**param)
+        solver = LocalExtr(**param, restr=restr)
         result = solver.solve()
         link = Phrases.LINK
         self.response.set_text(result+link)
