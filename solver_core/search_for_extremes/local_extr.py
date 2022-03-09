@@ -343,7 +343,7 @@ class LocalExtr:
         cond = ((points['z'] == points['z'].max()) & (points['z'] >= max_z)) \
                | ((points['z'] == points['z'].min()) & (points['z'] <= min_z))
         points = points[cond]
-        points['type'] = np.where(points['z'] == max_z,
+        points['type'] = np.where(points['z'] == points['z'].max(),
                                   'local max',
                                   'local min')
         return points
