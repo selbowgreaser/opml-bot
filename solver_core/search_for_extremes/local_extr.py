@@ -327,6 +327,10 @@ class LocalExtr:
                                 except TypeError:
                                     pass
                         else:
+                            if z > max_z:
+                                max_z = z
+                            if z < min_z:
+                                min_z = z
                             point = {'x': x, 'y': y, 'z': f(x, y)}
                             points = points.append(point, ignore_index=True)
         if self.interval_x:
@@ -343,7 +347,7 @@ class LocalExtr:
         cond = ((points['z'] == points['z'].max()) & (points['z'] >= max_z)) \
                | ((points['z'] == points['z'].min()) & (points['z'] <= min_z))
         points = points[cond]
-        points['type'] = np.where(points['z'] == points['z'].max(),
+        points['type'] = np.where(points['z'] == max_z,
                                   'local max',
                                   'local min')
         return points
