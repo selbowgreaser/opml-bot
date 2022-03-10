@@ -7,4 +7,5 @@ if os.path.exists(dotenv_path):
 
 ACCESS_TOKEN = os.environ.get("ACCESS_TOKEN")
 GROUP_ID = os.environ.get("GROUP_ID")
+CONFIRMATION_TOKEN = os.environ.get("CONFIRMATION_TOKEN")
 API_VERSION = '5.131'
