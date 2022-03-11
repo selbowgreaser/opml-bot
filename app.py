@@ -19,7 +19,7 @@ def processing():
         return CONFIRMATION_TOKEN
     elif data['type'] == 'message_new':
         MainHandler(data).process()
-        return 'ok'
+    return 'ok'
 
 
 if __name__ == '__main__':
